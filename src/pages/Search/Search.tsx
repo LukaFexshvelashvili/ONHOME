@@ -196,7 +196,7 @@ function Search() {
           </div>
           <button
             onClick={() => setOpenFilters((state) => !state)}
-            className="h-[45px] w-[60px] text-[14px]   bg-main rounded-[5px] text-buttonText tracking-wider font-mainMedium relative hidden mediumSmallXl:flex items-center justify-center"
+            className="h-[45px] w-[60px] text-[14px]   bg-main rounded-[5px] text-buttonText tracking-wider font-mainMedium relative flex items-center justify-center"
           >
             <div className=" flex flex-col h-[25px] aspect-square justify-center items-center gap-1 absolute">
               <span className="h-[2px] rounded-md w-10/12 bg-buttonText block"></span>
@@ -212,19 +212,19 @@ function Search() {
           </button>
         </div>
 
-        <div className="flex  gap-5 mediumSmallXl:flex-col">
-          <FiltersSection setSearchTitle={setSearchTitle} />
-          <ResponsiveFiltersSection
+        <div className="flex gap-5 w-full mediumSmallXl:flex-col">
+          <FiltersSection
             openFilters={openFilters}
             setOpenFilters={setOpenFilters}
+            setSearchTitle={setSearchTitle}
           />
-          <section className="flex-[3]  rounded-normal">
+          <section className="rounded-normal w-full">
             <p className="text-Asmall text-textDesc tracking-wider font-mainBold m-3 mt-0">
               {!loader && searched !== null
                 ? `ნაპოვნია ${getFullCount.current} შედეგი`
                 : ""}
             </p>
-            <div className="flex flex-wrap relative min-h-[150px] gap-5 gap-y-7 large:justify-center large:gap-5">
+            <div className="flex flex-wrap relative min-h-[150px] gap-5 gap-y-7 large:justify-center large:gap-5  justify-evenly">
               {!loader ? (
                 <>
                   {vipSearched !== null && vipSearched.length > 0
@@ -253,9 +253,10 @@ function Search() {
 }
 export default memo(Search);
 
-function ResponsiveFiltersSection(props: {
+function FiltersSection(props: {
   openFilters: boolean;
   setOpenFilters: Function;
+  setSearchTitle: Function;
 }) {
   const [params, setParams] = useSearchParams();
 
@@ -272,15 +273,15 @@ function ResponsiveFiltersSection(props: {
     };
   }, [props.openFilters]);
   return (
-    <section className="hidden mediumSmallXl:block shadow-none ">
+    <section className="flex justify-center items-center w-full absolute h-full z-20 shadow-none left-0 top-0 invisible">
       {openLocations ? (
         <>
           <div
             onClick={() => setOpenLocations(false)}
-            className="fixed h-full w-full aspect-square bg-blackFade top-0 left-0 z-20 "
+            className="fixed aspect-square bg-blackFade w-full h-full top-0 left-0 z-30 visible"
           ></div>
           <div
-            className={`fixed left-2/4 -translate-x-2/4 -translate-y-2/4 top-2/4 bg-whiteMain rounded-section shadow-sectionShadow p-4  ${
+            className={`fixed left-2/4 -translate-x-2/4 -translate-y-2/4 top-2/4 bg-whiteMain rounded-section shadow-sectionShadow p-4 visible ${
               openLocations ? "max-w-[1200px]" : "max-w-[800px]"
             } w-[90%] mx-auto small:top-2/4 small:-translate-y-2/4 z-40`}
           >
@@ -304,27 +305,43 @@ function ResponsiveFiltersSection(props: {
           </div>
         </>
       ) : null}
-      <div className={`overflow-hidden`}>
+      <div
+        className={`overflow-hidden  h-full w-full flex justify-center items-center`}
+      >
         <div
           onClick={() => props.setOpenFilters(false)}
-          className={`fixed h-full w-full top-0 left-0 bg-blackFade z-10 transition-[opacity,visibility] duration-500  ${
+          className={`fixed  h-full w-full top-0 left-0 bg-blackFade z-10 transition-[opacity,visibility] duration-500  ${
             props.openFilters ? "opacity-100 visible" : "opacity-0 invisible"
           } `}
         ></div>
         <div
-          className={`responsiveFilters  mobile  pb-[30px] rounded-[20px] h-3/4  top-1/4 shadow-sectionShadow fixed z-[11] bg-whiteMain left-0  w-full overflow-y-scroll transition-transform duration-300 ${
-            props.openFilters ? "translate-y-0" : "translate-y-full"
+          className={`  pb-[30px] rounded-[20px] overflow-hidden h-3/4  mobile:top-1/4 shadow-sectionShadow fixed z-[11] bg-whiteMain mobile:left-0  mobile:w-full transition-all duration-200 ${
+            props.openFilters
+              ? "mobile:translate-y-0 opacity-100 visible"
+              : "mobile:translate-y-full opacity-0 invisible"
           } `}
         >
           <div
             onClick={() => props.setOpenFilters(false)}
-            className="flex sticky top-0 items-center justify-center py-3 h-[50px] translate-y-[-2px] bg-whiteMain z-20"
+            className="mobile:flex sticky top-0 items-center justify-center hidden py-3 h-[50px] translate-y-[-2px] bg-whiteMain z-20"
           >
             <div className=" h-[6px] w-[100px] rounded-md  bg-lineBg mx-auto "></div>
           </div>
 
-          <div className="content_container">
-            <div className="flex flex-col gap-9 pt-5">
+          <div className="content_container responsiveFilters mobile:pt-[10px] mobile:pb-[50px] overflow-y-scroll px-5 max-h-full">
+            <div className="relative flex flex-col gap-9 pt-5 ">
+              {params.size > 0 ? (
+                <button
+                  onClick={() => {
+                    setParams({});
+
+                    props.setSearchTitle("");
+                  }}
+                  className="absolute top-3 mobile:top-0 right-3 text-buttonText px-3 py-1 rounded-md bg-main text-[12px] tracking-widest font-mainMedium cursor-pointer transition-colors hover:bg-mainHover"
+                >
+                  ფილტრების წაშლა
+                </button>
+              ) : null}
               <p className=" text-textHead tracking-wider text-center font-mainBold ">
                 გარიგების ტიპი
               </p>
@@ -338,15 +355,20 @@ function ResponsiveFiltersSection(props: {
 
                 <div
                   onClick={() => setOpenLocations(true)}
-                  className="cursor-pointer rounded-lg h-[40px] w-[300px] gap-2 flex items-center bg-whiteMain border-2 mt-2 text-textDesc text-[14px] border-lineBg font-mainRegular px-2"
+                  className="cursor-pointer rounded-lg h-[40px]  max-w-[500px] w-full gap-2 flex items-center bg-whiteMain border-2 mt-2 text-textDesc text-[14px] border-lineBg font-mainRegular px-2"
                 >
-                  <div className=" w-[50%] overflow-hidden max-w-[50%] text-nowrap text-ellipsis">
+                  <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
                     ქალაქი: {params.get("city") ? params.get("city") : "*"}{" "}
                   </div>
                   <div className="h-[50%] w-[2px] bg-lineBg "></div>
-                  <div className=" w-[50%] overflow-hidden max-w-[50%] text-nowrap text-ellipsis">
+                  <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
                     რაიონი:{" "}
                     {params.get("district") ? params.get("district") : "*"}{" "}
+                  </div>
+                  <div className="h-[50%] w-[2px] bg-lineBg "></div>
+
+                  <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
+                    უბანი: {params.get("urban") ? params.get("urban") : "*"}{" "}
                   </div>
                 </div>
               </div>
@@ -394,133 +416,6 @@ function ResponsiveFiltersSection(props: {
               />
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FiltersSection(props: { setSearchTitle: Function }) {
-  const [params, setParams] = useSearchParams();
-  const [openLocations, setOpenLocations] = useState(false);
-
-  return (
-    <section className=" mediumSmallXl:hidden relative flex-[1.5] large:flex-[2] bg-whiteMain mediumSmallXl:rounded-[10px] rounded-[18px] shadow-sectionShadow mediumSmallXl:shadow-none">
-      <div
-        className={` px-4 py-3 pb-12 mediumSmallXl:p-0 mediumSmallXl:pb-8 overflow-hidden mediumSmallXl:max-h-[55px]`}
-      >
-        {params.size > 0 ? (
-          <button
-            onClick={() => {
-              setParams({});
-
-              props.setSearchTitle("");
-            }}
-            className="absolute top-3 right-3 text-buttonText px-3 py-1 rounded-md bg-main text-[12px] tracking-widest font-mainMedium cursor-pointer transition-colors hover:bg-mainHover"
-          >
-            ფილტრების წაშლა
-          </button>
-        ) : null}
-        <p className="text-Asmall mediumSmallXl:hidden text-textDesc tracking-wider font-mainBold">
-          ფილტრები
-        </p>
-        <div className="flex flex-col gap-6 pt-5">
-          <p className=" text-textHead tracking-wider text-center font-mainBold ">
-            გარიგების ტიპი
-          </p>
-          <div className="flex flex-wrap gap-2 justify-center">
-            <ProjectDealSelector />
-          </div>
-          <div className="flex flex-col items-center">
-            <p className=" text-textHead tracking-wider font-mainBold ">
-              ადგილმდებარეობა
-            </p>
-            <div
-              onClick={() => setOpenLocations(true)}
-              className="cursor-pointer rounded-lg h-[40px] w-[300px] gap-2 flex items-center bg-whiteMain border-2 mt-2 text-textDesc text-[14px] border-lineBg font-mainRegular px-2"
-            >
-              <div className=" w-[50%] overflow-hidden max-w-[50%] text-nowrap text-ellipsis">
-                ქალაქი: {params.get("city") ? params.get("city") : "*"}{" "}
-              </div>
-              <div className="h-[50%] w-[2px] bg-lineBg "></div>
-              <div className=" w-[50%] overflow-hidden max-w-[50%] text-nowrap text-ellipsis">
-                რაიონი: {params.get("district") ? params.get("district") : "*"}{" "}
-              </div>
-            </div>
-            {openLocations ? (
-              <>
-                <div
-                  onClick={() => setOpenLocations(false)}
-                  className="fixed h-full w-full aspect-square bg-blackFade top-0 left-0 z-20 "
-                ></div>
-
-                <div
-                  className={`fixed left-2/4 -translate-x-2/4 -translate-y-2/4 top-2/4 bg-whiteMain rounded-section shadow-sectionShadow p-4  ${
-                    openLocations ? "max-w-[1200px]" : "max-w-[800px]"
-                  } w-[90%] mx-auto z-[21] small:top-2/4 small:-translate-y-2/4`}
-                >
-                  <button
-                    onClick={() => setOpenLocations(false)}
-                    className="h-[26px] aspect-square  absolute top-3 right-3 flex justify-center items-center p-1"
-                  >
-                    <PopupCloseIcon className=" [&>path]:fill-whiteCont" />
-                  </button>
-                  <SearchPlace
-                    setData={(locations: any) => {
-                      updateParams(params, setParams, locations);
-                    }}
-                    defData={{
-                      city: params.get("city") ? params.get("city") : "",
-                      district: params.get("district")
-                        ? params.get("district")
-                        : "",
-                      urban: params.get("urban") ? params.get("urban") : "",
-                    }}
-                    closeWindow={() => setOpenLocations(false)}
-                  />
-                </div>
-              </>
-            ) : null}
-          </div>
-          <div className="flex flex-col items-center">
-            <p className=" text-textHead tracking-wider font-mainBold ">
-              მდგომარეობა
-            </p>
-
-            <DropDownSelector
-              name="არჩევა"
-              itemsList={projectStatuses}
-              engName={"condition"}
-              changeParams={true}
-            />
-          </div>
-          <div className="flex flex-col items-center">
-            <p className=" text-textHead tracking-wider font-mainBold ">
-              პროექტის ტიპი
-            </p>
-
-            <DropDownSelector
-              name="არჩევა"
-              itemsList={projectTypes}
-              engName={"project_type"}
-              changeParams={true}
-            />
-          </div>
-
-          <PriceSlider />
-          <SizeSlider />
-          <SelectType />
-          <SelectNumbers changeParams={true} engName="rooms" name="ოთახები" />
-          <SelectNumbers
-            changeParams={true}
-            engName="bedrooms"
-            name="საძინებლები"
-          />
-          <SelectNumbers
-            changeParams={true}
-            engName="wet_points"
-            name="სველი წერტილი"
-          />
         </div>
       </div>
     </section>

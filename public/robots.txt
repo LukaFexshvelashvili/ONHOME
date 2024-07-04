@@ -3,6 +3,6 @@ Disallow: /AdminPanel/
 Disallow: /PrivacyPolicy/          
 Disallow: /SuspendedAccount/         
 Disallow: /Seller/         
-Disallow: /Maclerconditions/        
+Disallow: /Agencyconditions/        
 Disallow: /Profile/        
 Disallow: /Search/        

@@ -20,7 +20,7 @@ export type TProductCard = {
   estate_title: string;
   estate_active_image: string;
   estate_city: string;
-  estate_address: string;
+  estate_district: string;
   estate_exact_address: string;
   estate_size: number;
   estate_land_size: number | null;
@@ -107,8 +107,9 @@ export default function Card(props: {
             </Link>
             <Link to={"/product/" + props.product.id}>
               <p className="text-textDescCard text-[13px] font-mainRegular mt-[2px]  text-nowrap text-ellipsis w-full overflow-hidden">
-                {props.product.estate_city},{" "}
-                {props.product.estate_address && props.product.estate_address}
+                {props.product.estate_city}
+                {props.product.estate_district &&
+                  ", " + props.product.estate_district}
               </p>{" "}
             </Link>
           </div>

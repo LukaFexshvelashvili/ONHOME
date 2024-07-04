@@ -85,7 +85,7 @@ function BasicBanner(props: { productData: TProductData }) {
           </p>
           <p className="flex items-center text-[13px] text-textDesc gap-1">
             <DateIcon className="h-4 aspect-square [&>path]:fill-textDesc" />
-            {props.productData.update_time.split(" ")[0]}
+            {props.productData.update_time.slice(0, 16)}
           </p>
           <p className="text-[13px] text-textDesc">
             ID - {props.productData.id}

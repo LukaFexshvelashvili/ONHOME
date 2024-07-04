@@ -20,7 +20,8 @@ export type TProductData = {
   estate_deal: number;
   estate_status: string;
   estate_city: string;
-  estate_address: string;
+  estate_district: string;
+  estate_urban: string;
   estate_exact_address: string;
   estate_ipcode: string;
   estate_size: number;
@@ -289,7 +290,7 @@ function MyProducts() {
                     სააგენტოს მოთხოვნები ვერ მოიძებნა
                   </p>
                   <div className="flex justify-center my-3 mt-5">
-                    <Link to={"/maclerChoose"} className=" rounded-lg">
+                    <Link to={"/agencyChoose"} className=" rounded-lg">
                       <button className=" block text-buttonText bg-maclerMain rounded-lg text-[14px] px-4 py-2 tracking-wide">
                         მოთხოვნის გაგზავნა
                       </button>

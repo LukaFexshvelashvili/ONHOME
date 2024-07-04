@@ -76,7 +76,7 @@ export default function ProductSideBar({
             </span>
             <span className="flex items-center">
               <DateIcon className=" h-[18px] aspect-square [&>path]:fill-textDesc mr-3 mobile:mr-2 translate-y-[-1px]" />{" "}
-              {pageData.productData.update_time.slice(0, 10)}
+              {pageData.productData.update_time.slice(0, 16)}
             </span>
             <span>ID - {pageData.productData.id}</span>
           </div>
@@ -88,14 +88,45 @@ export default function ProductSideBar({
               {getDealType(pageData.productData.estate_deal)}
             </div>{" "}
           </div>
-          <div className=" flex text-textHead items-center h-[30px] font-mainSemiBold tracking-wider rounded-lg text-[13px] mobile:mx-auto mobileSmall:text-[12px] mobileSmall:h-[28px]">
+          <div className=" flex text-textHead items-center h-[26px] font-mainSemiBold tracking-wider rounded-lg text-[13px] mobile:mx-auto mobileSmall:text-[12px] mobileSmall:h-[28px]">
             ტიპი:{" "}
-            <span className="ml-2 text-main ">
-              {getType(pageData.productData.estate_type)}
-            </span>
+            <Link
+              className="ml-2 "
+              to={"/search?estate_type=" + pageData.productData.estate_type}
+            >
+              <span className="text-main ">
+                {getType(pageData.productData.estate_type)}
+              </span>
+            </Link>
           </div>{" "}
+          {pageData.productData.estate_district ? (
+            <div className=" flex text-textHead items-center h-[26px] font-mainSemiBold tracking-wider rounded-lg text-[13px] mobile:mx-auto mobileSmall:text-[12px] mobileSmall:h-[28px]">
+              რაიონი:{" "}
+              <Link
+                className="ml-2 "
+                to={"/search?district=" + pageData.productData.estate_district}
+              >
+                <span className="text-main ">
+                  {pageData.productData.estate_district}
+                </span>
+              </Link>
+            </div>
+          ) : null}
+          {pageData.productData.estate_urban ? (
+            <div className=" flex text-textHead items-center h-[26px] font-mainSemiBold tracking-wider rounded-lg text-[13px] mobile:mx-auto mobileSmall:text-[12px] mobileSmall:h-[28px]">
+              უბანი:{" "}
+              <Link
+                className="ml-2 "
+                to={"/search?urban=" + pageData.productData.estate_urban}
+              >
+                <span className="text-main ">
+                  {pageData.productData.estate_urban}
+                </span>
+              </Link>
+            </div>
+          ) : null}
           {pageData.productData.estate_land_size ? (
-            <div className=" flex text-textHead items-center h-[30px] font-mainSemiBold tracking-wider rounded-lg text-[13px] mobile:mx-auto mobileSmall:text-[12px] mobileSmall:h-[28px]">
+            <div className=" flex text-textHead items-center h-[26px] font-mainSemiBold tracking-wider rounded-lg text-[13px] mobile:mx-auto mobileSmall:text-[12px] mobileSmall:h-[28px]">
               ეზოს ფართი:{" "}
               <span className="ml-2 text-textDesc ">
                 {pageData.productData.estate_land_size}

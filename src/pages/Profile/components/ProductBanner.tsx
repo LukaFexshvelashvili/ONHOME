@@ -66,7 +66,7 @@ export default function ProductBanner(props: {
           <span className="text-[13px] text-textHeadBlack">
             {" "}
             {props.productData.update_time
-              ? props.productData.update_time.slice(0, 10)
+              ? props.productData.update_time.slice(0, 16)
               : ""}
           </span>
         </p>{" "}
@@ -93,7 +93,7 @@ export default function ProductBanner(props: {
           {" "}
           <p className="flex items-center text-[13px] text-textDesc gap-1">
             <DateIcon className="h-4 aspect-square [&>path]:fill-textDesc" />
-            {props.productData.created_time.slice(0, 10)}
+            {props.productData.created_time.slice(0, 16)}
           </p>
           <p className="flex items-center text-[13px] text-textDesc gap-1">
             <LoginEyeIcon className="h-4 aspect-square [&>path]:fill-textDesc" />{" "}

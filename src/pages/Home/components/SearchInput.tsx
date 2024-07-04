@@ -38,7 +38,8 @@ function SearchInput() {
   const [getLocation, setGetLoaction] = useState<{
     city: string;
     district: string;
-  }>({ city: "", district: "" });
+    urban: string;
+  }>({ city: "", district: "", urban: "" });
   const [searchTitle, setSearchTitle] = useState<string>("");
   const [getSizes, setGetSizes] = useState<null | number[]>(null);
   const [getRooms, setGetRooms] = useState<number | null>(null);
@@ -57,6 +58,7 @@ function SearchInput() {
     getLocation.city !== "" && params.append("city", getLocation.city);
     getLocation.district !== "" &&
       params.append("district", getLocation.district);
+    getLocation.urban !== "" && params.append("urban", getLocation.urban);
     searchTitle !== "" && params.append("title", searchTitle);
     getSizes && params.append("sizes", JSON.stringify(getSizes));
     getRooms && params.append("rooms", JSON.stringify(getRooms));
@@ -151,7 +153,9 @@ function SearchInput() {
             </div>
             {getLocation.city !== "" && (
               <button
-                onClick={() => setGetLoaction({ city: "", district: "" })}
+                onClick={() =>
+                  setGetLoaction({ city: "", district: "", urban: "" })
+                }
                 className="h-[20px] aspect-square absolute right-2 flex justify-center items-center p-1 z-10"
               >
                 <PopupCloseIcon className=" [&>path]:fill-white" />

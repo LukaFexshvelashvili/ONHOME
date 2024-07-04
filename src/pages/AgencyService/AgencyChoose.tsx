@@ -1,5 +1,5 @@
 import { LoginEyeIcon } from "../../assets/icons/Icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axiosCall from "../../hooks/axiosCall";
 import { TProductData } from "../Profile/components/MyProducts";
 import { sendMaclerRequest } from "../../hooks/serverProductFunctions";
@@ -12,6 +12,7 @@ import { Helmet } from "react-helmet";
 export default function MaclerChoose() {
   const userData = useSelector((store: RootState) => store.user);
   const navigate = useNavigate();
+  const firstRender = useRef(true);
   const [productId, setProductId] = useState<number | null>(null);
   const [message, setMessage] = useState<{ status: number }>({ status: -1 });
   const [myProducts, setMyProducts] = useState<any[]>([]);
@@ -26,12 +27,19 @@ export default function MaclerChoose() {
     }
   };
   useEffect(() => {
-    axiosCall
-      .get("fetch/my_products", { withCredentials: true })
-      .then((res) => {
-        res.data && setMyProducts(res.data);
-      });
-  }, []);
+    if (firstRender.current) {
+      if (userData.id) {
+        axiosCall
+          .get("fetch/my_products?user_id=" + userData.id, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            res.data && setMyProducts(res.data);
+          });
+        firstRender.current = false;
+      }
+    }
+  }, [userData.id]);
 
   return (
     <>

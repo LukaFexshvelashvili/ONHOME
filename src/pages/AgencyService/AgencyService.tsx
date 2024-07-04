@@ -100,7 +100,7 @@ export default function AgencyService() {
               </div>
             </div>
             <Link
-              to={"/MaclerChoose"}
+              to={"/agencyChoose"}
               className="mt-5 block small:mx-auto   small:mt-8 w-min"
             >
               <button className="block  bg-maclerMain rounded-[5px] w-[190px] h-[40px] text-buttonText text-[15px] tracking-widest transition-colors hover:bg-maclerMainHover">
