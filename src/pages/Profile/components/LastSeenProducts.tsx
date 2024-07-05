@@ -5,6 +5,7 @@ import { TProductData } from "./MyProducts";
 import { FetchLastSeenProducts } from "../../../hooks/serverProductFunctions";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { image_url_start } from "../../../hooks/axiosCall";
 
 export default function LastSeenProducts() {
   const [products, setProducts] = useState<TProductData[]>([]);
@@ -49,9 +50,7 @@ function BasicBanner(props: { productData: TProductData }) {
         <Link to={"/Product/" + props.productData.id}>
           <div className="absolute w-full h-full top-0 left-0 bg-[rgba(0,0,0,0.1)] z-[2]"></div>
           <img
-            src={
-              "http://api.onhome.ge/" + props.productData.estate_active_image
-            }
+            src={image_url_start + props.productData.estate_active_image}
             className="absolute h-full w-full object-cover  top-0 left-0"
           />
         </Link>

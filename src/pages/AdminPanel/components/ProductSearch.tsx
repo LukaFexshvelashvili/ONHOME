@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DateIcon, LoginEyeIcon } from "../../../assets/icons/Icons";
 import { TProductData } from "../../Profile/components/MyProducts";
-import axiosCall from "../../../hooks/axiosCall";
+import axiosCall, { image_url_start } from "../../../hooks/axiosCall";
 import { useDebounce } from "../../../hooks/serverFunctions";
 import ContentLoader from "../../../components/global/ContentLoader";
 export default function ProductSearch() {
@@ -111,7 +111,7 @@ function ProductBanner(props: { product: TProductData; rerender: Function }) {
       <div className="w-[160px] h-[90px] rounded-lg bg-whiteLoad relative overflow-hidden small:w-[100%] small:aspect-video small:h-auto">
         <div className="absolute w-full h-full top-0 left-0 bg-[rgba(0,0,0,0.1)] z-[2]"></div>
         <img
-          src={"http://api.onhome.ge/" + props.product.estate_active_image}
+          src={image_url_start + props.product.estate_active_image}
           className="absolute h-full w-full object-cover  top-0 left-0"
         />
       </div>

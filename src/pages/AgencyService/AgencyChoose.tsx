@@ -1,6 +1,6 @@
 import { LoginEyeIcon } from "../../assets/icons/Icons";
 import { useEffect, useRef, useState } from "react";
-import axiosCall from "../../hooks/axiosCall";
+import axiosCall, { image_url_start } from "../../hooks/axiosCall";
 import { TProductData } from "../Profile/components/MyProducts";
 import { sendMaclerRequest } from "../../hooks/serverProductFunctions";
 import { useSelector } from "react-redux";
@@ -210,7 +210,7 @@ function ProductBannerMacler(props: {
       <div className="w-[170px] h-[100px] rounded-lg bg-whiteLoad relative overflow-hidden mobile:w-[100%] mobile:aspect-video mobile:h-auto">
         <div className="absolute w-full h-full top-0 left-0 bg-[rgba(0,0,0,0.1)] z-[2]"></div>
         <img
-          src={"http://api.onhome.ge/" + props.productData.estate_active_image}
+          src={image_url_start + props.productData.estate_active_image}
           className="absolute h-full w-full object-cover  top-0 left-0"
         />
       </div>

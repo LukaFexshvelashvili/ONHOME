@@ -1,18 +1,33 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import compression from "vite-plugin-compression";
-// https://vitejs.dev/config/
+
 export default defineConfig({
   base: "/",
   plugins: [
-    react(),
+    react(), // Plugin for React support
     compression({
-      algorithm: "gzip", // you can also use 'brotliCompress'
-      ext: ".gz", // file extension
-      deleteOriginFile: false, // delete original files after compression
+      // Optional plugin for compression
+      algorithm: "gzip",
+      ext: ".gz",
+      deleteOriginFile: false,
     }),
   ],
   server: {
     port: 1026,
+  },
+  build: {
+    outDir: "dist",
+    minify: "terser",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"], // Split vendor code into separate chunk
+        },
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ["react", "react-dom"], // Pre-bundle dependencies for faster dev server start
   },
 });

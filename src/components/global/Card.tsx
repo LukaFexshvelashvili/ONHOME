@@ -14,10 +14,13 @@ import {
 } from "../../hooks/serverFunctions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { image_url_start } from "../../hooks/axiosCall";
+import { getDealType } from "./getTypes";
 
 export type TProductCard = {
   id: number;
   estate_title: string;
+  estate_deal: number;
   estate_active_image: string;
   estate_city: string;
   estate_district: string;
@@ -27,6 +30,9 @@ export type TProductCard = {
   estate_price: number;
   estate_currency: number;
   estate_rooms: number;
+  estate_bedrooms: number;
+  estate_floor: number;
+  estate_floors: number;
   estate_vip: number;
   views: number;
   created_time: Date;
@@ -65,21 +71,28 @@ export default function Card(props: {
         <div className={`${loaded ? "visible" : "invisible"}`}>
           <Link to={"/product/" + props.product.id} className=" rounded-2xl">
             <div className="w-full h-[200px] rounded-[15px] bg-whiteLoad relative overflow-hidden">
-              {props.product.estate_vip == 2 ? (
-                <div className="absolute h-[25px] w-[60px] select-none bg-vipPlusI rounded-md flex items-center justify-center text-Asmaller font-mainBold text-buttonText tracking-wider cursor-default top-2 right-2 z-[3]">
-                  VIP+
+              <div className="absolute flex gap-2 top-2 right-2 z-[3] cursor-pointer">
+                <div
+                  className={`  h-[25px] px-2 select-none ${
+                    props.product.estate_vip == 2 ? "bg-vipPlusI" : "bg-main"
+                  } rounded-md shadow-lg flex items-center justify-center text-Asmaller font-mainSemiBold text-buttonText ml-auto tracking-widest cursor-default top-[6px] right-0 z-[3]`}
+                >
+                  {getDealType(props.product.estate_deal)}
                 </div>
-              ) : props.product.estate_vip == 1 ? (
-                <div className="absolute h-[25px] w-[60px] select-none bg-orangeI rounded-md flex items-center justify-center text-Asmaller font-mainBold text-buttonText tracking-wider cursor-default top-2 right-2 z-[3]">
-                  VIP
-                </div>
-              ) : (
-                props.product.estate_vip == 0 && <></>
-              )}
+                {props.product.estate_vip == 2 ? (
+                  <div className="h-[25px] w-[60px] select-none bg-vipPlusI rounded-md flex items-center justify-center text-Asmaller font-mainBold text-buttonText tracking-wider cursor-default">
+                    VIP+
+                  </div>
+                ) : props.product.estate_vip == 1 ? (
+                  <div className="h-[25px] w-[60px] select-none bg-orangeI rounded-md flex items-center justify-center text-Asmaller font-mainBold text-buttonText tracking-wider cursor-default">
+                    VIP
+                  </div>
+                ) : (
+                  props.product.estate_vip == 0 && <></>
+                )}
+              </div>
               <img
-                src={
-                  "http://api.onhome.ge/" + props.product.estate_active_image
-                }
+                src={image_url_start + props.product.estate_active_image}
                 className="absolute h-full w-full object-cover top-0 left-0 select-none"
                 alt="estate-photo"
                 onLoad={() => {
@@ -87,7 +100,7 @@ export default function Card(props: {
                 }}
                 loading="lazy"
               />
-              <div className="absolute bottom-2 left-3 flex items center gap-1">
+              <div className="absolute bottom-2 left-0 px-3 flex items center gap-1 w-full">
                 <div className="bg-cardInfoBg backdrop-blur-[3px] rounded-[3px] flex justify-center items-center px-2 py-[5px] text-WhiteFade font-mainMedium tracking-wider text-[12px]">
                   <RoomIcon className="h-[15px] mr-3 [&>path]:fill-WhiteFade" />{" "}
                   {props.product.estate_rooms}
@@ -99,7 +112,7 @@ export default function Card(props: {
               </div>
             </div>{" "}
           </Link>
-          <div className="flex flex-col py-1 pt-2 px-3">
+          <div className="flex flex-col py-1 pt-2 px-3 relative">
             <Link to={"/product/" + props.product.id}>
               <h2 className="text-textHeadCard font-mainSemiBold text-[15px] text-nowrap text-ellipsis w-full overflow-hidden">
                 {props.product.estate_title}

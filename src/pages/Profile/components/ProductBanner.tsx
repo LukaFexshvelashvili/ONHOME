@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { ActiveOffers } from "../../../assets/lists/offers";
 import HoverTitle from "../../../components/global/HoverTitle";
 import { setWebLoader } from "../../../store/data/webUISlice";
+import { image_url_start } from "../../../hooks/axiosCall";
 
 export default function ProductBanner(props: {
   setPopbuy: Function;
@@ -37,9 +38,7 @@ export default function ProductBanner(props: {
           <div className="w-[160px] h-[90px] rounded-lg bg-whiteLoad relative overflow-hidden small:w-[100%] small:aspect-video small:h-auto">
             <div className="absolute w-full h-full top-0 left-0 bg-[rgba(0,0,0,0.1)] z-[2] "></div>
             <img
-              src={
-                "http://api.onhome.ge/" + props.productData.estate_active_image
-              }
+              src={image_url_start + props.productData.estate_active_image}
               className="absolute h-full w-full object-cover  top-0 left-0"
             />
           </div>
@@ -48,9 +47,7 @@ export default function ProductBanner(props: {
         <div className="w-[160px] h-[90px] rounded-lg bg-whiteLoad relative overflow-hidden small:w-[100%] small:aspect-video small:h-auto">
           <div className="absolute w-full h-full top-0 left-0 bg-[rgba(0,0,0,0.1)] z-[2] "></div>
           <img
-            src={
-              "http://api.onhome.ge/" + props.productData.estate_active_image
-            }
+            src={image_url_start + props.productData.estate_active_image}
             className="absolute h-full w-full object-cover  top-0 left-0"
           />
         </div>

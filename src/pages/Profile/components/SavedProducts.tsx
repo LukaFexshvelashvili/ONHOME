@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import HoverTitle from "../../../components/global/HoverTitle";
 import { Helmet } from "react-helmet";
+import { image_url_start } from "../../../hooks/axiosCall";
 
 function SavedProducts() {
   const userFavorites = useSelector((store: RootState) => store.user.favorites);
@@ -100,7 +101,7 @@ function FavoriteBanner(props: { product: TProductData }) {
       <div className="w-[160px] h-[90px] rounded-lg bg-whiteLoad relative overflow-hidden   small:w-[100%] small:aspect-video small:h-auto">
         <div className="absolute w-full h-full top-0 left-0 bg-[rgba(0,0,0,0.1)] z-[2]"></div>
         <img
-          src={"http://api.onhome.ge/" + props.product.estate_active_image}
+          src={image_url_start + props.product.estate_active_image}
           className="absolute h-full w-full object-cover  top-0 left-0"
         />
       </div>

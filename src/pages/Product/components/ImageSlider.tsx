@@ -2,6 +2,7 @@ import { memo, useEffect, useMemo, useState } from "react";
 import { LeftArrowIcon, PopupCloseIcon } from "../../../assets/icons/Icons";
 import { AdBannerProductSlider } from "../../../components/global/AdComponents";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { image_url_start } from "../../../hooks/axiosCall";
 
 function ImageSlider(props: { productData: any }) {
   const [slider, setSlider] = useState<number>(0);
@@ -115,7 +116,7 @@ function SliderMainImage({
       ) : null}
       {imageList[slider] !== "AD" ? (
         <img
-          src={"http://api.onhome.ge/" + imageList[slider]}
+          src={image_url_start + imageList[slider]}
           className="absolute top-0 left-0 h-full w-full object-cover"
           alt="Product Image"
           onLoad={() => {
@@ -165,7 +166,7 @@ function FullSliderBlock({
             ) : null}
             {imageList[slider] !== "AD" ? (
               <img
-                src={"http://api.onhome.ge/" + imageList[slider]}
+                src={image_url_start + imageList[slider]}
                 className="h-full w-full top-0 left-0 object-cover"
                 alt="Product Image"
                 onLoad={() => {
@@ -227,7 +228,7 @@ function SliderSmallImage(props: {
       ) : null}
       {props.item !== "AD" ? (
         <img
-          src={"http://api.onhome.ge/" + props.item}
+          src={image_url_start + props.item}
           className=" h-full w-full object-cover rounded-[5px]"
           alt="Product Image"
           onLoad={() => {
