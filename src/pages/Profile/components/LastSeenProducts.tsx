@@ -6,6 +6,7 @@ import { FetchLastSeenProducts } from "../../../hooks/serverProductFunctions";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { image_url_start } from "../../../hooks/axiosCall";
+import { FormatTime } from "../../../components/global/Addons";
 
 export default function LastSeenProducts() {
   const [products, setProducts] = useState<TProductData[]>([]);
@@ -84,7 +85,8 @@ function BasicBanner(props: { productData: TProductData }) {
           </p>
           <p className="flex items-center text-[13px] text-textDesc gap-1">
             <DateIcon className="h-4 aspect-square [&>path]:fill-textDesc" />
-            {props.productData.update_time.slice(0, 16)}
+            {FormatTime(props.productData.update_time.toString())}
+
           </p>
           <p className="text-[13px] text-textDesc">
             ID - {props.productData.id}

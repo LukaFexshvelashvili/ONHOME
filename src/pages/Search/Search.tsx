@@ -209,12 +209,12 @@ function Search() {
             setSearchTitle={setSearchTitle}
           />
           <section className="rounded-normal w-full">
-            <p className="text-Asmall text-textDesc tracking-wider font-mainBold m-3 mt-0">
+            <p className="text-Asmall text-textDesc tracking-wider font-mainSemiBold m-3 mt-0 mobile:text-[12px]">
               {!loader && searched !== null
                 ? `ნაპოვნია ${getFullCount.current} შედეგი`
                 : ""}
             </p>
-            <div className="flex flex-wrap relative min-h-[150px] gap-5 gap-y-7 large:justify-center large:gap-5  justify-evenly">
+            <div className="flex flex-wrap relative min-h-[150px] gap-[10px] gap-y-[15px] searchCardLow:gap-y-[10px] large:justify-center large:gap-5  justify-evenly mediumSmallXl:flex-col">
               {!loader ? (
                 <>
                   {vipSearched !== null && vipSearched.length > 0

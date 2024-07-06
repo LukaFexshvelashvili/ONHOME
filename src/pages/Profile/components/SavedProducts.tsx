@@ -12,6 +12,7 @@ import { RootState } from "../../../store/store";
 import HoverTitle from "../../../components/global/HoverTitle";
 import { Helmet } from "react-helmet";
 import { image_url_start } from "../../../hooks/axiosCall";
+import { FormatTime } from "../../../components/global/Addons";
 
 function SavedProducts() {
   const userFavorites = useSelector((store: RootState) => store.user.favorites);
@@ -134,7 +135,7 @@ function FavoriteBanner(props: { product: TProductData }) {
           </p>
           <p className="flex items-center text-[13px] text-textDesc gap-1">
             <DateIcon className="h-4 aspect-square [&>path]:fill-textDesc" />
-            {props.product.update_time.slice(0, 16)}
+            {FormatTime(props.product.update_time.toString())}
           </p>
           <p className="text-[13px] text-textDesc">ID - {props.product.id}</p>
         </div>

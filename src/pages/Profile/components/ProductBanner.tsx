@@ -18,6 +18,7 @@ import { ActiveOffers } from "../../../assets/lists/offers";
 import HoverTitle from "../../../components/global/HoverTitle";
 import { setWebLoader } from "../../../store/data/webUISlice";
 import { image_url_start } from "../../../hooks/axiosCall";
+import { FormatTime } from "../../../components/global/Addons";
 
 export default function ProductBanner(props: {
   setPopbuy: Function;
@@ -63,7 +64,7 @@ export default function ProductBanner(props: {
           <span className="text-[13px] text-textHeadBlack">
             {" "}
             {props.productData.update_time
-              ? props.productData.update_time.slice(0, 16)
+              ? FormatTime(props.productData.update_time.toString())
               : ""}
           </span>
         </p>{" "}

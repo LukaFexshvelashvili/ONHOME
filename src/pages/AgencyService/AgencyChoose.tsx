@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { FormatTime } from "../../components/global/Addons";
 
 export default function MaclerChoose() {
   const userData = useSelector((store: RootState) => store.user);
@@ -221,13 +222,13 @@ function ProductBannerMacler(props: {
         <p className="text-[13px] text-textDesc">
           განახლდა:{" "}
           <span className="text-[13px] text-textHeadBlack">
-            {props.productData.update_time.split(" ")[0]}
+            {FormatTime(props.productData.update_time.toString())}
           </span>
         </p>
         <p className="text-[13px] text-textDesc">
           ვადა:{" "}
           <span className="text-[13px] text-textHeadBlack">
-            {props.productData.update_time.split(" ")[0]}
+            {FormatTime(props.productData.update_time.toString())}
           </span>
         </p>
         <div className="flex items-center gap-5 mt-3">

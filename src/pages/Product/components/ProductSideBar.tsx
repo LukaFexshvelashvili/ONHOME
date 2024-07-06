@@ -26,6 +26,7 @@ import {
   getProject,
   getType,
 } from "../../../components/global/getTypes";
+import { FormatTime } from "../../../components/global/Addons";
 export default function ProductSideBar({
   pageData,
 }: {
@@ -81,13 +82,13 @@ export default function ProductSideBar({
             </span>
             <span className="flex items-center">
               <DateIcon className=" h-[18px] aspect-square [&>path]:fill-textDesc mr-3 mobile:mr-2 translate-y-[-1px]" />{" "}
-              {pageData.productData.update_time.slice(0, 16)}
+              {FormatTime(pageData.productData.update_time.toString())}
             </span>
             <span>ID - {pageData.productData.id}</span>
           </div>
           <div className="flex items-center mt-2 justify-between mobile:flex-col-reverse mobile:mt-3 mobile:gap-3 mobile:items-stretch">
             <h2 className="text-[18px] text-textHeadCard tracking-wide font-mainBold mobile:text-[18px] mobileSmall:text-[16px] max-w-[360px] overflow-hidden text-nowrap ">
-              {pageData.productData.estate_title.slice(0, 30)}
+              {FormatTime(pageData.productData.update_time.toString())}
             </h2>
             <div className=" flex justify-center items-center bg-mainClear text-main h-[30px] px-3 font-mainSemiBold tracking-wider rounded-md text-[13px] mobile:mx-auto mobileSmall:text-[12px] mobileSmall:h-[28px]">
               {getDealType(pageData.productData.estate_deal)}

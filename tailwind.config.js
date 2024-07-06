@@ -170,6 +170,7 @@ export default {
       smallXl: { max: "900px" },
       mobile: { max: "800px" },
       mobileTab: { max: "600px" },
+      searchCardLow: { max: "500px" },
       mobileSmall: { max: "440px" },
     },
   },
