@@ -19,10 +19,10 @@
 }
 
 .AddProductInputTitle {
-  @apply h-[40px] px-2 w-[300px] border-[2px] border-inputBorder rounded-lg text-[14px]  outline-none text-textHeadCard font-mainMedium tracking-wider bg-LoginInput transition-colors  focus:bg-LoginInputActive;
+  @apply h-[40px] px-2 max-w-[300px] w-[100%] border-[2px] border-inputBorder rounded-lg text-[14px]  outline-none text-textHeadCard font-mainMedium tracking-wider bg-LoginInput transition-colors  focus:bg-LoginInputActive;
 }
 .textareaInput {
-  @apply h-[90px] max-w-[700px] w-[600px];
+  @apply h-[90px] max-w-[700px] w-full;
 }
 .ActiveProfileNav::before {
   content: "";

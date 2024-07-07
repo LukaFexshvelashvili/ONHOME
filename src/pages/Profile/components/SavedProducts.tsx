@@ -13,6 +13,7 @@ import HoverTitle from "../../../components/global/HoverTitle";
 import { Helmet } from "react-helmet";
 import { image_url_start } from "../../../hooks/axiosCall";
 import { FormatTime } from "../../../components/global/Addons";
+import { Link } from "react-router-dom";
 
 function SavedProducts() {
   const userFavorites = useSelector((store: RootState) => store.user.favorites);
@@ -69,7 +70,7 @@ function SavedProducts() {
             მსგავსი განცხადება ვერ მოიძებნა
           </p>
         )}
-        <div className="flex flex-col  max-h-[550px] overflow-hidden overflow-y-auto">
+        <div className="flex flex-col  max-h-[550px] overflow-x-hidden overflow-y-auto ">
           {products ? (
             products.length > 0 && search.length !== 0 ? (
               products
@@ -98,18 +99,23 @@ function SavedProducts() {
 function FavoriteBanner(props: { product: TProductData }) {
   const dispatch = useDispatch();
   return (
-    <div className=" w-full border-t-[2px] border-lineBg py-5 px-4 flex items-center   small:flex-col">
-      <div className="w-[160px] h-[90px] rounded-lg bg-whiteLoad relative overflow-hidden   small:w-[100%] small:aspect-video small:h-auto">
-        <div className="absolute w-full h-full top-0 left-0 bg-[rgba(0,0,0,0.1)] z-[2]"></div>
-        <img
-          src={image_url_start + props.product.estate_active_image}
-          className="absolute h-full w-full object-cover  top-0 left-0"
-        />
-      </div>
+    <div className=" w-full relative border-t-[2px] border-lineBg py-5 px-4 flex items-center   small:flex-col">
+      <Link to={"/product/" + props.product.id}>
+        <div className="w-[160px] h-[90px] rounded-lg bg-whiteLoad relative overflow-hidden   small:w-[100%] small:aspect-video small:h-auto">
+          <div className="absolute w-full h-full top-0 left-0 bg-[rgba(0,0,0,0.1)] z-[2]"></div>
+          <img
+            src={image_url_start + props.product.estate_active_image}
+            className="absolute h-full w-full object-cover  top-0 left-0"
+          />
+        </div>
+      </Link>
       <div className="flex flex-col ml-3 h-full relative  small:w-full small:mt-3 small:h-auto">
-        <h3 className="text-[15px] mb-[2px] text-textHeadBlack">
-          {props.product.estate_title}
-        </h3>
+        {" "}
+        <Link to={"/product/" + props.product.id} className="w-min">
+          <h3 className="text-[15px] mb-[2px] text-textHeadBlack w-min text-nowrap max-w-[250px] text-ellipsis overflow-hidden ">
+            {props.product.estate_title}
+          </h3>{" "}
+        </Link>
         <p className="text-[13px] text-textDesc">
           ადგილი:{" "}
           <span className="text-[13px] text-textHeadBlack">
@@ -146,7 +152,7 @@ function FavoriteBanner(props: { product: TProductData }) {
           className="group relative bg-orangeClear  h-[35px] aspect-square rounded-md  transition-colors p-2 hover:bg-orangeHover flex justify-center items-center"
         >
           <BookmarkIcon className="h-full aspect-square [&>path]:fill-orangeI [&>path]:stroke-orangeI" />
-          <HoverTitle title="ფავორიტებიდან ამოღება" />
+          <HoverTitle title="ფავორიტებიდან ამოღება" left bottom />
         </button>
       </div>
     </div>

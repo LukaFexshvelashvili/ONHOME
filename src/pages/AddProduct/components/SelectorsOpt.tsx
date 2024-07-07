@@ -42,7 +42,7 @@ export function EstateTitle(props: {
         </div>
       )}
       <div className="flex gap-3 flex-wrap pl-3 mt-4 mobile:justify-center mobile:pl-0 ">
-        <div className="inputBl relative flex items-center">
+        <div className="inputBl relative flex items-center max-w-[300px] w-full">
           <input
             type="text"
             className="AddProductInputTitle"
@@ -94,7 +94,7 @@ export function EstateDescription(props: {
       </div>
 
       <div className="flex gap-3 flex-wrap pl-3 mt-4 mobile:justify-center mobile:pl-0">
-        <div className="inputBl relative flex items-center">
+        <div className="inputBl relative flex items-center max-w-[700px] w-full">
           <textarea
             className="AddProductInputTitle textareaInput"
             placeholder="განცხადების აღწერა"
@@ -338,7 +338,7 @@ export function EstateAddress(props: { error: boolean }) {
       )}
       <div
         onClick={() => setOpenLocations(true)}
-        className="cursor-pointer rounded-lg h-[40px] w-[600px] gap-2 flex items-center bg-whiteMain border-2 mt-2 text-textDesc text-[14px] border-lineBg font-mainRegular px-2"
+        className="cursor-pointer rounded-lg h-[40px]  max-w-[500px] w-full gap-2 flex items-center bg-whiteMain border-2 mt-2 text-textDesc text-[14px] border-lineBg font-mainRegular px-2"
       >
         <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
           ქალაქი: {locations.city ? locations.city : "*"}{" "}
@@ -353,6 +353,7 @@ export function EstateAddress(props: { error: boolean }) {
           უბანი: {locations.urban ? locations.urban : "*"}{" "}
         </div>
       </div>
+
       <div className="flex gap-3 flex-wrap mt-4 mobile:justify-center mobile:pl-0">
         <div className="relative">
           <input

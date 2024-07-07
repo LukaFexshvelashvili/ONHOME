@@ -57,9 +57,11 @@ function BasicBanner(props: { productData: TProductData }) {
         </Link>
       </div>
       <div className="flex flex-col ml-3 h-full relative smallXl:w-full smallXl:mt-3 smallXl:h-auto">
-        <h3 className="text-[15px] mb-[2px] text-textHeadBlack ">
-          {props.productData.estate_title}
-        </h3>
+        <Link to={"/product/" + props.productData.id} className="w-min">
+          <h3 className="text-[15px] mb-[2px] text-textHeadBlack w-min text-nowrap max-w-[250px] text-ellipsis overflow-hidden ">
+            {props.productData.estate_title}
+          </h3>{" "}
+        </Link>
         <p className="text-[13px] text-textDesc">
           ქალაქი:{" "}
           <span className="text-[13px] text-textHeadBlack">
@@ -86,7 +88,6 @@ function BasicBanner(props: { productData: TProductData }) {
           <p className="flex items-center text-[13px] text-textDesc gap-1">
             <DateIcon className="h-4 aspect-square [&>path]:fill-textDesc" />
             {FormatTime(props.productData.update_time.toString())}
-
           </p>
           <p className="text-[13px] text-textDesc">
             ID - {props.productData.id}
