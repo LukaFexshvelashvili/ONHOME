@@ -309,7 +309,7 @@ export function EstateAddress(props: { error: boolean }) {
             className="fixed h-full w-full aspect-square bg-blackFade top-0 left-0 z-20 "
           ></div>
           <div
-            className={`fixed left-2/4 -translate-x-2/4 -translate-y-2/4 top-2/4 bg-whiteMain rounded-section shadow-sectionShadow p-4  ${
+            className={`fixed left-2/4 -translate-x-2/4 -translate-y-2/4 top-2/4 bg-whiteMain rounded-section shadow-sectionShadow p-4 small:py-0 small:p-1  ${
               openLocations ? "max-w-[1200px]" : "max-w-[800px]"
             } w-[90%] mx-auto small:top-2/4 small:-translate-y-2/4 z-40`}
           >

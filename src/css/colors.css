@@ -18,6 +18,7 @@
 
   --LoginInput: rgba(239, 239, 239, 0.5);
   --LoginInputActive: rgba(232, 232, 232, 0.5);
+  --whiteLower: rgba(239, 239, 239, 0.3);
   --whiteLow: rgba(239, 239, 239, 0.6);
   --whiteCont: rgba(198, 198, 198, 1);
   --whiteLoad: #eaeaea;
@@ -138,6 +139,8 @@
   --blackMain: rgba(255, 255, 255, 0.8);
   --LoginInput: rgba(69, 69, 69, 0.5);
   --LoginInputActive: rgba(62, 62, 62, 0.9);
+
+  --whiteLower: rgba(44, 44, 44, 0.3);
   --whiteLow: rgba(44, 44, 44, 0.6);
   --whiteCont: rgb(60, 60, 60);
   --whiteLoad: #323232;

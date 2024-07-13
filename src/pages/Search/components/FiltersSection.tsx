@@ -38,7 +38,7 @@ function FiltersSection(props: {
             className="fixed aspect-square bg-blackFade w-full h-full top-0 left-0 z-30 visible"
           ></div>
           <div
-            className={`fixed left-2/4 -translate-x-2/4 -translate-y-2/4 top-2/4 bg-whiteMain rounded-section shadow-sectionShadow p-4 visible ${
+            className={`fixed left-2/4 -translate-x-2/4 -translate-y-2/4 top-2/4 bg-whiteMain rounded-section shadow-sectionShadow p-4 small:py-0 visible ${
               openLocations ? "max-w-[1200px]" : "max-w-[800px]"
             } w-[90%] mx-auto small:top-2/4 small:-translate-y-2/4 z-40`}
           >

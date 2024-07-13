@@ -164,7 +164,7 @@ body.no-scroll {
   margin: 0 auto;
 }
 .DefButton {
-  @apply bg-main rounded-[5px] w-[170px] h-[35px] font-mainMedium text-buttonText text-[12px] tracking-widest transition-colors hover:bg-mainHover;
+  @apply bg-main rounded-[5px] w-[170px] h-[35px] small:h-[32px] font-mainMedium text-buttonText text-[12px] tracking-widest transition-colors hover:bg-mainHover;
 }
 
 .swiper-pagination-bullet {

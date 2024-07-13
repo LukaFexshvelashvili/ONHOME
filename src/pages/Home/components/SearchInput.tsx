@@ -226,7 +226,7 @@ function SearchInput() {
 
           {inputSelect && (
             <div
-              className={`fixed left-2/4 -translate-x-2/4 -translate-y-2/4 top-2/4 bg-whiteMain rounded-section shadow-sectionShadow p-4  ${
+              className={`fixed left-2/4 -translate-x-2/4 -translate-y-2/4 top-2/4 bg-whiteMain rounded-section shadow-sectionShadow p-4 small:py-0  ${
                 inputSelect == 2 ? "max-w-[1200px]" : "max-w-[800px]"
               } w-[90%] mx-auto z-[21] small:top-2/4 small:-translate-y-2/4`}
             >

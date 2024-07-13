@@ -26,6 +26,7 @@ export default {
         LoginInput: "var(--LoginInput)",
         LoginInputActive: "var(--LoginInputActive)",
 
+        whiteLower: "var(--whiteLower)",
         whiteLow: "var(--whiteLow)",
         whiteCont: "var(--whiteCont)",
 
@@ -172,6 +173,7 @@ export default {
       mobileTab: { max: "600px" },
       searchCardLow: { max: "500px" },
       mobileSmall: { max: "440px" },
+      mobileSmallest: { max: "370px" },
     },
   },
   plugins: [],
