@@ -110,7 +110,10 @@ export default function Login() {
 
         <meta property="og:type" lang="ka" content="website" />
         <meta property="og:url" lang="ka" content="https://onhome.ge" />
-        <meta property="og:site_name" content="OnHome" />
+        <meta
+          property="og:site_name"
+          content="OnHome.ge - უძრავი ქონების ყიდვა გაყიდვა გაქირავება"
+        />
       </Helmet>
       <main className="m-0 p-0">
         <AuthenticationHeader />

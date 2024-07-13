@@ -3,7 +3,7 @@ import { getCacheItem, setCacheItem } from "../cache/cacheFunctions";
 import axiosCall from "../../hooks/axiosCall";
 import { Tlocation } from "../../store/data/addProductSlice";
 
-function SelectPlace(props: {
+function SearchPlace(props: {
   setData: Function;
   closeWindow?: Function;
   defData?: Tlocation | any;
@@ -131,7 +131,12 @@ function SelectPlace(props: {
             : null}
         </p>
 
-        <button onClick={submitLocations} className=" DefButton">
+        <button
+          onClick={() => {
+            submitLocations();
+          }}
+          className=" DefButton"
+        >
           დადასტურება
         </button>
       </div>
@@ -139,7 +144,7 @@ function SelectPlace(props: {
   );
 }
 
-export default memo(SelectPlace);
+export default memo(SearchPlace);
 
 function GetDistricts(props: {
   setDistrict: Function;

@@ -108,7 +108,10 @@ function Home() {
 
         <meta property="og:type" lang="ka" content="website" />
         <meta property="og:url" lang="ka" content="https://onhome.ge" />
-        <meta property="og:site_name" content="ONHOME" />
+        <meta
+          property="og:site_name"
+          content="OnHome.ge - უძრავი ქონების ყიდვა გაყიდვა გაქირავება"
+        />
       </Helmet>
       <main>
         <div className="relative flex flex-col w-full mobileTab:flex-col-reverse">

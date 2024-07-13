@@ -17,7 +17,7 @@ function MainSlider() {
       pagination={{ clickable: true }}
       rewind
       autoplay={{ delay: 6000 }}
-      className="w-full"
+      className="w-full  "
     >
       <SwiperSlide>
         <MainSliderCard
@@ -68,7 +68,7 @@ function MainSliderCard(props: TMainSliderCard) {
   const [loaded, setLoaded] = useState<boolean>(false);
   return (
     <div
-      className="w-full h-[380px]
+      className="w-full h-[380px]  bg-bodyBg
     large:h-[330px]
       mediumSmall:h-[270px]
       mediumSmallXl:h-[245px]
