@@ -74,6 +74,7 @@ function MainSliderCard(props: TMainSliderCard) {
           setLoaded(true);
         }}
         className=" z-[1] max-h-[380px] max-w-[1390px] absolute h-full w-full object-cover top-0 left-0 object-[center_center]"
+        alt="OnHome Slider Banner"
       />
     );
   }, []);

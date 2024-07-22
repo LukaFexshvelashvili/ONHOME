@@ -381,8 +381,8 @@ export function EstateImages(props: { error: boolean }) {
         <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
           ფოტოები{" "}
         </p>
-        <p className="text-Asmall text-textDescCard ml-2 mobile:ml-0">
-          (მაქსიმუმ 12 ფოტო, სურათის მოცულობა: 15MB)
+        <p className="text-Asmall text-textDescCard ml-2 mobile:ml-0 text-center">
+          (მაქსიმუმ 12 ფოტო, სურათის მოცულობა: 10MB, PNG, JPG, JPEG)
         </p>{" "}
       </div>
       {images.length == 0 && props.error && (

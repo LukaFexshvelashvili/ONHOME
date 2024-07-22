@@ -64,7 +64,6 @@ export default function Profile() {
       <Helmet>
         <title>პროფილი - OnHome</title>
       </Helmet>
-
       <main className="min-h-screen flex gap-4 mobile:gap-0 mobile:flex-col">
         <section className="flex flex-col flex-[2] mobile:flex-[none] mobile:mb-5 gap-4">
           {userData.isLogged ? (

@@ -73,7 +73,7 @@ export default function Balance() {
               to={"/Profile/ProfileInfo"}
               className="text-[14px] text-main mt-8 underline text-center"
             >
-              გადახდების ისტორია იხილეთ ინფორმაციის გვერძე
+              გადახდების ისტორია იხილეთ ინფორმაციის გვერდზე
             </Link>
           </div>
         </div>
