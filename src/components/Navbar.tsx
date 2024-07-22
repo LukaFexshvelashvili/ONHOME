@@ -120,15 +120,15 @@ export default function Navbar() {
           </Link>
           {userData.isLogged ? (
             <Link to={"/AddProduct"}>
-              <button className=" font-mainSemiBold flex items-center justify-center gap-3 tracking-widest w-[140px] h-[34px] bg-greenClear text-greenI rounded-[8px] text-[12px] transition-colors hover:bg-greenHover">
-                <PlusIcon className="h-[13px] aspect-square  [&>path]:fill-greenI" />
+              <button className=" font-mainSemiBold flex items-center justify-center gap-3 tracking-widest w-[140px] h-[34px] bg-mainClear text-main rounded-[8px] text-[12px] transition-colors hover:bg-mainClearHover">
+                <PlusIcon className="h-[13px] aspect-square  [&>path]:fill-main" />
                 დამატება
               </button>
             </Link>
           ) : (
             <Link to={"/Login"}>
-              <button className=" font-mainSemiBold flex items-center justify-center gap-3 tracking-widest w-[140px] h-[34px] bg-greenClear text-greenI rounded-[8px] text-[12px] transition-colors hover:bg-greenHover">
-                <PlusIcon className="h-[13px] aspect-square  [&>path]:fill-greenI" />
+              <button className=" font-mainSemiBold flex items-center justify-center gap-3 tracking-widest w-[140px] h-[34px] bg-mainClear text-main rounded-[8px] text-[12px] transition-colors hover:bg-mainClearHover">
+                <PlusIcon className="h-[13px] aspect-square  [&>path]:fill-main" />
                 დამატება
               </button>
             </Link>
@@ -332,15 +332,15 @@ function ResponsiveNavbar({
             </Link>
             {userData.isLogged ? (
               <Link onClick={() => setActive(false)} to={"/AddProduct"}>
-                <button className=" font-mainSemiBold flex items-center justify-center gap-2 tracking-widest w-[160px] h-[40px] bg-greenClear text-greenI rounded-[8px] text-[14px] transition-colors hover:bg-greenHover">
-                  <PlusIcon className="h-[16px] aspect-square [&>path]:fill-greenI" />
+                <button className=" font-mainSemiBold flex items-center justify-center gap-2 tracking-widest w-[160px] h-[40px] bg-mainClear text-main rounded-[8px] text-[14px] transition-colors hover:bg-mainClearHover">
+                  <PlusIcon className="h-[16px] aspect-square [&>path]:fill-main" />
                   დამატება
                 </button>
               </Link>
             ) : (
               <Link onClick={() => setActive(false)} to={"/Login"}>
-                <button className=" font-mainSemiBold flex items-center justify-center gap-2 tracking-widest w-[160px] h-[40px] bg-greenClear text-greenI rounded-[8px] text-[14px] transition-colors hover:bg-greenHover">
-                  <PlusIcon className="h-[16px] aspect-square [&>path]:fill-greenI" />
+                <button className=" font-mainSemiBold flex items-center justify-center gap-2 tracking-widest w-[160px] h-[40px] bg-mainClear text-main rounded-[8px] text-[14px] transition-colors hover:bg-mainClearHover">
+                  <PlusIcon className="h-[16px] aspect-square [&>path]:fill-main" />
                   დამატება
                 </button>
               </Link>

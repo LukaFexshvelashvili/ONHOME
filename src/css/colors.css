@@ -2,7 +2,7 @@
   --main: #3a86ff;
   --mainHover: #4f92fe;
   --mainClear: rgba(58, 134, 255, 0.1);
-  --mainClearHover: rgba(58, 134, 255, 0.3);
+  --mainClearHover: rgba(58, 134, 255, 0.2);
   --mainClear2: rgba(58, 133, 255, 0.7);
   --mainClearActive: rgba(58, 134, 255, 0.15);
   --LoginInputBg: rgba(58, 134, 255, 0.05);
@@ -16,8 +16,8 @@
   --blackMainBlocked: rgb(11, 11, 11);
   --blackMainHoverBlocked: rgb(16, 16, 16);
 
-  --LoginInput: rgba(239, 239, 239, 0.5);
-  --LoginInputActive: rgba(232, 232, 232, 0.5);
+  --LoginInput: rgba(250, 250, 250, 0.5);
+  --LoginInputActive: rgba(240, 240, 240, 0.5);
   --whiteLower: rgba(213, 213, 213, 0.3);
   --whiteLow: rgba(239, 239, 239, 0.6);
   --whiteCont: rgba(198, 198, 198, 1);
@@ -30,7 +30,7 @@
   --photoLabel: rgba(255, 255, 255, 0.9);
   --photoLabelDesc: rgba(255, 255, 255, 0.8);
   --buttonText: rgb(255, 255, 255);
-  --inputBorder: #e7e7e7;
+  --inputBorder: rgb(246, 246, 246);
   --sliderFadeStart: rgba(0, 0, 0, 0.6);
   --sliderFadeEnd: rgba(0, 0, 0, 0);
   --sliderHead: rgba(255, 255, 255, 0.9);
@@ -137,8 +137,8 @@
   --navIcon: #cccccc;
   --lineBg: #333333;
   --blackMain: rgba(255, 255, 255, 0.8);
-  --LoginInput: rgba(69, 69, 69, 0.5);
-  --LoginInputActive: rgba(62, 62, 62, 0.9);
+  --LoginInput: rgba(45, 45, 45, 0.5);
+  --LoginInputActive: rgba(52, 52, 52, 0.5);
 
   --whiteLower: rgba(44, 44, 44, 0.3);
   --whiteLow: rgba(44, 44, 44, 0.6);
@@ -151,7 +151,7 @@
   --buttonBgLast: #6da5ff;
   --photoLabel: rgba(255, 255, 255, 0.9);
   --photoLabelDesc: rgba(255, 255, 255, 0.8);
-  --inputBorder: #424242;
+  --inputBorder: #383838;
   --sliderFadeStart: rgba(0, 0, 0, 0.6);
   --sliderFadeEnd: rgba(0, 0, 0, 0);
   --sliderHead: rgba(255, 255, 255, 0.9);

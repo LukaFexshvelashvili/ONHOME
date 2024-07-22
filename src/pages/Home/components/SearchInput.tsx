@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import {
   FilterFrameIcon,
   FilterHomeIcon,
@@ -77,14 +77,19 @@ function SearchInput() {
       document.body.classList.remove("no-scroll");
     };
   }, [inputSelect]);
+  const imageElement = useMemo(() => {
+    return (
+      <img
+        src={searchBg}
+        className="absolute w-full h-full object-cover top-0 left-0 z-0 object-bottom"
+        alt="search_background"
+      />
+    );
+  }, []);
   return (
     <div className="w-full my-4 overflow-hidden  bg-whiteMain rounded-[25px] shadow-sectionShadow">
       <div className="w-full relative  flex gap-3 small:w-auto small:h-auto small:flex-col small:gap-1 flex-wrap mx-auto py-[20px] px-[25px] ">
-        <img
-          src={searchBg}
-          className="absolute w-full h-full object-cover top-0 left-0 z-0 object-bottom"
-          alt="search_background"
-        />
+        {imageElement}
         <div className="absolute w-full h-full object-cover top-0 left-0 bg-[#0000009a] backdrop-blur-[2px] z-0"></div>
         <div className="flex flex-wrap gap-2 justify-center small:flex-col  z-10">
           <ProjectDealSelectorSearch setData={setGetDeal} />

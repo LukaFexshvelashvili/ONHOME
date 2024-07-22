@@ -7,7 +7,7 @@ import banner1 from "../../../assets/images/estates/banner1.webp";
 import banner2 from "../../../assets/images/estates/banner2.webp";
 import banner3 from "../../../assets/images/estates/banner3.webp";
 import { Link } from "react-router-dom";
-import { memo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 
 function MainSlider() {
   return (
@@ -66,6 +66,18 @@ type TMainSliderCard = {
 };
 function MainSliderCard(props: TMainSliderCard) {
   const [loaded, setLoaded] = useState<boolean>(false);
+  const imageElement = useMemo(() => {
+    return (
+      <img
+        src={props.image}
+        onLoad={() => {
+          setLoaded(true);
+        }}
+        className=" z-[1] max-h-[380px] max-w-[1390px] absolute h-full w-full object-cover top-0 left-0 object-[center_center]"
+      />
+    );
+  }, []);
+
   return (
     <div
       className="w-full h-[380px]  bg-bodyBg
@@ -84,14 +96,7 @@ function MainSliderCard(props: TMainSliderCard) {
       ) : null}
       {props.linkWhole ? (
         <Link to={props.linkWhole}>
-          <img
-            src={props.image}
-            alt="Apartment"
-            onLoad={() => {
-              setLoaded(true);
-            }}
-            className=" z-[1] max-h-[380px] max-w-[1390px] absolute h-full w-full object-cover top-0 left-0 object-[center_center]"
-          />
+          {imageElement}
           {props.opacity ? (
             <div className=" bg-gradient-to-t from-sliderFadeStart to-sliderFadeEnd z-[2] absolute h-full w-full object-cover top-0 left-0"></div>
           ) : null}

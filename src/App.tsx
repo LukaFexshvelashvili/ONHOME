@@ -114,7 +114,8 @@ function App() {
   return (
     <>
       <Helmet>
-        <title>OnHome</title>
+        <title>უძრავი ქონების ყიდვა, გაყიდვა, გაქირავება - OnHome.ge</title>
+
         <meta
           name="description"
           lang="ka"
@@ -137,8 +138,10 @@ function App() {
 
         <meta property="og:type" lang="ka" content="website" />
         <meta property="og:url" lang="ka" content="https://onhome.ge" />
-        <meta property="og:site_name" content="OnHome.ge - უძრავი ქონების ყიდვა გაყიდვა გაქირავება" />
-        
+        <meta
+          property="og:site_name"
+          content="OnHome.ge - უძრავი ქონების ყიდვა გაყიდვა გაქირავება"
+        />
       </Helmet>
       {loading ? <MainLoader /> : null}
       {cookiesAgreement ? (

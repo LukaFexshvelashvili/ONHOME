@@ -142,8 +142,8 @@ export default function Footer() {
       </div>
 
       <div className="h-[2px] w-full bg-lineBg mt-5"></div>
-      <div className="content_container flex justify-between  [&>p]:text-Asmall text-Asmall [&>p]:text-textInfo [&>p]:cursor-pointer py-3">
-        <div className="flex gap-4  text-Asmall [&>a]:text-Asmall [&>a]:text-textInfo  [&>a]:cursor-pointer flex-wrap">
+      <div className="content_container flex justify-between  [&>p]:text-Asmall medium:[&>p]:text-[11px] text-Asmall [&>p]:text-textInfo [&>p]:cursor-pointer py-3">
+        <div className="flex gap-4  text-Asmall [&>a]:text-Asmall [&>a]:text-textInfo medium:[&>a]:text-[11px]  [&>a]:cursor-pointer flex-wrap">
           <Link to={"PrivacyPolicy"}> წესები და პირობები</Link>
           <Link to={"PrivacyPolicy"}> კონფიდენციალურობა </Link>
         </div>

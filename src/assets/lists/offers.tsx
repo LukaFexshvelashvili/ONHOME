@@ -27,11 +27,11 @@ export const ActiveOffers = [
     id: 3,
     status: 3,
     name: "AUTO",
-    benefits: ["ავტომატური განახლება"],
-    mainColor: "#00ff80",
+    benefits: ["ავტომატური განახლება", "მოძებნისას მაღალი რანკი"],
+    mainColor: "#0fb196",
 
-    secondColor: "rgba(0, 255, 128, 0.1) ",
-    lineColor: "rgba(0, 255, 128, 0.3) ",
+    secondColor: "rgba(15, 177, 150, 0.15)",
+    lineColor: "rgba(15, 177, 150, 0.3) ",
     sale: 0.1,
     price: 0.3,
   },
@@ -46,7 +46,7 @@ export const ActiveOffers = [
     ],
     mainColor: "#FF9900",
 
-    secondColor: "rgba(255, 153, 0, 0.1)",
+    secondColor: "rgba(255, 153, 0, 0.15)",
     lineColor: "rgba(255, 153, 0, 0.3)",
     sale: 0.45,
 
@@ -65,7 +65,7 @@ export const ActiveOffers = [
     ],
     mainColor: "#ff005c",
 
-    secondColor: "rgba(255, 0, 60, 0.1)",
+    secondColor: "rgba(255, 0, 60, 0.15)",
     lineColor: "rgba(255, 0, 60, 0.3)",
     sale: 0.75,
     price: 3,

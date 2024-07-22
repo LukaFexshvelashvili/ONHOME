@@ -84,7 +84,8 @@ function Home() {
   return (
     <>
       <Helmet>
-        <title>OnHome</title>
+        <title>უძრავი ქონების ყიდვა, გაყიდვა, გაქირავება - OnHome.ge</title>
+
         <meta
           name="description"
           lang="ka"

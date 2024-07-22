@@ -214,7 +214,7 @@ function Search() {
                 ? `ნაპოვნია ${getFullCount.current} შედეგი`
                 : ""}
             </p>
-            <div className="flex flex-wrap relative min-h-[150px] gap-[10px] gap-y-[15px] searchCardLow:gap-y-[10px] large:justify-center large:gap-5  justify-evenly mediumSmallXl:flex-col">
+            <div className="flex flex-wrap relative min-h-[150px] gap-[10px] gap-y-[18px] searchCardLow:gap-y-[13px] large:justify-center large:gap-5  justify-evenly mediumSmallXl:flex-col">
               {!loader ? (
                 <>
                   {vipSearched !== null && vipSearched.length > 0

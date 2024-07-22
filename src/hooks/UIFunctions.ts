@@ -68,6 +68,7 @@ export function changeMainColor(newColor: string) {
       case "#3A86FF":
         b.style.setProperty(`--main`, `${newColor}`);
         b.style.setProperty(`--mainClear`, `rgba(58, 134, 255, 0.1)`);
+        b.style.setProperty(`--mainClearHover`, `rgba(58, 134, 255, 0.2)`);
         b.style.setProperty(`--mainClear2`, `rgba(58, 133, 255, 0.7)`);
         b.style.setProperty(`--mainClearActive`, `rgba(58, 134, 255, 0.15)`);
         b.style.setProperty(`--mainHover`, `#4f92fe`);
@@ -76,6 +77,7 @@ export function changeMainColor(newColor: string) {
       case "#C727FF":
         b.style.setProperty(`--main`, `${newColor}`);
         b.style.setProperty(`--mainClear`, `rgba(198, 47, 253, 0.1)`);
+        b.style.setProperty(`--mainClearHover`, `rgba(198, 47, 253, 0.2)`);
         b.style.setProperty(`--mainClear2`, `rgba(198, 47, 253, 0.7)`);
         b.style.setProperty(`--mainClearActive`, `rgba(198, 47, 253, 0.15)`);
         b.style.setProperty(`--mainHover`, `#cd44ff`);
@@ -84,6 +86,7 @@ export function changeMainColor(newColor: string) {
       case "#95d609":
         b.style.setProperty(`--main`, `${newColor}`);
         b.style.setProperty(`--mainClear`, `rgba(149, 214, 9, 0.1)`);
+        b.style.setProperty(`--mainClearHover`, `rgba(149, 214, 9, 0.2)`);
         b.style.setProperty(`--mainClear2`, `rgba(149, 214, 9, 0.7)`);
         b.style.setProperty(`--mainClearActive`, `rgba(149, 214, 9, 0.15)`);
         b.style.setProperty(`--mainHover`, `#a0dd1e`);

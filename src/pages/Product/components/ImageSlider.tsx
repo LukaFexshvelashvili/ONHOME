@@ -49,7 +49,7 @@ function ImageSlider(props: { productData: any }) {
           setFullSlider={setFullSlider}
         />
       ) : null}
-      <div className="flex-[1.3] bg-whiteMain rounded-block relative flex items-center justify-center  shadow-sectionShadow max-h-[450px]">
+      <div className="flex-[1.3] bg-whiteMain rounded-block relative flex items-center justify-center  shadow-sectionShadow max-h-[450px] overflow-hidden">
         <div className="slider-shade absolute h-full w-full left-0 top-0 z-[2] rounded-b-block"></div>
         <div className="flex items-center gap-4 absolute bottom-3 z-[3] mobileSmall:gap-3 max-w-[90%] overflow-hidden">
           <Swiper spaceBetween={15} slidesPerView="auto">

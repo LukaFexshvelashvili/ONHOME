@@ -134,7 +134,7 @@ export default function Product() {
               <ImageSlider productData={pageData.productData} />
               <ProductSideBar pageData={pageData} />
             </section>
-            <section className="flex gap-[36px] mt-6  small:flex-col">
+            <section className="flex gap-[36px] mt-6  small:flex-col medium:mt-3 medium:gap-3">
               <div className="flex-[2] flex flex-col gap-3">
                 <div className=" rounded-block bg-whiteMain p-4">
                   <p className=" text-[15px] font-mainBold text-textHeadCard">
@@ -236,7 +236,7 @@ export default function Product() {
                   </div>
                 </div>
               </div>
-              <div className="flex-1 flex flex-col gap-3  small:flex-col-reverse">
+              <div className="flex-1 flex flex-col gap-3  small:flex-col-reverse ">
                 <AdBanner3 />
                 <div className=" rounded-block bg-whiteMain p-4">
                   <p className=" text-[15px] font-mainBold text-textHeadCard">

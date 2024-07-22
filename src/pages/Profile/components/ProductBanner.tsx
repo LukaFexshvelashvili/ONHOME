@@ -83,7 +83,7 @@ export default function ProductBanner(props: {
             სტატუსის ვადა:{" "}
             <span className="text-[13px] text-textHeadBlack">
               {" "}
-              {props.productData.estate_vip_expire.slice(0, 10)}
+              {FormatTime(props.productData.estate_vip_expire.toString())}
             </span>
           </p>
         ) : null}
