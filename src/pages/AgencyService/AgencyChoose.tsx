@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { FormatTime } from "../../components/global/Addons";
 import numeral from "numeral";
+import { t } from "i18next";
 
 export default function MaclerChoose() {
   const userData = useSelector((store: RootState) => store.user);
@@ -111,7 +112,7 @@ export default function MaclerChoose() {
             <>
               <div className="p-4">
                 <h1 className="text-[18px] text-maclerMain  font-mainBold">
-                  სააგენტოს სერვისი - აირჩიეთ განცხადება{" "}
+                  {t("homePage.agencyService.title")} - აირჩიეთ განცხადება{" "}
                 </h1>
                 <p className="text-[15px] text-textDesc mt-4 ">
                   თქვენი განცხადებები
@@ -131,7 +132,7 @@ export default function MaclerChoose() {
             <>
               <div className="p-4">
                 <h1 className="text-[18px] text-maclerMain  font-mainBold">
-                  სააგენტოს სერვისი - შეთანხმება
+                  {t("homePage.agencyService.title")} - შეთანხმება
                 </h1>
                 <div className="bg-maclerMainClear rounded-xl [&>div]:border-none mt-[30px]">
                   <ProductBannerMacler

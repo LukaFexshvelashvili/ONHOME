@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { image_url_start } from "../../hooks/axiosCall";
 import { getDealType } from "./getTypes";
+import { t } from "i18next";
 
 export type TProductCard = {
   id: number;
@@ -244,7 +245,7 @@ export function SeeMoreCard(props: { autoWidth?: boolean; link: string }) {
           to={"/Search?" + props.link}
           className="absolute w-full h-full top-0 left-0"
         ></Link>
-        მეტის ნახვა
+        {t("global.titles.see_more")}
         <PlusIcon className="h-[20px] [&>path]:fill-blackMain " />
       </div>
     </>

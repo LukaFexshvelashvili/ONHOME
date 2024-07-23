@@ -25,6 +25,7 @@ import searchBg from "../../../assets/images/estates/searchBg2.webp";
 import HoverTitle from "../../../components/global/HoverTitle";
 import SearchPlace from "../../../components/placeSelector/SearchPlace";
 import { getDealType } from "../../../components/global/getTypes";
+import { t } from "i18next";
 
 type TPriceGet = {
   start: number;
@@ -104,7 +105,7 @@ function SearchInput() {
           >
             <input
               type="text"
-              placeholder="სიტყვით ძებნა..."
+              placeholder={t("global.placeholders.search")}
               className="w-full h-full px-4  outline-none font-mainRegular bg-transparent text-buttonText tracking-wider text-[14px] transition-colors focus:bg-[#ffffff11]"
               onChange={(e) => setSearchTitle(e.target.value)}
               value={searchTitle}
@@ -130,7 +131,9 @@ function SearchInput() {
             >
               <SellIcon className=" small:w-[20px] h-[18px] [&>path]:fill-white" />{" "}
               <p className="max-w-[150px] small:max-w-[180px] text-[13px] font-mainRegular text-[#ffffffd3] text-ellipsis overflow-hidden text-nowrap">
-                {getDeal !== null ? getDealType(getDeal) : "გარიგების ტიპი"}
+                {getDeal !== null
+                  ? getDealType(getDeal)
+                  : t("global.placeholders.deal")}
               </p>
             </div>
             {getDeal !== null && (
@@ -149,7 +152,7 @@ function SearchInput() {
             >
               <FilterHomeIcon className=" small:w-[20px] h-[16px] [&>path]:fill-white" />{" "}
               <p className="max-w-[150px] text-[13px] font-mainRegular text-[#ffffffd3]">
-                {getType ? getType : "ბინა"}
+                {getType ? getType : t("global.placeholders.home")}
               </p>
             </div>
             {getType && (
@@ -172,7 +175,7 @@ function SearchInput() {
                   ? getLocation.district
                     ? getLocation.city + " > " + getLocation.district
                     : getLocation.city
-                  : "მდებარეობა"}
+                  : t("global.placeholders.location")}
               </p>
             </div>
             {getLocation.city !== "" && (
@@ -193,7 +196,11 @@ function SearchInput() {
             >
               <FilterFrameIcon className=" small:w-[20px] h-[16px] [&>path]:fill-white" />{" "}
               <p className="max-w-[150px] text-[13px] font-mainRegular text-[#ffffffd3]">
-                {getSizes ? `${getSizes[0]} მ² - ${getSizes[1]} მ²` : "ფართი"}
+                {getSizes
+                  ? `${getSizes[0]} ${t("global.placeholders.m")}² - ${
+                      getSizes[1]
+                    } ${t("global.placeholders.m")}²`
+                  : t("global.placeholders.space")}
               </p>
             </div>
             {getSizes && (
@@ -216,7 +223,7 @@ function SearchInput() {
                   ? `${getPrices.start}${
                       getPrices.currency == 0 ? "$" : "₾"
                     } - ${getPrices.end}${getPrices.currency == 0 ? "$" : "₾"}`
-                  : "ფასი"}
+                  : t("global.placeholders.price")}
               </p>
             </div>
             {getPrices && (
@@ -235,7 +242,9 @@ function SearchInput() {
             >
               <RoomIcon className=" small:w-[20px] h-[18px] translate-y-[1px] [&>path]:fill-white" />{" "}
               <p className="max-w-[150px] text-[13px] font-mainRegular text-[#ffffffd3]">
-                {getRooms !== null ? `${getRooms} ოთახი` : "ოთახები"}
+                {getRooms !== null
+                  ? `${getRooms} ${t("global.placeholders.room")}`
+                  : t("global.placeholders.rooms")}
               </p>
             </div>
             {getRooms !== null ? (
@@ -263,7 +272,7 @@ function SearchInput() {
               {inputSelect == 1 ? (
                 <>
                   <p className="text-textHead text-[14px] w-full text-center small:text-center small:w-full small:mt-6 small:mb-2">
-                    აირჩიეთ უძრავი ქონების ტიპი
+                    {t("global.titles.choose_real_estate_type")}
                   </p>
                   <SelectType
                     setData={setGetType}
@@ -273,7 +282,7 @@ function SearchInput() {
               ) : inputSelect == 2 ? (
                 <>
                   <p className="text-textHead text-[14px] w-full text-center small:text-center small:w-full small:mt-6 small:mb-2">
-                    აირჩიეთ მდებარეობა
+                    {t("global.titles.choose_location")}
                   </p>
                   <SearchPlace
                     setData={setGetLoaction}
@@ -283,7 +292,7 @@ function SearchInput() {
               ) : inputSelect == 3 ? (
                 <>
                   <p className="text-textHead text-[14px] w-wull text-center small:text-center small:w-full small:mt-6 small:mb-2">
-                    აირჩიეთ ფართის ზომა
+                    {t("global.titles.choose_space")}
                   </p>
                   <InputSizeSlider
                     setData={setGetSizes}
@@ -294,7 +303,7 @@ function SearchInput() {
               ) : inputSelect == 4 ? (
                 <>
                   <p className="text-textHead text-[14px] w-full text-center small:text-center small:w-full small:mt-6 small:mb-2">
-                    აირჩიეთ ფასის ინტერვალი
+                    {t("global.titles.choose_price")}
                   </p>
                   <InputPriceSlider
                     setData={setGetPrices}
@@ -305,7 +314,7 @@ function SearchInput() {
               ) : inputSelect == 5 ? (
                 <>
                   <p className="text-textHead text-[14px] w-full text-center small:text-center small:w-full small:mt-6 small:mb-2">
-                    აირჩიეთ ოთახების რაოდენობა
+                    {t("global.titles.choose_rooms")}
                   </p>
                   <SelectRooms
                     setData={setGetRooms}
@@ -315,7 +324,7 @@ function SearchInput() {
               ) : inputSelect == 7 ? (
                 <>
                   <p className="text-textHead text-[14px] w-full text-center small:text-center small:w-full small:mt-6 small:mb-2">
-                    აირჩიეთ გარიგება
+                    {t("global.titles.choose_deal")}
                   </p>
                   <div className="flex flex-wrap justify-center small:flex-col gap-2 mt-5">
                     <ProjectDealSelectorSearch
@@ -334,13 +343,14 @@ function SearchInput() {
           className={`relative group small:hidden h-[45px] w-[60px] text-[14px] z-10 small:w-full small:py-3 small:mt-2 small:rounded-normal font-mainMedium rounded-[6px] text-buttonText bg-main flex items-center justify-center tracking-widest transition-all hover:bg-mainHover`}
         >
           <SearchIcon className="h-[16px] aspect-square " />
-          <HoverTitle title="მოძებნა" top />
+          <HoverTitle title={t("global.search")} top />
         </button>
         <button
           onClick={handleSearch}
           className={`hidden h-full z-[1] text-[14px] w-full py-3 mt-2 rounded-normal font-mainMedium  rounded-r-[6px] text-buttonText bg-main small:flex items-center justify-center tracking-widest  transition-all hover:bg-mainHover  `}
         >
-          <SearchIcon className="h-[16px] aspect-square mr-2" /> მოძებნა
+          <SearchIcon className="h-[16px] aspect-square mr-2" />{" "}
+          {t("global.search")}
         </button>
         {inputSelect && (
           <div

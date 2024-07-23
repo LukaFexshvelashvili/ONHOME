@@ -11,8 +11,8 @@ import {
   SunIcon,
   UserLinearIcon,
 } from "../assets/icons/Icons";
-// import georgianFlag from "../assets/images/languages/georgia.png";
-// import englishFlag from "../assets/images/languages/english.png";
+import georgianFlag from "../assets/images/languages/georgia.png";
+import englishFlag from "../assets/images/languages/english.png";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { Link } from "react-router-dom";
@@ -22,6 +22,8 @@ import { toggleDarkMode } from "../store/data/webUISlice";
 import { NotificationBar, ProfileBar } from "./NavbarComponents";
 import { Tuser } from "../store/data/userSlice";
 import HoverTitle from "./global/HoverTitle";
+import { t } from "i18next";
+import { OutsideClickClose } from "./global/OutsideClickClose";
 export default function Navbar() {
   const userData = useSelector((store: RootState) => store.user);
   const darkmode: boolean = useSelector(
@@ -29,8 +31,8 @@ export default function Navbar() {
   );
 
   const [activePop, setActivePop] = useState<null | string>(null);
-  // const [activeLang, setActiveLang] = useState<boolean>(false);
-  // const [langImg, setLangImg] = useState<string>(georgianFlag);
+  const [activeLang, setActiveLang] = useState<boolean>(false);
+  const [langImg, setLangImg] = useState<string>(georgianFlag);
 
   let favNums = 0;
   if (localStorage.getItem("favorites")) {
@@ -51,15 +53,11 @@ export default function Navbar() {
             onClick={() => window.scrollTo(0, 0)}
             className="flex items-center gap-3"
           >
-            {/* <WebIcon className="h-[34px] aspect-square" />
-            <div className=" mobile:hidden rounded-[3px] cursor-pointer text-blackMain font-logoBold text-[18px] tracking-[3px]">
-              <span className="text-main ">ON</span>HOME
-            </div> */}
             <div className=" h-[32px] w-[140px] flex justify-center items-center bg-gradient-to-tr from-main to-mainHover rounded-[5px] mobile:h-[30px] mobile:w-[130px]  cursor-pointer text-buttonText font-logoBold text-[18px] font-thin  tracking-[2.5px] [text-shadow:_2px_2px_10px_rgb(0_0_0_/_10%)] ">
               ONHOME
             </div>
           </Link>
-          {/* <OutsideClickClose
+          <OutsideClickClose
             setActivePop={setActiveLang}
             activePop={activeLang}
           >
@@ -109,27 +107,27 @@ export default function Navbar() {
                 </button>
               </div>
             </div>
-          </OutsideClickClose> */}
+          </OutsideClickClose>
         </div>
         <div className="mobile:hidden flex items-center gap-4">
           <Link to={"/Contact"}>
             <button className=" font-mainSemiBold flex items-center justify-center gap-3 tracking-widest w-[140px] h-[34px] bg-orangeClear text-orangeI rounded-[8px] text-[12px] transition-colors hover:bg-orangeHover">
               <HelpIcon className="h-[16px] aspect-square" />
-              დახმარება
+              {t("navbar.help")}
             </button>
           </Link>
           {userData.isLogged ? (
             <Link to={"/AddProduct"}>
               <button className=" font-mainSemiBold flex items-center justify-center gap-3 tracking-widest w-[140px] h-[34px] bg-mainClear text-main rounded-[8px] text-[12px] transition-colors hover:bg-mainClearHover">
                 <PlusIcon className="h-[13px] aspect-square  [&>path]:fill-main" />
-                დამატება
+                {t("navbar.add_form")}
               </button>
             </Link>
           ) : (
             <Link to={"/Login"}>
               <button className=" font-mainSemiBold flex items-center justify-center gap-3 tracking-widest w-[140px] h-[34px] bg-mainClear text-main rounded-[8px] text-[12px] transition-colors hover:bg-mainClearHover">
                 <PlusIcon className="h-[13px] aspect-square  [&>path]:fill-main" />
-                დამატება
+                {t("navbar.add_form")}
               </button>
             </Link>
           )}
@@ -144,7 +142,7 @@ export default function Navbar() {
 
                 <BookmarkIcon className="h-[20px] aspect-square stroke-navIcon cursor-pointer [&>path]:stroke-navIcon p-[0.2px]" />
               </button>
-              <HoverTitle title="ფავორიტები" />
+              <HoverTitle title={t("navbar.favorites")} />
             </Link>{" "}
             <NotificationBar
               userData={userData}
@@ -262,7 +260,8 @@ function ResponsiveNavbar({
             </div>
           </div>
           <p className="text-[12px] text-textDesc mt-3 text-center px-4">
-            ბალანსი{": "}
+            {t("global.balance")}
+            {": "}
             <span className="text-main ml-1">
               {(userData.money / 100)
                 .toFixed(2)
@@ -293,7 +292,9 @@ function ResponsiveNavbar({
                       ) : (
                         e.icon
                       )}
-                      {darkmode ? "ღია თემა" : "მუქი თემა"}
+                      {darkmode
+                        ? t("navbar.light_mode")
+                        : t("navbar.dark_mode")}
                     </button>
                   )
                 )
@@ -318,7 +319,10 @@ function ResponsiveNavbar({
                       ) : (
                         e.icon
                       )}
-                      {darkmode ? "ღია თემა" : "მუქი თემა"}
+
+                      {darkmode
+                        ? t("navbar.light_mode")
+                        : t("navbar.dark_mode")}
                     </button>
                   )
                 )}
@@ -327,21 +331,21 @@ function ResponsiveNavbar({
             <Link onClick={() => setActive(false)} to={"/Contact"}>
               <button className=" font-mainSemiBold flex items-center justify-center gap-2 tracking-widest w-[160px] h-[40px] bg-orangeClear text-orangeI rounded-[8px] text-[14px] transition-colors hover:bg-orangeHover">
                 <HelpIcon className="h-[18px] aspect-square" />
-                დახმარება
+                {t("navbar.help")}
               </button>
             </Link>
             {userData.isLogged ? (
               <Link onClick={() => setActive(false)} to={"/AddProduct"}>
                 <button className=" font-mainSemiBold flex items-center justify-center gap-2 tracking-widest w-[160px] h-[40px] bg-mainClear text-main rounded-[8px] text-[14px] transition-colors hover:bg-mainClearHover">
                   <PlusIcon className="h-[16px] aspect-square [&>path]:fill-main" />
-                  დამატება
+                  {t("navbar.add_form")}
                 </button>
               </Link>
             ) : (
               <Link onClick={() => setActive(false)} to={"/Login"}>
                 <button className=" font-mainSemiBold flex items-center justify-center gap-2 tracking-widest w-[160px] h-[40px] bg-mainClear text-main rounded-[8px] text-[14px] transition-colors hover:bg-mainClearHover">
                   <PlusIcon className="h-[16px] aspect-square [&>path]:fill-main" />
-                  დამატება
+                  {t("navbar.add_form")}
                 </button>
               </Link>
             )}
@@ -349,7 +353,7 @@ function ResponsiveNavbar({
           <div className="bg-lineBg h-[5px] rounded-md w-[50px] mx-auto mb-5 mt-7"></div>
 
           <p className="text-center  text-textDesc tracking-wider text-[16px]">
-            კატეგორიები
+            {t("navbar.categories")}
           </p>
           <div className="flex gap-3 flex-wrap justify-center mt-5">
             {RealEstateTypes.map(
@@ -389,40 +393,40 @@ type TProfileButton = {
 const profileResponsiveButtons: TProfileButton[] = [
   {
     link: "/Profile",
-    name: "ჩემი პროფილი",
+    name: t("navbar.my_profile"),
     icon: (
       <UserLinearIcon className=" h-[26px] aspect-square fill-textHead mr-2" />
     ),
   },
   {
     link: "/Profile/MyProducts",
-    name: "ჩემი განცხადებები",
+    name: t("navbar.my_forms"),
     icon: (
       <DocumentsIcon className=" h-[26px] aspect-square stroke-textHead mr-2" />
     ),
   },
   {
     link: "ChangeDarkTheme",
-    name: "მუქი თემა",
+    name: t("navbar.dark_mode"),
     icon: <MoonIcon className=" h-[26px] aspect-square fill-textHead mr-2" />,
   },
   {
     link: "Profile/Notifications",
-    name: "შეტყობინებები",
+    name: t("navbar.notifications"),
     icon: (
       <NotificationResponsiveIcon className=" h-[26px] flex items-center justify-center stroke-textHead mr-2" />
     ),
   },
   {
     link: "/Profile/Settings",
-    name: "პარამეტრები",
+    name: t("navbar.settings"),
     icon: (
       <SettingsIcon className=" h-[26px] aspect-square [&>path]:stroke-textHead mr-2" />
     ),
   },
   {
     link: "/Logout",
-    name: "გასვლა",
+    name: t("navbar.log_out"),
     icon: (
       <LogoutIcon className=" h-[26px] aspect-square stroke-textHead mr-2" />
     ),
@@ -431,7 +435,7 @@ const profileResponsiveButtons: TProfileButton[] = [
 const responsiveUnloggedButtons: TProfileButton[] = [
   {
     link: "/Login",
-    name: "ანგარიშში შესვლა",
+    name: t("navbar.log_in"),
     icon: (
       <LogoutIcon className="h-[26px] aspect-square stroke-textHead mr-2" />
     ),
@@ -439,7 +443,7 @@ const responsiveUnloggedButtons: TProfileButton[] = [
 
   {
     link: "ChangeDarkTheme",
-    name: "მუქი თემა",
+    name: t("navbar.dark_mode"),
     icon: <MoonIcon className="h-[26px] aspect-square fill-textHead mr-2" />,
   },
 ];

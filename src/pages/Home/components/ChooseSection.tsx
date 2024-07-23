@@ -4,6 +4,7 @@ import ApartamentImage from "../../../assets/images/estates/apartament.webp";
 import LandImage from "../../../assets/images/estates/land.webp";
 import ApartamentRentImage from "../../../assets/images/estates/apartamentRent.webp";
 import HotelImage from "../../../assets/images/estates/hotel.webp";
+import { t } from "i18next";
 
 export default function ChooseSection() {
   return (
@@ -14,7 +15,7 @@ export default function ChooseSection() {
             <Link to={"/Search?estate_type=0"}>
               <div className="absolute h-full w-full top-0 left-0 bg-gradient-to-t from-sectionFadeStart to-sectionFadeEnd z-[2]"></div>
               <div className="absolute bottom-3 left-4 text-WhiteFade tracking-wider font-mainRegular text-[14px] mobile:text-[14px] z-[3] ">
-                სახლები / აგარაკები
+                {t("homePage.cards.houses")}
               </div>
               <img
                 src={HomeImage}
@@ -27,7 +28,7 @@ export default function ChooseSection() {
             <Link to={"/Search?estate_type=3"}>
               <div className="absolute h-full w-full top-0 left-0 bg-gradient-to-t from-sectionFadeStart to-sectionFadeEnd z-[2]"></div>
               <div className="absolute bottom-3 left-4 text-WhiteFade tracking-wider font-mainRegular text-[14px] mobile:text-[14px] z-[3] ">
-                მიწის ნაკვეთები
+                {t("homePage.cards.lands")}
               </div>
               <img
                 src={LandImage}
@@ -40,7 +41,7 @@ export default function ChooseSection() {
             <Link to={"/Search?estate_type=1"}>
               <div className="absolute h-full w-full top-0 left-0 bg-gradient-to-t from-sectionFadeStart to-sectionFadeEnd z-[2]"></div>
               <div className="absolute bottom-3 left-4 text-WhiteFade tracking-wider font-mainRegular text-[14px] mobile:text-[14px] z-[3] ">
-                იყიდება ბინები
+                {t("homePage.cards.selling_apartments")}
               </div>
               <img
                 src={ApartamentImage}
@@ -53,7 +54,7 @@ export default function ChooseSection() {
             <Link to={"/Search?estate_type=1&deal=1"}>
               <div className="absolute h-full w-full top-0 left-0 bg-gradient-to-t from-sectionFadeStart to-sectionFadeEnd z-[2]"></div>
               <div className="absolute bottom-3 left-4 text-WhiteFade tracking-wider font-mainRegular text-[14px] mobile:text-[14px] z-[3] ">
-                ქირავდება ბინები
+                {t("homePage.cards.renting_apartments")}
               </div>
               <img
                 src={ApartamentRentImage}
@@ -68,7 +69,7 @@ export default function ChooseSection() {
             {" "}
             <div className="absolute h-full w-full top-0 left-0 bg-gradient-to-t from-sectionFadeStart to-sectionFadeEnd z-[2]"></div>
             <div className="absolute bottom-3 left-4 text-WhiteFade tracking-wider font-mainRegular text-[14px] mobile:text-[14px] z-[3] ">
-              სასტუმროები
+              {t("homePage.cards.hotels")}
             </div>
             <img
               src={HotelImage}
@@ -81,6 +82,7 @@ export default function ChooseSection() {
       <div className=" mobile:aspect-video w-full mt-4 mobile:mt-2 bg-whiteLoad overflow-hidden cursor-pointer group rounded-section relative">
         <div className="absolute h-full w-full top-0 left-0 bg-gradient-to-t from-sectionFadeStart to-sectionFadeEnd z-[2]"></div>
         <div className="absolute bottom-3 left-4 text-WhiteFade tracking-wider font-mainRegular text-[14px] mobile:text-[14px] z-[3] ">
+          {t("homePage.cards.lands")}
           მიწის ნაკვეთები
         </div>
         <img

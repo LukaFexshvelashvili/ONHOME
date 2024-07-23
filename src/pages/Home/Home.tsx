@@ -21,10 +21,12 @@ import {
 } from "../../components/cache/cacheFunctions";
 import { Helmet } from "react-helmet";
 import MaclerCard from "./components/MaclerCard";
+import { useTranslation } from "react-i18next";
 
 function Home() {
   const [products, setProducts] = useState<null | TProductCard[]>([]);
   const firstRender = useRef<boolean>(true);
+  const { t } = useTranslation();
   useLayoutEffect(() => {
     if (firstRender.current) {
       getCacheItem("home_page_fetch").then((chache) => {
@@ -84,7 +86,7 @@ function Home() {
   return (
     <>
       <Helmet>
-        <title>უძრავი ქონების ყიდვა, გაყიდვა, გაქირავება - OnHome.ge</title>
+        <title>{t("seo.title")}</title>
 
         <meta
           name="description"
@@ -122,7 +124,8 @@ function Home() {
         <AdBanner1 />
         <div className="flex items-center text-textHead font-mainBold text-[17px] mobileSmall:text-[15px] my-4 mt-10">
           <CrownIcon className=" h-[18px] mobileSmall:h-[17px] [&>path]:fill-vipPlusI mr-3 mobileSmall:mr-2 translate-y-[-1px] " />{" "}
-          <span className="text-vipPlusI mr-2">VIP+</span> განცხადებები
+          <span className="text-vipPlusI mr-2">VIP+</span>{" "}
+          {t("global.titles.forms")}
         </div>
 
         <CardSlider
@@ -138,7 +141,8 @@ function Home() {
 
         <div className="flex items-center text-textHead font-mainBold text-[17px] mobileSmall:text-[15px] my-4 mt-[50px]">
           <ListIcon className=" h-[36px] mobileSmall:h-[34px] mobileSmall:mr-1  [&>path]:fill-orangeI mr-2 translate-y-[-1px]" />{" "}
-          <span className="text-orangeI mr-2">VIP</span> განცხადებები
+          <span className="text-orangeI mr-2">VIP</span>{" "}
+          {t("global.titles.forms")}
         </div>
         <CardSlider
           link="vip=1"
@@ -153,13 +157,13 @@ function Home() {
         <ChooseSection />
         <div className="flex items-center text-textHead font-mainBold text-[17px] mobileSmall:text-[15px] my-4">
           <NewsIcon className=" h-[32px] mobileSmall:h-[30px] mobileSmall:mr-1 [&>path]:fill-purpleI mr-2 translate-y-[-1px]" />{" "}
-          ახალი
+          {t("global.titles.news")}
         </div>
         <CardSlider link="new=1" products={lastProducts()} />
         <MaclerCard />
         <div className="flex items-center text-textHead font-mainBold text-[17px] mobileSmall:text-[15px] my-4 mt-[50px]">
           <StarIcon className=" h-[32px] mobileSmall:h-[30px] mobileSmall:mr-1 [&>path]:fill-pinkI mr-2 translate-y-[-1px]" />{" "}
-          პოპულარული
+          {t("global.titles.popular")}
         </div>
         <CardSlider link="views=1" products={viewedProducts()} />
         <AdBanner2 />

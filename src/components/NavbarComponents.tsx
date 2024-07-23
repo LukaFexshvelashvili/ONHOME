@@ -14,6 +14,7 @@ import { toggleDarkMode } from "../store/data/webUISlice";
 import { useDispatch } from "react-redux";
 import { useEffect, useRef } from "react";
 import HoverTitle from "./global/HoverTitle";
+import { t } from "i18next";
 
 export function NotificationBar({
   userData,
@@ -53,7 +54,7 @@ export function NotificationBar({
       }   rounded-md `}
     >
       {activePop !== "notifications" ? (
-        <HoverTitle title="შეტყობინებები" />
+        <HoverTitle title={t("navbar.notifications")} />
       ) : null}
 
       {userData.notifications.length !== 0 &&
@@ -87,7 +88,7 @@ export function NotificationBar({
           {userData.isLogged ? (
             userData.notifications.length == 0 ? (
               <p className=" text-textHead text-[12px] tracking-wider font-mainRegular p-3 text-center">
-                შეტყობინებები არ არის
+                {t("navbar.there_are_no_messages")}
               </p>
             ) : (
               userData.notifications.map((item, i) => (
@@ -120,12 +121,12 @@ export function NotificationBar({
             )
           ) : (
             <p className=" text-textHead text-[12px] tracking-wider font-mainRegular p-3 text-center">
-              შეტყობინებების მისაღებად გაიარეთ{" "}
+              {t("navbar.to_see_notifications")}{" "}
               <Link
                 to={"/Login"}
                 className=" text-main font-mainBold underline"
               >
-                ავტორიზაცია
+                {t("navbar.log_in2")}
               </Link>
             </p>
           )}
@@ -137,7 +138,7 @@ export function NotificationBar({
             onClick={() => setActivePop(null)}
           >
             <button className=" w-full h-full bg-mainClear text-main left-0 tracking-wider font-mainBold text-[12px]">
-              ყველას ნახვა
+              {t("navbar.see_all")}{" "}
             </button>
           </Link>
         ) : null}
@@ -212,7 +213,8 @@ export function ProfileBar({
           </div>
         </div>
         <p className="text-[12px] text-textDesc mt-3 text-center px-4">
-          ბალანსი{": "}
+          {t("global.balance")}
+          {": "}
           <span className="text-main ml-1 font-mainBold">
             {(userData.money / 100)
               .toFixed(2)
@@ -241,7 +243,7 @@ export function ProfileBar({
                     ) : (
                       e.icon
                     )}
-                    {darkmode ? "ღია თემა" : "მუქი თემა"}
+                    {darkmode ? t("navbar.light_mode") : t("navbar.dark_mode")}
                   </button>
                 )
               )
@@ -264,7 +266,7 @@ export function ProfileBar({
                     ) : (
                       e.icon
                     )}
-                    {darkmode ? "ღია თემა" : "მუქი თემა"}
+                    {darkmode ? t("navbar.light_mode") : t("navbar.dark_mode")}
                   </button>
                 )
               )}
@@ -283,7 +285,7 @@ type TProfileButton = {
 const unloggedButtons: TProfileButton[] = [
   {
     link: "/Login",
-    name: "ანგარიშში შესვლა",
+    name: t("navbar.log_in"),
     icon: (
       <LogoutIcon className="h-[20px] aspect-square stroke-textHead mr-2" />
     ),
@@ -291,7 +293,7 @@ const unloggedButtons: TProfileButton[] = [
 
   {
     link: "ChangeDarkTheme",
-    name: "მუქი თემა",
+    name: t("navbar.dark_mode"),
     icon: <MoonIcon className="h-[20px] aspect-square fill-textHead mr-2" />,
   },
 ];
@@ -299,40 +301,40 @@ const unloggedButtons: TProfileButton[] = [
 const profileButtons: TProfileButton[] = [
   {
     link: "/Profile",
-    name: "ჩემი პროფილი",
+    name: t("navbar.my_profile"),
     icon: (
       <UserLinearIcon className=" h-[20px] aspect-square fill-textHead mr-2" />
     ),
   },
   {
     link: "/Profile/MyProducts",
-    name: "ჩემი განცხადებები",
+    name: t("navbar.my_forms"),
     icon: (
       <DocumentsIcon className=" h-[20px] aspect-square stroke-textHead mr-2" />
     ),
   },
   {
     link: "ChangeDarkTheme",
-    name: "მუქი თემა",
+    name: t("navbar.dark_mode"),
     icon: <MoonIcon className=" h-[20px] aspect-square fill-textHead mr-2" />,
   },
   {
     link: "/Profile/Settings",
-    name: "პარამეტრები",
+    name: t("navbar.settings"),
     icon: (
       <SettingsIcon className=" h-[20px] aspect-square [&>path]:stroke-textHead mr-2" />
     ),
   },
   {
     link: "/Contact",
-    name: "კონტაქტი",
+    name: t("navbar.contact"),
     icon: (
       <MessageIcon className=" h-[20px] aspect-square stroke-textHead mr-2" />
     ),
   },
   {
     link: "/Logout",
-    name: "გასვლა",
+    name: t("navbar.log_out"),
     icon: (
       <LogoutIcon className=" h-[20px] aspect-square stroke-textHead mr-2" />
     ),

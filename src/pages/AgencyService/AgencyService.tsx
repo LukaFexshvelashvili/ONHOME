@@ -10,6 +10,7 @@ import {
   MaclerHouse3,
 } from "../../assets/images/decorations/svg/Decorations";
 import { Helmet } from "react-helmet";
+import { t } from "i18next";
 
 type Tservice = {
   icon: JSX.Element;
@@ -72,34 +73,33 @@ export default function AgencyService() {
           property="og:site_name"
           content="OnHome.ge - უძრავი ქონების ყიდვა გაყიდვა გაქირავება"
         />
-        <title>სააგენტოს სერვისი - OnHome</title>
+        <title>{t("homePage.agencyService.title")} - OnHome</title>
       </Helmet>
       <main className=" mt-[30px]">
         <section className="flex items-center small:flex-col-reverse small:gap-y-20">
           <div className="">
             <h2 className="text-[28px] font-mainBold text-maclerMain mb-3 small:text-center mobileTab:text-[24px]">
-              სააგენტოს სერვისი
+              {t("homePage.agencyService.title")}
             </h2>
             <p className=" text-textDesc text-[16px] tracking-wider max-w-[600px] small:text-center mobileTab:text-[16px] mobileTab:px-[5%] ">
-              სერვისში გთავაზობთ დახმარებას თქვენი უძრავი ქონების
-              გაყიდვა/გაქირავება -ში
+              {t("homePage.agencyService.description")}
             </p>
             <div className="flex flex-col gap-3 my-5 small:items-center">
               <div className="flex items-center text-textDesc gap-3">
                 <div className="h-[14px] aspect-square rounded-circle border-2 border-maclerMain"></div>{" "}
-                სოციალურ მედიაში განთავსება
+                {t("homePage.agencyService.service1")}
               </div>
               <div className="flex items-center text-textDesc gap-3">
                 <div className="h-[14px] aspect-square rounded-circle border-2 border-maclerMain"></div>{" "}
-                პრიორიტეტული გამოჩენა (საიტზე)
+                {t("homePage.agencyService.service2")}
               </div>
               <div className="flex items-center text-textDesc gap-3">
                 <div className="h-[14px] aspect-square rounded-circle border-2 border-maclerMain"></div>{" "}
-                მომხმარებლებთან მოლაპარაკება
+                {t("homePage.agencyService.service3")}
               </div>
               <div className="flex items-center text-textDesc gap-3">
                 <div className="h-[14px] aspect-square rounded-circle border-2 border-maclerMain"></div>{" "}
-                სწრაფი მომსახურება
+                {t("homePage.agencyService.service4")}
               </div>
             </div>
             <Link

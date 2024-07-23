@@ -67,6 +67,7 @@ function SearchPlace(props: {
       props.closeWindow();
     }
   };
+
   return (
     <>
       {locationsAPI && locationsAPI.length > 1 ? (
@@ -160,8 +161,17 @@ function GetDistricts(props: {
       {props.city !== "" &&
         props.locationsAPI
           .filter((cities: any) => cities.display_name == props.city)[0]
-          .districts.filter((district: any) =>
-            district.display_name.includes(props.search)
+          .districts.filter(
+            (district: any) =>
+              district.translations.ka.display_name
+                .toLowerCase()
+                .includes(props.search.toLowerCase()) ||
+              district.translations.en.display_name
+                .toLowerCase()
+                .includes(props.search.toLowerCase()) ||
+              district.translations.ru.display_name
+                .toLowerCase()
+                .includes(props.search.toLowerCase())
           )
           .map((item: any) => (
             <div
@@ -218,7 +228,18 @@ function GetCities(props: {
   return (
     <>
       {props.locationsAPI
-        .filter((cities: any) => cities.display_name.includes(props.search))
+        .filter(
+          (cities: any) =>
+            cities.translations.ka.display_name
+              .toLowerCase()
+              .includes(props.search.toLowerCase()) ||
+            cities.translations.en.display_name
+              .toLowerCase()
+              .includes(props.search.toLowerCase()) ||
+            cities.translations.ru.display_name
+              .toLowerCase()
+              .includes(props.search.toLowerCase())
+        )
         .map((item: any) => (
           <div
             key={item.id}

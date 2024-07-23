@@ -6,6 +6,7 @@ import {
   Home4Decor,
   SkeletonDecor,
 } from "../../../assets/images/decorations/svg/Decorations";
+import { t } from "i18next";
 
 export default function CreateOffer() {
   return (
@@ -18,18 +19,17 @@ export default function CreateOffer() {
           <Home2Decor className=" h-[90px] mediumSmall:h-[80px] small:h-[90px] mobileSmall:h-[60px] aspect-auto translate-y-[2px]" />
         </div>
         <h2 className="small:text-center small:w-full mt-5 text-[26px] tracking-wider font-mainBold text-main mb-3 mobileSmall:mb-2  mediumSmall:text-[24px] mobileSmall:text-[20px] mobileSmall:tracking-wide">
-          გამოაქვეყნე შენი უძრავი ქონება
+          {t("homePage.addProduct.title")}
         </h2>
         <p className="small:text-center small:max-w-full  text-textDesc text-[16px] max-w-[500px] leading-7 mobileSmall:text-[14px] mobileSmall:tracking-wide mobileSmall:leading-6 tracking-wider ">
-          ჩვენი სერვისი საშუალებას გაძლევთ გამოაქვეყნოთ თქვენი უძრავი ქონება
-          რათა დაგეხმაროთ მის გაყიდვა/გაქირავება -ში
+          {t("homePage.addProduct.description")}
         </p>
         <Link
           to={"/AddProduct"}
           className="small:mx-auto mt-9 mobileSmall:mt-4 w-min block"
         >
           <button className="    mobileSmall:h-[36px] mobileSmall:w-[160px] mobileSmall:text-[14px] bg-main rounded-[5px] w-[190px] h-[40px] text-buttonText text-[15px] tracking-widest transition-colors hover:bg-mainHover">
-            დაწყება
+            {t("homePage.addProduct.button")}
           </button>
         </Link>
       </div>
