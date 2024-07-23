@@ -126,10 +126,10 @@ function SearchInput() {
           <div className="flex small:border-none beforeInputBlock items-center w-[25%] text-textDesc  small:w-full h-full border-r-2 border-[#ffffff55] cursor-pointer transition-colors hover:bg-[#ffffff11] relative">
             <div
               onClick={() => setInputSelect(7)}
-              className="flex h-full items-center gap-3  px-6 w-full small:h-[52px]"
+              className="flex h-full items-center gap-2  px-3 w-full small:h-[52px]"
             >
               <SellIcon className=" small:w-[20px] h-[18px] [&>path]:fill-white" />{" "}
-              <p className="max-w-[150px] small:max-w-[180px] text-[14px] font-mainRegular text-[#ffffffd3]">
+              <p className="max-w-[150px] small:max-w-[180px] text-[13px] font-mainRegular text-[#ffffffd3] text-ellipsis overflow-hidden text-nowrap">
                 {getDeal !== null ? getDealType(getDeal) : "გარიგების ტიპი"}
               </p>
             </div>
@@ -145,10 +145,10 @@ function SearchInput() {
           <div className="flex small:border-none beforeInputBlock items-center w-[25%] text-textDesc  small:w-full h-full border-r-2 border-[#ffffff55] cursor-pointer transition-colors hover:bg-[#ffffff11] relative">
             <div
               onClick={() => setInputSelect(1)}
-              className="flex h-full items-center gap-3  px-6 w-full small:h-[52px]"
+              className="flex h-full items-center gap-2  px-3 w-full small:h-[52px]"
             >
               <FilterHomeIcon className=" small:w-[20px] h-[16px] [&>path]:fill-white" />{" "}
-              <p className="max-w-[150px] text-[14px] font-mainRegular text-[#ffffffd3]">
+              <p className="max-w-[150px] text-[13px] font-mainRegular text-[#ffffffd3]">
                 {getType ? getType : "ბინა"}
               </p>
             </div>
@@ -164,10 +164,10 @@ function SearchInput() {
           <div className="flex small:border-none beforeInputBlock items-center w-[25%] text-textDesc  small:w-full h-full border-r-2 border-[#ffffff55] cursor-pointer transition-colors hover:bg-[#ffffff11] relative">
             <div
               onClick={() => setInputSelect(2)}
-              className="flex h-full items-center gap-3  px-6 w-full small:h-[52px]"
+              className="flex h-full items-center gap-2  px-3 w-full small:h-[52px]"
             >
               <FilterPlaceIcon className=" small:w-[20px] h-[16px] [&>path]:fill-white" />{" "}
-              <p className="max-w-[150px] text-[14px] font-mainRegular text-[#ffffffd3] overflow-hidden text-nowrap text-ellipsis">
+              <p className="max-w-[150px] text-[13px] font-mainRegular text-[#ffffffd3] overflow-hidden text-nowrap text-ellipsis">
                 {getLocation.city !== ""
                   ? getLocation.district
                     ? getLocation.city + " > " + getLocation.district
@@ -189,10 +189,10 @@ function SearchInput() {
           <div className="flex small:border-none beforeInputBlock items-center w-[25%] text-textDesc  small:w-full h-full border-r-2 border-[#ffffff55] cursor-pointer transition-colors hover:bg-[#ffffff11] relative">
             <div
               onClick={() => setInputSelect(3)}
-              className="flex h-full items-center gap-3  px-6 w-full small:h-[52px]"
+              className="flex h-full items-center gap-2  px-3 w-full small:h-[52px]"
             >
               <FilterFrameIcon className=" small:w-[20px] h-[16px] [&>path]:fill-white" />{" "}
-              <p className="max-w-[150px] text-[14px] font-mainRegular text-[#ffffffd3]">
+              <p className="max-w-[150px] text-[13px] font-mainRegular text-[#ffffffd3]">
                 {getSizes ? `${getSizes[0]} მ² - ${getSizes[1]} მ²` : "ფართი"}
               </p>
             </div>
@@ -208,10 +208,10 @@ function SearchInput() {
           <div className="flex small:border-none beforeInputBlock items-center w-[25%] text-textDesc  small:w-full h-full border-r-2 border-[#ffffff55] cursor-pointer transition-colors hover:bg-[#ffffff11] relative">
             <div
               onClick={() => setInputSelect(4)}
-              className="flex h-full items-center gap-3  px-6 w-full small:h-[52px]"
+              className="flex h-full items-center gap-2  px-3 w-full small:h-[52px]"
             >
               <MoneyIcon className=" h-[18px] small:w-[20px] [&>path]:fill-white" />{" "}
-              <p className="max-w-[150px] text-[14px] font-mainRegular text-[#ffffffd3]">
+              <p className="max-w-[150px] text-[13px] font-mainRegular text-[#ffffffd3]">
                 {getPrices
                   ? `${getPrices.start}${
                       getPrices.currency == 0 ? "$" : "₾"
@@ -231,10 +231,10 @@ function SearchInput() {
           <div className="flex small:border-none beforeInputBlock items-center w-[25%] text-textDesc  small:w-full h-full cursor-pointer transition-colors hover:bg-[#ffffff11] relative">
             <div
               onClick={() => setInputSelect(5)}
-              className="flex h-full items-center gap-3  px-6 w-full small:h-[52px]"
+              className="flex h-full items-center gap-2  px-3 w-full small:h-[52px]"
             >
               <RoomIcon className=" small:w-[20px] h-[18px] translate-y-[1px] [&>path]:fill-white" />{" "}
-              <p className="max-w-[150px] text-[14px] font-mainRegular text-[#ffffffd3]">
+              <p className="max-w-[150px] text-[13px] font-mainRegular text-[#ffffffd3]">
                 {getRooms !== null ? `${getRooms} ოთახი` : "ოთახები"}
               </p>
             </div>

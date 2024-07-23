@@ -9,20 +9,24 @@ import { RootState } from "../../store/store";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { FormatTime } from "../../components/global/Addons";
+import numeral from "numeral";
 
 export default function MaclerChoose() {
   const userData = useSelector((store: RootState) => store.user);
   const navigate = useNavigate();
   const firstRender = useRef(true);
-  const [productId, setProductId] = useState<number | null>(null);
+  const [productId, setProductId] = useState<any>({
+    id: null,
+    data: null,
+  });
   const [message, setMessage] = useState<{ status: number }>({ status: -1 });
   const [myProducts, setMyProducts] = useState<any[]>([]);
   if (userData.isLogged === false) {
     navigate("/Login");
   }
   const maclerRequest = () => {
-    if (productId) {
-      sendMaclerRequest(userData, productId, 1000).then((res) =>
+    if (productId.id) {
+      sendMaclerRequest(userData, productId.id, 1000).then((res) =>
         setMessage({ status: res })
       );
     }
@@ -63,7 +67,7 @@ export default function MaclerChoose() {
                     მოთხოვნა წარმატებით გაიგზავნა
                   </h2>
                   <p className="text-textDesc  text-center text-[14px] mt-2">
-                    სააგენტოს სერვისის მოთხოვნა განცხადებაზე #{productId}
+                    სააგენტოს სერვისის მოთხოვნა განცხადებაზე #{productId.id}
                   </p>
                   <p className="text-textDesc  text-center text-[14px] ">
                     სერვისის დადასტურების შემთხვევაში დაგიკავშირდებით თქვენი
@@ -81,7 +85,7 @@ export default function MaclerChoose() {
               ) : (
                 <div className="w-[550px] mx-auto  max-w-[100%] ">
                   <h2 className="text-redI font-mainBold text-center text-[18px]  mb-4">
-                    წარმოიშვა შეცდომა შეცდომა
+                    წარმოიშვა შეცდომა
                   </h2>
                   <p className="text-textDesc  text-center text-[14px] mt-2">
                     სერვისი ამჟამად მიუწვდომელია
@@ -101,7 +105,7 @@ export default function MaclerChoose() {
           </div>
         )}
         <div className="bg-whiteMain rounded-section shadow-sectionShadow">
-          {productId == null ? (
+          {productId.id == null ? (
             <>
               <div className="p-4">
                 <h1 className="text-[18px] text-maclerMain  font-mainBold">
@@ -131,7 +135,7 @@ export default function MaclerChoose() {
                   <ProductBannerMacler
                     productData={
                       myProducts.filter(
-                        (product: TProductData) => product.id == productId
+                        (product: TProductData) => product.id == productId.id
                       )[0]
                     }
                     setProduct={setProductId}
@@ -145,18 +149,47 @@ export default function MaclerChoose() {
                   <div className="flex flex-col flex-1 gap-8  mobile:w-full">
                     <div className="px-5 flex flex-col  gap-3">
                       <div className="w-full h-10 bg-maclerMain flex justify-center items-center text-buttonText tracking-widest rounded-lg">
-                        86 000$
+                        {numeral(productId.data.estate_price)
+                          .format("0,0")
+                          .replace(/,/g, " ")}{" "}
+                        {productId.data.estate_currency == 0
+                          ? "$"
+                          : productId.data.estate_currency == 1
+                          ? "₾"
+                          : ""}
                       </div>
                       <div className="flex justify-between my-3 mb-5">
                         <p className="text-maclerMain">სერვისი</p>
-                        <p className="text-maclerMain">-1 000$</p>
+                        <p className="text-maclerMain">
+                          -
+                          {numeral(
+                            Math.floor((productId.data.estate_price / 100) * 3)
+                          )
+                            .format("0,0")
+                            .replace(/,/g, " ")}{" "}
+                          {productId.data.estate_currency == 0
+                            ? "$"
+                            : productId.data.estate_currency == 1
+                            ? "₾"
+                            : ""}
+                        </p>
                       </div>
                       <div className="w-full h-[1px] bg-maclerMain rounded-md"></div>
                       <p className="w-full text-maclerMain text-center">
                         გაყიდვის შემოსავალი
                       </p>
                       <p className="w-full text-maclerMain text-center">
-                        85 000$
+                        {numeral(
+                          productId.data.estate_price -
+                            Math.floor((productId.data.estate_price / 100) * 3)
+                        )
+                          .format("0,0")
+                          .replace(/,/g, " ")}{" "}
+                        {productId.data.estate_currency == 0
+                          ? "$"
+                          : productId.data.estate_currency == 1
+                          ? "₾"
+                          : ""}
                       </p>
                     </div>
                   </div>
@@ -246,7 +279,12 @@ function ProductBannerMacler(props: {
           props.setOff == null ? (
             <button
               className="bg-maclerMain mobile:mt-5  text-buttonText h-[35px] w-[180px] rounded-md text-[13px] font-mainBold tracking-wide transition-colors hover:bg-maclerMainHover"
-              onClick={() => props.setProduct(props.productData.id)}
+              onClick={() =>
+                props.setProduct({
+                  id: props.productData.id,
+                  data: props.productData,
+                })
+              }
             >
               არჩევა
             </button>

@@ -68,7 +68,7 @@ export default function AdsMake() {
             დაგვირეკე
           </Link>
           <Link
-            to={"mailto:onhomege@gmail.com"}
+            to={"mailto:adspublish@onhome.ge"}
             className="DefButton flex justify-center items-center"
           >
             მოგვწერე
