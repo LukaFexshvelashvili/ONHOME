@@ -26,9 +26,11 @@ export default function MaclerChoose() {
   }
   const maclerRequest = () => {
     if (productId.id) {
-      sendMaclerRequest(userData, productId.id, 1000).then((res) =>
-        setMessage({ status: res })
-      );
+      sendMaclerRequest(
+        userData,
+        productId.id,
+        Math.floor((productId.data.estate_price / 100) * 3)
+      ).then((res) => setMessage({ status: res }));
     }
   };
   useEffect(() => {
