@@ -23,16 +23,21 @@ import {
 import AuthenticationHeader from "./AuthenticationHeader";
 import { Helmet } from "react-helmet";
 import { setWebLoader } from "../../store/data/webUISlice";
+import MailVerification from "./MailVerification";
 
 export default function Register() {
   const user: Tuser = useSelector((store: RootState) => store.user);
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
+
+  const [showVerify, setShowVerify] = useState<boolean>(false);
+
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [passwordStatus, setPasswordStatus] = useState<number>(0);
   const [agreement, setAgreement] = useState<boolean>(false);
   const dispatch = useDispatch();
 
+  const getVerifyMail = useRef<string | null>(null);
   const nameRef = useRef<null | HTMLInputElement>(null);
   const surnameRef = useRef<null | HTMLInputElement>(null);
   const mailRef = useRef<null | HTMLInputElement>(null);
@@ -74,8 +79,10 @@ export default function Register() {
     return null;
   }
 
-  const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleForm = (e?: React.FormEvent<HTMLFormElement>) => {
+    if (e) {
+      e.preventDefault();
+    }
     if (agreement) {
       let formInputs = {
         name: nameRef.current?.value,
@@ -99,7 +106,11 @@ export default function Register() {
             if (formInputs.password === formInputs.confirmPassword) {
               setError("");
               const formData = new FormData();
-
+              if (e) {
+                formData.append("verified", JSON.stringify(false));
+              } else {
+                formData.append("verified", JSON.stringify(true));
+              }
               formData.append("name", formInputs.name);
               formData.append("surname", formInputs.surname);
               formData.append("mail", formInputs.mail);
@@ -120,8 +131,12 @@ export default function Register() {
                 })
                 .then((res) => {
                   dispatch(setWebLoader({ active: false }));
-
-                  if (res.data.status === 3) {
+                  if (res.data.status === 801) {
+                    setShowVerify(true);
+                    getVerifyMail.current = formInputs.mail
+                      ? formInputs.mail
+                      : null;
+                  } else if (res.data.status === 3) {
                     let userData = {
                       id: res.data.user_id,
                       name: formInputs.name,
@@ -135,11 +150,9 @@ export default function Register() {
                       create_date: res.data.create_date,
                     };
                     makeUserSession(dispatch, userData);
-                  }
-                  if (res.data.status === 2) {
+                  } else if (res.data.status === 2) {
                     setError("მითითებულ მეილზე ანგარიში უკვე არსებობს");
-                  }
-                  if (res.data.status === -1) {
+                  } else if (res.data.status === -1) {
                     setError("სერვერზე წარმოიშვა პრობლემა, სცადეთ მოგვიანებით");
                   }
                 });
@@ -179,16 +192,30 @@ export default function Register() {
 
         <meta property="og:type" lang="ka" content="website" />
         <meta property="og:url" lang="ka" content="https://onhome.ge" />
-        <meta property="og:site_name" content="OnHome.ge - უძრავი ქონების ყიდვა გაყიდვა გაქირავება" />
+        <meta
+          property="og:site_name"
+          content="OnHome.ge - უძრავი ქონების ყიდვა გაყიდვა გაქირავება"
+        />
       </Helmet>
       <main className="m-0 p-0">
         <AuthenticationHeader />
         <div className="flex h-screen overflow-hidden min-h-[900px]">
           <section className="flex-1 relative flex justify-center items-center">
+            {showVerify ? (
+              <MailVerification
+                goBack={() => {
+                  setShowVerify(false);
+                }}
+                mail={getVerifyMail.current ? getVerifyMail.current : ""}
+                getRegister={() => {
+                  handleForm();
+                }}
+              />
+            ) : null}
             <div
-              className={`flex flex-col items-center ${
+              className={` flex-col items-center ${
                 darkMode ? "" : "pb-[150px]"
-              }  medium:pb-[80px]`}
+              }  medium:pb-[80px] ${showVerify ? "hidden" : "flex"}`}
             >
               <h1 className=" text-[32px] text-textHead font-mainBold mb-10 mobile:text-[22px] mobile:mb-6">
                 ანგარიშის შექმნა
@@ -207,6 +234,7 @@ export default function Register() {
                     <input
                       ref={nameRef}
                       type="text"
+                      name="firstname"
                       placeholder="სახელი"
                       className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                     />
@@ -215,6 +243,7 @@ export default function Register() {
                     <input
                       ref={surnameRef}
                       type="text"
+                      name="surname"
                       placeholder="გვარი"
                       className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                     />
@@ -224,6 +253,7 @@ export default function Register() {
                   <MailIcon className="h-[22px] mobile:h-[20px] aspect-square absolute left-3 [&>path]:stroke-blackMain z-[3] opacity-40" />
                   <input
                     type="email"
+                    name="email"
                     ref={mailRef}
                     placeholder="მეილი"
                     className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 pl-11 mobile:pl-10 text-textDesc tracking-wider text-[13px] transition-colors focus:bg-LoginInputActive"
@@ -235,6 +265,8 @@ export default function Register() {
                   <input
                     ref={mobileRef}
                     type="tel"
+                    name="mobile"
+                    autoComplete="off"
                     placeholder="ტელეფონის ნომერი"
                     className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 pl-11 mobile:pl-10 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                   />
@@ -245,6 +277,7 @@ export default function Register() {
                     type="password"
                     placeholder="პაროლი"
                     ref={passwordRef}
+                    autoComplete="off"
                     value={passwordInput}
                     onChange={(e) => setPasswordInput(e.target.value)}
                     className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 pl-11 mobile:pl-10 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
@@ -254,6 +287,7 @@ export default function Register() {
                   <LockIcon className="w-[22px] mobile:h-[20px] aspect-square absolute left-3 [&>path]:stroke-blackMain z-[3] opacity-40" />
                   <input
                     ref={confirmPasswordRef}
+                    autoComplete="off"
                     type="password"
                     placeholder="გაიმეორეთ პაროლი"
                     className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 pl-11 mobile:pl-10 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"

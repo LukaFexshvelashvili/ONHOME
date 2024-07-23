@@ -415,7 +415,7 @@ function SubmitMailCode(props: {
     }
   }, [sendStop.current]);
 
-  const checkMail = (e: FormEvent) => {
+  const checkCode = (e: FormEvent) => {
     e.preventDefault();
     props.setError("");
     if (code.current) {
@@ -436,7 +436,7 @@ function SubmitMailCode(props: {
         <>
           <p className="text-textDesc text-center">კოდი გამოგზავნილია მეილზე</p>
           <form
-            onSubmit={checkMail}
+            onSubmit={checkCode}
             className="flex flex-col justify-center items-center mt-10 gap-7"
           >
             <input

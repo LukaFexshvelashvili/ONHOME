@@ -93,9 +93,7 @@ function SearchInput() {
       <div className="w-full relative  flex gap-3 small:w-auto small:h-auto small:flex-col small:gap-1 flex-wrap mx-auto py-[20px] px-[25px] ">
         {imageElement}
         <div className="absolute w-full h-full object-cover top-0 left-0 bg-[#000000cf] backdrop-blur-[2px] z-0"></div>
-        <div className="flex flex-wrap gap-2 justify-center small:flex-col  z-10 small:hidden">
-          {/* <ProjectDealSelectorSearch setData={setGetDeal} /> */}
-        </div>
+
         <div className="w-full flex items-center border-2 border-[#ffffff55] rounded-normal overflow-hidden relative h-[45px] small:my-2">
           <form
             className="w-full h-full"

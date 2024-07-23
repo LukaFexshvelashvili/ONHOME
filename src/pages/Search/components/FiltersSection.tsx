@@ -88,7 +88,7 @@ function FiltersSection(props: {
           <div className="content_container responsiveFilters mobile:pt-[10px] mobile:pb-[50px] overflow-y-scroll px-5 max-h-full">
             <button
               onClick={() => props.setOpenFilters(false)}
-              className="h-[26px] aspect-square  absolute top-3 right-6 flex justify-center items-center p-1 cursor-pointer z-10 mobile:hidden"
+              className="h-[26px] aspect-square  absolute top-3 right-4 flex justify-center items-center p-1 cursor-pointer z-10 mobile:hidden"
             >
               <PopupCloseIcon className=" [&>path]:fill-whiteCont" />
             </button>
@@ -100,7 +100,7 @@ function FiltersSection(props: {
 
                     props.setSearchTitle("");
                   }}
-                  className="absolute top-3 mobile:top-0 right-3 text-buttonText px-3 py-1 rounded-md bg-main text-[12px] tracking-widest font-mainMedium cursor-pointer transition-colors hover:bg-mainHover"
+                  className="absolute top-3 mobile:top-0 right-6 text-buttonText px-3 py-1 rounded-md bg-main text-[12px] tracking-widest font-mainMedium cursor-pointer transition-colors hover:bg-mainHover"
                 >
                   ფილტრების წაშლა
                 </button>
