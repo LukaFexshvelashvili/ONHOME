@@ -300,6 +300,17 @@ export function EstateAddress(props: { error: boolean }) {
     );
   }, [locations]);
 
+  useEffect(() => {
+    if (openLocations) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [openLocations]);
+
   return (
     <div className="flex flex-col relative z-10">
       {openLocations ? (

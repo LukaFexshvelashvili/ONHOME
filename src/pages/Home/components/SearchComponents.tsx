@@ -137,8 +137,14 @@ export function InputPriceSlider(props: {
     </div>
   );
 }
-export function ProjectDealSelectorSearch(props: { setData: Function }) {
-  const [active, setActive] = useState<null | number>(null);
+export function ProjectDealSelectorSearch(props: {
+  setData: Function;
+  addFunction?: Function;
+  active?: number | null;
+}) {
+  const [active, setActive] = useState<null | number>(
+    props.active ? props.active : null
+  );
 
   return (
     <>
@@ -153,6 +159,9 @@ export function ProjectDealSelectorSearch(props: { setData: Function }) {
             } else {
               props.setData(i);
               setActive(i);
+              if (props.addFunction) {
+                props.addFunction();
+              }
             }
           }}
           className={`  p-2 px-4 rounded-xl transition-colors font-mainSemiBold ${

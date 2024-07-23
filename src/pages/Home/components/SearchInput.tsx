@@ -7,6 +7,7 @@ import {
   PopupCloseIcon,
   RoomIcon,
   SearchIcon,
+  SellIcon,
 } from "../../../assets/icons/Icons";
 import {
   RealEstateTypes,
@@ -23,6 +24,7 @@ import { SelectNumbers } from "../../Search/components/Filters";
 import searchBg from "../../../assets/images/estates/searchBg2.webp";
 import HoverTitle from "../../../components/global/HoverTitle";
 import SearchPlace from "../../../components/placeSelector/SearchPlace";
+import { getDealType } from "../../../components/global/getTypes";
 
 type TPriceGet = {
   start: number;
@@ -90,9 +92,9 @@ function SearchInput() {
     <div className="w-full my-4 overflow-hidden  bg-whiteMain rounded-[25px] shadow-sectionShadow">
       <div className="w-full relative  flex gap-3 small:w-auto small:h-auto small:flex-col small:gap-1 flex-wrap mx-auto py-[20px] px-[25px] ">
         {imageElement}
-        <div className="absolute w-full h-full object-cover top-0 left-0 bg-[#0000009a] backdrop-blur-[2px] z-0"></div>
-        <div className="flex flex-wrap gap-2 justify-center small:flex-col  z-10">
-          <ProjectDealSelectorSearch setData={setGetDeal} />
+        <div className="absolute w-full h-full object-cover top-0 left-0 bg-[#000000cf] backdrop-blur-[2px] z-0"></div>
+        <div className="flex flex-wrap gap-2 justify-center small:flex-col  z-10 small:hidden">
+          {/* <ProjectDealSelectorSearch setData={setGetDeal} /> */}
         </div>
         <div className="w-full flex items-center border-2 border-[#ffffff55] rounded-normal overflow-hidden relative h-[45px] small:my-2">
           <form
@@ -125,10 +127,29 @@ function SearchInput() {
         <div className="relative  rounded-normal flex small:w-full small:h-auto small:flex-col  h-[45px] items-center  w-[calc(100%-72px)] border-2 border-[#ffffff55] overflow-hidden">
           <div className="flex small:border-none beforeInputBlock items-center w-[25%] text-textDesc  small:w-full h-full border-r-2 border-[#ffffff55] cursor-pointer transition-colors hover:bg-[#ffffff11] relative">
             <div
+              onClick={() => setInputSelect(7)}
+              className="flex h-full items-center gap-3  px-6 w-full small:h-[52px]"
+            >
+              <SellIcon className=" small:w-[20px] h-[18px] [&>path]:fill-white" />{" "}
+              <p className="max-w-[150px] small:max-w-[180px] text-[14px] font-mainRegular text-[#ffffffd3]">
+                {getDeal !== null ? getDealType(getDeal) : "გარიგების ტიპი"}
+              </p>
+            </div>
+            {getDeal !== null && (
+              <button
+                onClick={() => setGetDeal(null)}
+                className="h-[20px] aspect-square absolute right-2 flex justify-center items-center p-1 z-10"
+              >
+                <PopupCloseIcon className=" [&>path]:fill-white" />
+              </button>
+            )}
+          </div>
+          <div className="flex small:border-none beforeInputBlock items-center w-[25%] text-textDesc  small:w-full h-full border-r-2 border-[#ffffff55] cursor-pointer transition-colors hover:bg-[#ffffff11] relative">
+            <div
               onClick={() => setInputSelect(1)}
               className="flex h-full items-center gap-3  px-6 w-full small:h-[52px]"
             >
-              <FilterHomeIcon className=" h-[16px] [&>path]:fill-white" />{" "}
+              <FilterHomeIcon className=" small:w-[20px] h-[16px] [&>path]:fill-white" />{" "}
               <p className="max-w-[150px] text-[14px] font-mainRegular text-[#ffffffd3]">
                 {getType ? getType : "ბინა"}
               </p>
@@ -147,7 +168,7 @@ function SearchInput() {
               onClick={() => setInputSelect(2)}
               className="flex h-full items-center gap-3  px-6 w-full small:h-[52px]"
             >
-              <FilterPlaceIcon className=" h-[16px] [&>path]:fill-white" />{" "}
+              <FilterPlaceIcon className=" small:w-[20px] h-[16px] [&>path]:fill-white" />{" "}
               <p className="max-w-[150px] text-[14px] font-mainRegular text-[#ffffffd3] overflow-hidden text-nowrap text-ellipsis">
                 {getLocation.city !== ""
                   ? getLocation.district
@@ -172,7 +193,7 @@ function SearchInput() {
               onClick={() => setInputSelect(3)}
               className="flex h-full items-center gap-3  px-6 w-full small:h-[52px]"
             >
-              <FilterFrameIcon className=" h-[16px] [&>path]:fill-white" />{" "}
+              <FilterFrameIcon className=" small:w-[20px] h-[16px] [&>path]:fill-white" />{" "}
               <p className="max-w-[150px] text-[14px] font-mainRegular text-[#ffffffd3]">
                 {getSizes ? `${getSizes[0]} მ² - ${getSizes[1]} მ²` : "ფართი"}
               </p>
@@ -191,7 +212,7 @@ function SearchInput() {
               onClick={() => setInputSelect(4)}
               className="flex h-full items-center gap-3  px-6 w-full small:h-[52px]"
             >
-              <MoneyIcon className=" h-[18px] [&>path]:fill-white" />{" "}
+              <MoneyIcon className=" h-[18px] small:w-[20px] [&>path]:fill-white" />{" "}
               <p className="max-w-[150px] text-[14px] font-mainRegular text-[#ffffffd3]">
                 {getPrices
                   ? `${getPrices.start}${
@@ -214,7 +235,7 @@ function SearchInput() {
               onClick={() => setInputSelect(5)}
               className="flex h-full items-center gap-3  px-6 w-full small:h-[52px]"
             >
-              <RoomIcon className=" h-[18px] translate-y-[1px] [&>path]:fill-white" />{" "}
+              <RoomIcon className=" small:w-[20px] h-[18px] translate-y-[1px] [&>path]:fill-white" />{" "}
               <p className="max-w-[150px] text-[14px] font-mainRegular text-[#ffffffd3]">
                 {getRooms !== null ? `${getRooms} ოთახი` : "ოთახები"}
               </p>
@@ -231,7 +252,7 @@ function SearchInput() {
 
           {inputSelect && (
             <div
-              className={`fixed left-2/4 -translate-x-2/4 -translate-y-2/4 top-2/4 bg-whiteMain rounded-section shadow-sectionShadow p-4 small:py-0  ${
+              className={`fixed left-2/4 -translate-x-2/4 -translate-y-2/4 top-2/4 bg-whiteMain rounded-section shadow-sectionShadow p-4 small:pt-1 small:pb-4  ${
                 inputSelect == 2 ? "max-w-[1200px]" : "max-w-[800px]"
               } w-[90%] mx-auto z-[21] small:top-2/4 small:-translate-y-2/4`}
             >
@@ -292,6 +313,19 @@ function SearchInput() {
                     setData={setGetRooms}
                     closeWindow={setInputSelect}
                   />
+                </>
+              ) : inputSelect == 7 ? (
+                <>
+                  <p className="text-textHead text-[14px] w-full text-center small:text-center small:w-full small:mt-6 small:mb-2">
+                    აირჩიეთ გარიგება
+                  </p>
+                  <div className="flex flex-wrap justify-center small:flex-col gap-2 mt-5">
+                    <ProjectDealSelectorSearch
+                      setData={setGetDeal}
+                      addFunction={() => setInputSelect(null)}
+                      active={getDeal}
+                    />
+                  </div>
                 </>
               ) : null}
             </div>
