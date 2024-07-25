@@ -8,6 +8,8 @@ import banner2 from "../../../assets/images/estates/banner2.webp";
 import banner3 from "../../../assets/images/estates/banner3.webp";
 import { Link } from "react-router-dom";
 import { memo, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 
 function MainSlider() {
   return (
@@ -28,6 +30,7 @@ function MainSlider() {
           linkWhole="/AddProduct"
           button={false}
           opacity={false}
+          needLogin
         />
       </SwiperSlide>
       <SwiperSlide>
@@ -63,9 +66,11 @@ type TMainSliderCard = {
   opacity: boolean;
   button: boolean;
   linkWhole?: string;
+  needLogin?: boolean;
 };
 function MainSliderCard(props: TMainSliderCard) {
   const [loaded, setLoaded] = useState<boolean>(false);
+  const isLogged = useSelector((store: RootState) => store.user.isLogged);
   const imageElement = useMemo(() => {
     return (
       <img
@@ -96,7 +101,9 @@ function MainSliderCard(props: TMainSliderCard) {
         </div>
       ) : null}
       {props.linkWhole ? (
-        <Link to={props.linkWhole}>
+        <Link
+          to={props.needLogin && isLogged !== true ? "Login" : props.linkWhole}
+        >
           {imageElement}
           {props.opacity ? (
             <div className=" bg-gradient-to-t from-sliderFadeStart to-sliderFadeEnd z-[2] absolute h-full w-full object-cover top-0 left-0"></div>

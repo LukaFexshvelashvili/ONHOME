@@ -69,7 +69,7 @@ export default function Navbar() {
   return (
     <nav className="h-[60px] w-full sticky bg-navBg shadow-navbarShadow flex items-center top-0 z-20">
       <div className="content_container flex justify-between">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-[5px]">
           <Link
             to="/"
             onClick={() => window.scrollTo(0, 0)}
@@ -91,7 +91,7 @@ export default function Navbar() {
                 <img className="max-h-[20px] aspect-square" src={langImg} />
               </button>
               <div
-                className={` absolute h-auto w-[150px] overflow-hidden flex flex-col bg-whiteMain rounded-normal shadow-sectionShadow top-[50px] left-0 duration-200 transition-[opacity,visibility]  ${
+                className={` absolute h-auto w-[150px] overflow-hidden flex flex-col bg-whiteMain rounded-normal  shadow-sectionShadow top-[50px] left-2/4 duration-200 transition-[opacity,visibility] -translate-x-2/4 ${
                   activeLang ? "visible opacity-100" : "invisible opacity-0"
                 }`}
               >
@@ -256,7 +256,7 @@ function ResponsiveNavbar({
   const [activePop, setActivePop] = useState<string | null>(null);
   return (
     <>
-      <div className="flex items-center mr-[6px] gap-[3px]">
+      <div className="flex items-center mr-[6px] gap-[5px]">
         {userData.isLogged ? (
           <Link to={"/AddProduct"}>
             <button className=" font-mainSemiBold flex items-center justify-center gap-3 tracking-widest h-[32px] aspect-square bg-greenClear text-greenI rounded-[8px] text-[12px] transition-colors hover:bg-greenHover">

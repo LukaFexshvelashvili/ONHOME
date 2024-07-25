@@ -36,10 +36,8 @@ export default function Login() {
   const mailRef = useRef<null | HTMLInputElement>(null);
   const passwordRef = useRef<null | HTMLInputElement>(null);
 
-  if (user.isLogged === null) {
-    if (user.isLogged === true) {
-      navigate("/");
-    }
+  if (user.isLogged === true) {
+    navigate("/");
     return null;
   }
 
@@ -216,7 +214,9 @@ export default function Login() {
                 </span>
               </p>
               <p className="text-main hidden relative z-10 mobile:block text-Asmall font-mainBold mt-3 tracking-wider mobile:text-[12px] cursor-pointer">
-                {t("login.password_recover")}
+                <Link to={"/ForgotPassword"}>
+                  {t("login.password_recover")}
+                </Link>
               </p>
             </div>
             <div className="absolute bottom-0 z-0 pointer-events-none w-full">
