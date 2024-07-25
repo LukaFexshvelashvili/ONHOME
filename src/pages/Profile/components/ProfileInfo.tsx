@@ -14,6 +14,7 @@ import {
 } from "../../../assets/icons/Icons";
 import CryptoJS from "crypto-js";
 import ContentLoader from "../../../components/global/ContentLoader";
+import { t } from "i18next";
 type TuserInfo = {
   title: string;
   value: string;
@@ -52,24 +53,26 @@ export default function ProfileInfo() {
   }, []);
 
   const userInfo: TuserInfo[] = [
-    { title: "სახელი", value: user.name },
-    { title: "გვარი", value: user.surname },
-    { title: "მეილი", value: user.mail?.slice(0, 6) + "***" },
+    { title: t("profileInfo.name"), value: user.name },
+    { title: t("profileInfo.surname"), value: user.surname },
+    { title: t("profileInfo.email"), value: user.mail?.slice(0, 6) + "***" },
     {
-      title: "ტელეფონის ნომერი",
-      value: user.mobile ? user.mobile.slice(0, 6) + "***" : "დამატება",
+      title: t("profileInfo.mobile"),
+      value: user.mobile
+        ? user.mobile.slice(0, 6) + "***"
+        : t("profileInfo.add"),
     },
   ];
   return (
     <>
       <Helmet>
-        <title>ჩემი ინფორმაცია - OnHome</title>
+        <title>{t("profileInfo.my_info")} - OnHome</title>
       </Helmet>
       {editInfo ? (
         <EditInfoBlock open={editInfo} close={() => setEditInfo(false)} />
       ) : null}
       <div className=" rounded-section shadow-sectionShadow bg-whiteMain relative flex gap-6 flex-col  px-7 py-5 ">
-        <h2 className="text-textHeadCard">ინფორმაცია</h2>
+        <h2 className="text-textHeadCard">{t("profileInfo.info")}</h2>
         <div className="flex items-center gap-3 flex-wrap small:justify-center ">
           {userInfo.map((e: TuserInfo, i: number) => (
             <div
@@ -89,13 +92,13 @@ export default function ProfileInfo() {
             className="group relative h-[45px] aspect-square flex justify-center items-center rounded-[5px] bg-mainClear cursor-pointer transition-colors hover:bg-mainClearActive"
           >
             <EditIcon className=" h-[22px] aspect-square [&>path]:fill-main" />
-            <HoverTitle title="რედაქტირება" />
+            <HoverTitle title={t("productBanner.edit")} />
           </button>
         </div>
         <div className="flex items-center gap-4  flex-wrap justify-center">
           <div className="h-[50px] w-[270px] bg-gradient-to-r from-cyan-500 to-teal-500 rounded-lg flex flex-col justify-center px-3 ">
             <p className=" text-[13px] text-[rgba(255,255,255,0.9)] leading-[15px] font-mainBold tracking-wider">
-              განცხადებების რაოდენობა
+              {t("profileInfo.forms_count")}
             </p>
             <p className=" text-[15px] text-[rgb(255,255,255)] leading-[15px] font-mainBold ml-auto">
               {data?.products_count ? data.products_count : "..."}
@@ -103,7 +106,7 @@ export default function ProfileInfo() {
           </div>
           <div className="h-[50px] w-[270px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg flex flex-col justify-center px-3 ">
             <p className=" text-[13px] text-[rgba(255,255,255,0.9)] leading-[15px] font-mainBold tracking-wider">
-              ბალანსი
+              {t("global.balance")}
             </p>
             <p className=" text-[15px] text-[rgb(255,255,255)] leading-[15px] font-mainBold ml-auto">
               {data?.user_money
@@ -115,7 +118,7 @@ export default function ProfileInfo() {
           </div>
           <div className="h-[50px] w-[270px] bg-gradient-to-r from-indigo-500 from-0%  to-emerald-500 to-100% rounded-lg flex flex-col justify-center px-3 ">
             <p className=" text-[13px] text-[rgba(255,255,255,0.9)] leading-[15px] font-mainBold tracking-wider">
-              დახარჯული თანხა
+              {t("profileInfo.spended_money")}
             </p>
             <p className=" text-[15px] text-[rgb(255,255,255)] leading-[15px] font-mainBold ml-auto">
               {data?.total_payed
@@ -127,23 +130,23 @@ export default function ProfileInfo() {
           </div>
         </div>
         <p className=" text-[14px] text-textDesc">
-          ანგარიშის შექმნის თარიღი:{" "}
+          {t("profileInfo.create_date")}:{" "}
           <span className="text-textHead">
             {user.create_date?.split(" ")[0]}
           </span>
         </p>
 
         <h2 className=" text-[16px] text-textHead text-center">
-          გადახდების ისტორია
+          {t("profileInfo.payment_history")}
         </h2>
         <div className="h-[2px] w-[50px] bg-lineBg mx-auto"></div>
 
         <div className="flex flex-col">
           <div className="flex [&>div]:text-textDesc [&>div]:text-[14px] mb-3">
             <div className=" w-1/12">ID</div>
-            <div className=" w-4/12">გადახდილი თანხა</div>
-            <div className=" w-4/12">გააქტიურდა</div>
-            <div className=" w-3/12">თარიღი</div>
+            <div className=" w-4/12">{t("profileInfo.spend_money")}</div>
+            <div className=" w-4/12">{t("profileInfo.actived")}</div>
+            <div className=" w-3/12">{t("profileInfo.date")}</div>
           </div>
           <div
             className={`relative overflow-auto max-h-[300px] ${
@@ -153,7 +156,7 @@ export default function ProfileInfo() {
             {data?.payments ? (
               data?.payments.length == 0 ? (
                 <p className="text-textDescCard text-[14px] text-center mt-5">
-                  გადახდების ისტორია ცარიელია
+                  {t("profileInfo.payment_history_is_empty")}
                 </p>
               ) : null
             ) : null}
@@ -184,7 +187,7 @@ function EditInfoBlock(props: { open: boolean; close: Function }) {
       if (mail.current.value == user.mail) {
         setPhase(1);
       } else {
-        setError("მითითებული მეილი არ ემთხვევა თქვენი ანგარიშის მეილს");
+        setError(t("profileInfo.mail_does_not_match_to_account"));
       }
     }
   };
@@ -211,7 +214,9 @@ function EditInfoBlock(props: { open: boolean; close: Function }) {
         )}
         {phase == 0 ? (
           <>
-            <p className="text-textDesc text-center">შეიყვანეთ თქვენი მეილი</p>
+            <p className="text-textDesc text-center">
+              {t("profileInfo.enter_your_email")}
+            </p>
             <form
               onSubmit={checkMail}
               className="flex flex-col justify-center items-center mt-10 gap-7"
@@ -223,7 +228,9 @@ function EditInfoBlock(props: { open: boolean; close: Function }) {
                 className="AddProductInputTitle"
                 placeholder={user.mail?.slice(0, 6) + "***"}
               />
-              <button className="DefButton block">კოდის გაგზავნა</button>
+              <button className="DefButton block">
+                {t("profileInfo.send_code")}
+              </button>
             </form>
           </>
         ) : user.mail && phase == 1 ? (
@@ -296,7 +303,7 @@ function ChangeUserInfo(props: { setError: Function; close: Function }) {
           }
         });
     } else {
-      props.setError("შეიყვანეთ ინფორმაცია სწორად");
+      props.setError(t("profileInfo.enter_info_correctly"));
     }
   };
   return (
@@ -306,7 +313,9 @@ function ChangeUserInfo(props: { setError: Function; close: Function }) {
         <ContentLoader />
       ) : status == null ? (
         <>
-          <p className="text-textDesc text-center">ინფორმაციის შეცვლა</p>
+          <p className="text-textDesc text-center">
+            {t("profileInfo.change_info")}
+          </p>
 
           <form
             onSubmit={handleForm}
@@ -318,7 +327,7 @@ function ChangeUserInfo(props: { setError: Function; close: Function }) {
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                   type="text"
-                  placeholder="სახელი"
+                  placeholder={t("profileInfo.name")}
                   className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                 />
               </div>
@@ -327,7 +336,7 @@ function ChangeUserInfo(props: { setError: Function; close: Function }) {
                   onChange={(e) => setSurname(e.target.value)}
                   value={surname}
                   type="text"
-                  placeholder="გვარი"
+                  placeholder={t("profileInfo.surname")}
                   className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                 />
               </div>
@@ -339,39 +348,41 @@ function ChangeUserInfo(props: { setError: Function; close: Function }) {
                 onChange={(e) => setMobile(e.target.value)}
                 value={mobile}
                 type="tel"
-                placeholder="ტელეფონის ნომერი"
+                placeholder={t("profileInfo.mobile")}
                 className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 pl-11 mobile:pl-10 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
               />
             </div>
-            <button className="DefButton block">დადასტურება</button>
+            <button className="DefButton block">
+              {t("profileInfo.confirm")}
+            </button>
           </form>
         </>
       ) : status == 0 ? (
         <div className="w-[550px] mx-auto  max-w-[100%] ">
           <h2 className="text-redI font-mainBold text-center text-[18px]  mb-4">
-            წარმოიშვა შეცდომა
+            {t("profileInfo.an_error_occurred")}
           </h2>
           <p className="text-textDesc  text-center text-[14px] mt-2">
-            სერვერზე შეფერხებაა სცადეთ მოგვიანებით
+            {t("profileInfo.error_on_server_try_again_later")}
           </p>
 
           <button
             onClick={() => props.close()}
             className="bg-redI text-[14px] h-[35px] w-[200px] text-buttonText tracking-wider rounded-md mx-auto block mt-6  transition-colors hover:bg-redCloseI"
           >
-            გასაგებია
+            {t("profileInfo.confirm")}
           </button>
         </div>
       ) : status == 100 ? (
         <div className="w-[550px] mx-auto  max-w-[100%] ">
           <h2 className="text-greenI font-mainBold text-center text-[18px]  mb-4">
-            ინფორმაცია წარმატებით განახლდა
+            {t("profileInfo.info_updated_successfully")}
           </h2>
           <button
             onClick={() => props.close()}
             className="bg-greenI text-[14px] h-[35px] w-[200px] text-buttonText tracking-wider rounded-md mx-auto block mt-6  transition-colors hover:bg-greenCloseI"
           >
-            გასაგებია
+            {t("profileInfo.confirm")}
           </button>
         </div>
       ) : null}
@@ -422,7 +433,7 @@ function SubmitMailCode(props: {
       if (hashString(code.current.value.toString()) == sendedCode.current) {
         props.setPhase(2);
       } else {
-        props.setError("კოდი არასწორია");
+        props.setError(t("profileInfo.incorrect_code"));
       }
     }
   };
@@ -434,7 +445,9 @@ function SubmitMailCode(props: {
         <ContentLoader />
       ) : (
         <>
-          <p className="text-textDesc text-center">კოდი გამოგზავნილია მეილზე</p>
+          <p className="text-textDesc text-center">
+            {t("profileInfo.code_sended_to_email")}
+          </p>
           <form
             onSubmit={checkCode}
             className="flex flex-col justify-center items-center mt-10 gap-7"
@@ -443,9 +456,11 @@ function SubmitMailCode(props: {
               ref={code}
               type="number"
               className="AddProductInputTitle"
-              placeholder={"შეიყვანეთ კოდი"}
+              placeholder={t("profileInfo.enter_the_verification_code")}
             />
-            <button className="DefButton block">დადასტურება</button>
+            <button className="DefButton block">
+              {t("profileInfo.confirm")}
+            </button>
           </form>{" "}
         </>
       )}
@@ -454,7 +469,7 @@ function SubmitMailCode(props: {
 }
 
 function PaymentCard({ paymentData }: { paymentData: TuserCardInfoPayments }) {
-  const color = ActiveOffers.filter(
+  const color = ActiveOffers().filter(
     (item) => item.name == paymentData.payment_for
   )[0].mainColor;
   return (

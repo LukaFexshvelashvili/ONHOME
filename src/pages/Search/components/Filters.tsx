@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { deleteParams, updateParams } from "../../../hooks/routerHooks";
 import { currencyConvertor } from "../../../components/convertors/convertors";
+import { t } from "i18next";
 
 export function SelectNumbers(props: {
   name?: string;
@@ -93,9 +94,11 @@ export function SelectType() {
 
   return (
     <div className="flex flex-col items-center">
-      <p className=" text-textHead tracking-wider font-mainBold ">ტიპი</p>
+      <p className=" text-textHead tracking-wider font-mainBold ">
+        {t("filters.type")}
+      </p>
       <div className="flex gap-3 flex-wrap justify-center mt-4">
-        {RealEstateTypes.map((e, i) => (
+        {RealEstateTypes().map((e, i) => (
           <button
             key={i}
             onClick={() => {
@@ -187,7 +190,9 @@ export function PriceSlider(props: { setData?: Function }) {
   };
   return (
     <div className="flex flex-col items-center relative w-10/12 mx-auto">
-      <p className=" text-textHead tracking-wider font-mainBold ">ფასი</p>{" "}
+      <p className=" text-textHead tracking-wider font-mainBold ">
+        {t("filters.price")}
+      </p>{" "}
       <div
         onClick={() => changeCurrency(currency == 0 ? 1 : 0)}
         className={`h-[30px] w-[70px] flex items-center absolute select-none top-0 right-0 outline outline-2 -outline-offset-2 outline-borderCol1 rounded-lg  text-textDescCard cursor-pointer`}
@@ -222,7 +227,8 @@ export function PriceSlider(props: { setData?: Function }) {
             value={Prices[0] == -1 ? "" : Prices[0]}
           />
           <p className="text-Asmall ml-2 text-textDesc">
-            {currency == 0 ? "$" : "₾"} -დან
+            {currency == 0 ? "$" : "₾"}{" "}
+            {t("filters.from") == "-დან" ? t("filters.from") : "to"}
           </p>
         </div>
         <div className="flex items-center">
@@ -239,7 +245,8 @@ export function PriceSlider(props: { setData?: Function }) {
             value={Prices[1] == -1 ? "" : Prices[1]}
           />
           <p className="text-Asmall ml-2 text-textDesc">
-            {currency == 0 ? "$" : "₾"} -მდე
+            {currency == 0 ? "$" : "₾"}{" "}
+            {t("filters.to") == "-მდე" ? t("filters.to") : null}
           </p>
         </div>
       </div>
@@ -295,7 +302,7 @@ export function SizeSlider(props: { setData?: Function }) {
   return (
     <div className="flex flex-col items-center relative w-10/12 mx-auto">
       <p className=" text-textHead tracking-wider font-mainBold ">
-        კვადრატულობა
+        {t("filters.space")}
       </p>
 
       <div className="flex items-center gap-6 mt-4 mobileSmall:flex-col">
@@ -312,7 +319,10 @@ export function SizeSlider(props: { setData?: Function }) {
             }}
             value={Sizes[0] == -1 ? "" : Sizes[0]}
           />
-          <p className="text-Asmall ml-2 text-textDesc">მ² -დან</p>
+          <p className="text-Asmall ml-2 text-textDesc">
+            {t("global.m")}²{" "}
+            {t("filters.from") == "-დან" ? t("filters.from") : "to"}
+          </p>
         </div>
         <div className="flex items-center">
           <input
@@ -327,7 +337,10 @@ export function SizeSlider(props: { setData?: Function }) {
             }}
             value={Sizes[1] == -1 ? "" : Sizes[1]}
           />
-          <p className="text-Asmall ml-2 text-textDesc">მ² -მდე</p>
+          <p className="text-Asmall ml-2 text-textDesc">
+            {t("global.m")}²{" "}
+            {t("filters.to") == "-მდე" ? t("filters.to") : null}
+          </p>
         </div>
       </div>
     </div>

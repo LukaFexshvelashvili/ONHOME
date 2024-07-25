@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import {
   ApartmentIcon,
   CommercialIcon,
@@ -11,30 +12,30 @@ export type TRealEstateTypes = {
   name: string;
   link: string;
 };
-export const RealEstateTypes: TRealEstateTypes[] = [
+export const RealEstateTypes = (): TRealEstateTypes[] => [
   {
     icon: (props: any) => <HomeIcon {...props} />,
-    name: "სახლი/აგარაკი",
+    name: t("filters.house"),
     link: "search?estate_type=0",
   },
   {
     icon: (props: any) => <ApartmentIcon {...props} />,
-    name: "კორპუსის ბინა",
+    name: t("filters.apartment"),
     link: "search?estate_type=1",
   },
   {
     icon: (props: any) => <CommercialIcon {...props} />,
-    name: "კომერციული ფართი",
+    name: t("filters.commercial_space"),
     link: "search?estate_type=2",
   },
   {
     icon: (props: any) => <PlotIcon {...props} />,
-    name: "მიწის ნაკვეთი",
+    name: t("filters.land"),
     link: "search?estate_type=3",
   },
   {
     icon: (props: any) => <HotelIcon {...props} />,
-    name: "სასტუმრო",
+    name: t("filters.hotel"),
     link: "search?estate_type=4",
   },
 ];

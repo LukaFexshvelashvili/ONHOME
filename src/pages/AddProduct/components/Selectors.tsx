@@ -44,6 +44,7 @@ import axiosCall from "../../../hooks/axiosCall";
 import BubbleSelector from "../../../components/global/BubbleSelector";
 import { currencyConvertor } from "../../../components/convertors/convertors";
 import { TinfoDefData } from "../../Profile/components/components/PopEditBlock";
+import { t } from "i18next";
 
 export const submitProduct = (
   productData: TproductInfoStart | any,
@@ -227,7 +228,7 @@ export function EstateAddons({
     defData ? defData : []
   );
 
-  const [addonList, setAddonList] = useState<any[]>(productAddonsList);
+  const [addonList, setAddonList] = useState<any[]>(productAddonsList());
   const dispatch = useDispatch();
   useEffect(() => {
     if (!setData) {
@@ -246,11 +247,11 @@ export function EstateAddons({
   }, [selectedAddons]);
   useEffect(() => {
     if (productData.estateType == 3 || (estateType && estateType == 3)) {
-      setAddonList(productAddonsListForLand);
+      setAddonList(productAddonsListForLand());
     } else if (productData.estateType == 4 || (estateType && estateType == 4)) {
-      setAddonList(productAddonsListForHotel);
+      setAddonList(productAddonsListForHotel());
     } else {
-      setAddonList(productAddonsList);
+      setAddonList(productAddonsList());
     }
   }, [productData.estateType, estateType]);
   const addAddon = (index: number) => {
@@ -486,10 +487,10 @@ export function EstateType(props: { setData?: Function; defData?: number }) {
   return (
     <div className="flex flex-col">
       <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
-        უძრავი ქონების ტიპი *
+        {t("addProduct.real_estate_type")} *
       </p>
       <div className="flex gap-3 flex-wrap pl-3 mt-4 mobile:justify-center mobile:pl-0">
-        {RealEstateTypes.map((e, i) => (
+        {RealEstateTypes().map((e, i) => (
           <button
             key={i}
             onClick={() => setActive(i)}
@@ -592,24 +593,24 @@ export function EstateInformation(props: {
     <>
       <div className="flex flex-col ">
         <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
-          ინფორმაცია
+          {t("addProduct.info")}
         </p>
         {(size == null || fullPrice == 0) && props.error && (
           <div className=" rounded-xl text-pinkI bg-pinkClear py-3 px-4 text-sm tracking-wider mt-4 text-center">
             {" "}
-            სავალდებულოა შეავსოთ ფართი, ფასი
+            {t("addProduct.required_space_price")}
           </div>
         )}
         <div className="flex gap-6 flex-col pl-3 mt-4 mobile:pl-0">
           <div className="flex items-center mobileSmall:flex-col  mobileSmall:items-stretch">
             <p className="text-textDesc font-mainMedium w-[200px] mobileTab:text-[14px] mobileTab:min-w-[auto] mobileSmall:mb-3 mobileSmall:text-center mobileSmall:w-full mobileSmall:mt-3">
-              ფართი (მ²) *
+              {t("product.space")} ({t("global.m")}²) *
             </p>{" "}
             <div className="w-full flex justify-end">
               <input
                 type="number"
                 className="AddProductInput mobileSmall:mx-auto "
-                placeholder={"ფართი"}
+                placeholder={t("product.space")}
                 onChange={(e) => {
                   setSize(e.target.valueAsNumber);
                   if (!props.setData) {
@@ -628,13 +629,13 @@ export function EstateInformation(props: {
           {props.productData.estateType === 0 ? (
             <div className="flex items-center mobileSmall:flex-col  mobileSmall:items-stretch">
               <p className="text-textDesc font-mainMedium w-[200px] mobileTab:text-[14px] mobileTab:min-w-[auto] mobileSmall:mb-3 mobileSmall:text-center mobileSmall:w-full mobileSmall:mt-3">
-                ეზოს ფართი (მ²)
+                {t("product.yard_area")} ({t("global.m")}²)
               </p>{" "}
               <div className="w-full flex justify-end">
                 <input
                   type="number"
                   className="AddProductInput mobileSmall:mx-auto "
-                  placeholder={"ეზოს ფართი"}
+                  placeholder={t("product.yard_area")}
                   onChange={(e) => {
                     setLandSize(e.target.valueAsNumber);
                     if (!props.setData) {
@@ -656,12 +657,12 @@ export function EstateInformation(props: {
               {size == null || size <= 0 ? (
                 <div className=" rounded-xl text-orangeI bg-orangeClear py-3 px-4 text-sm tracking-wider  mb-4 text-center">
                   {" "}
-                  ფასის შევსებამდე შეიყვანეთ ფართი
+                  {t("addProduct.insert_price_before_space")}
                 </div>
               ) : null}
               <div className="flex items-center justify-between mediumSmall:flex-col mediumSmall:justify-center mediumSmall:gap-3">
                 <p className="text-textDesc font-mainMedium w-[60px] mobileTab:text-[14px] mobileTab:min-w-[auto] mobileSmall:mb-3 mobileSmall:text-center mobileSmall:w-full mobileSmall:mt-3">
-                  ფასი *
+                  {t("filters.price")} *
                 </p>{" "}
                 {/* <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
                 ფასი
@@ -679,7 +680,7 @@ export function EstateInformation(props: {
                       type="button"
                       className="bg-main mobile:w-full flex items-center w-[150px] justify-center py-[8px] rounded-lg text-buttonText tracking-widest font-mainMedium text-Asmall"
                     >
-                      {currency == 0 ? "$ დოლარი" : "₾ ლარი"}
+                      {currency == 0 ? "$ USD" : "₾ GEL"}
                       <DropDownIcon className="h-[16px] aspect-square flex items-center justify-center ml-4 translate-y-[1px] [&>path]:fill-WhiteFade" />
                     </button>
                     <div
@@ -697,7 +698,7 @@ export function EstateInformation(props: {
                           currency == 0 && "bg-whiteHover"
                         }`}
                       >
-                        ₾ ლარი
+                        ₾ GEL
                       </button>
                       <button
                         onClick={() => {
@@ -709,7 +710,7 @@ export function EstateInformation(props: {
                           currency == 0 && "bg-whiteHover"
                         }`}
                       >
-                        $ დოლარი
+                        $ USD
                       </button>
                     </div>
                   </div>
@@ -717,7 +718,7 @@ export function EstateInformation(props: {
                     <input
                       type="number"
                       className="AddProductInput mobile:w-[100%_!important]"
-                      placeholder="სრული ფასი"
+                      placeholder={t("addProduct.full_price")}
                       onChange={(e) => {
                         setFullPrice(e.target.valueAsNumber);
                         calculateSizePrice(e.target.valueAsNumber);
@@ -732,7 +733,7 @@ export function EstateInformation(props: {
                     <input
                       type="number"
                       className="AddProductInput mobile:w-[100%_!important]"
-                      placeholder="მ² ფასი"
+                      placeholder={`${t("global.m")}² ${t("product.price")}`}
                       onChange={(e) => {
                         setSizePrice(e.target.valueAsNumber);
                         calculateFullPrice(e.target.valueAsNumber);
@@ -753,10 +754,10 @@ export function EstateInformation(props: {
                 <>
                   <div className="flex items-start mobileTab:flex-col h-auto   mobileTab:items-stretch">
                     <p className="text-textDesc font-mainMedium w-[200px] min-w-[200px] mobileTab:text-[14px] mobileTab:min-w-[auto] mobileTab:mb-3 mobileTab:text-center mobileTab:w-full mobileTab:mt-3">
-                      პროექტის ტიპი *
+                      {t("addProduct.project")} *
                     </p>
                     <BubbleSelector
-                      itemList={projectTypes}
+                      itemList={projectTypes()}
                       defData={props.defData?.project}
                       setData={(item: any) => {
                         if (!props.setData) {
@@ -774,11 +775,11 @@ export function EstateInformation(props: {
               ) : null}
               <div className="flex items-center mobileTab:flex-col   mobileTab:items-stretch ">
                 <p className="text-textDesc font-mainMedium w-[200px] mobileTab:text-[14px] mobileTab:min-w-[auto] mobileTab:mb-3 mobileTab:text-center mobileTab:w-full mobileTab:mt-3">
-                  მდგომარეობა *
+                  {t("addProduct.condition")} *
                 </p>
 
                 <BubbleSelector
-                  itemList={projectStatuses}
+                  itemList={projectStatuses()}
                   defData={props.defData?.projectStatus}
                   setData={(item: any) => {
                     if (!props.setData) {
@@ -795,13 +796,13 @@ export function EstateInformation(props: {
 
               <div className="flex items-center mobileTab:flex-col  mobileTab:items-stretch">
                 <p className="text-textDesc font-mainMedium min-w-[200px] mobileTab:text-[14px] mobileTab:min-w-[auto] mobileTab:mb-3 mobileTab:text-center mobileTab:w-full mobileTab:mt-3">
-                  სართული
+                  {t("addProduct.floor")}
                 </p>
                 <div className="flex gap-4 flex-wrap  mobileTab:justify-center w-full justify-end">
                   <input
                     type="number"
                     className="AddProductInput"
-                    placeholder="სართულები"
+                    placeholder={t("addProduct.floors")}
                     value={floor}
                     onChange={(e) => {
                       if (!props.setData) {
@@ -818,7 +819,7 @@ export function EstateInformation(props: {
                   <input
                     type="number"
                     className="AddProductInput"
-                    placeholder="სართული სულ"
+                    placeholder={t("addProduct.all_floors")}
                     value={floors}
                     onChange={(e) => {
                       if (!props.setData) {
@@ -837,7 +838,7 @@ export function EstateInformation(props: {
 
               <div className="flex items-center mobileTab:flex-col">
                 <p className="text-textDesc font-mainMedium w-[200px] mobileTab:w-full mobileTab:mb-3 mobileTab:mt-5 mobileTab:text-center">
-                  ოთახები *
+                  {t("addProduct.rooms")} *
                 </p>
                 <div className="w-full flex justify-end mobileTab:justify-center">
                   <SelectNumbers
@@ -857,7 +858,7 @@ export function EstateInformation(props: {
               </div>
               <div className="flex items-center mobileTab:flex-col">
                 <p className="text-textDesc font-mainMedium w-[200px] mobileTab:w-full mobileTab:mb-3 mobileTab:mt-5 mobileTab:text-center">
-                  საძინებელი *
+                  {t("addProduct.bedrooms")} *
                 </p>{" "}
                 <div className="w-full flex justify-end mobileTab:justify-center">
                   <SelectNumbers
@@ -877,7 +878,7 @@ export function EstateInformation(props: {
               </div>
               <div className="flex items-center mobileTab:flex-col">
                 <p className="text-textDesc font-mainMedium w-[200px] mobileTab:w-full mobileTab:mb-3 mobileTab:mt-5 mobileTab:text-center">
-                  სველი წერტილი *
+                  {t("addProduct.wet_points")} *
                 </p>{" "}
                 <div className="w-full flex justify-end mobileTab:justify-center">
                   <SelectNumbers

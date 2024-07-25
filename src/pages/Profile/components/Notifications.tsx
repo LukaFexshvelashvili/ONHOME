@@ -6,6 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axiosCall from "../../../hooks/axiosCall";
 import { updateNotifications } from "../../../store/data/userSlice";
 import { Helmet } from "react-helmet";
+import { t } from "i18next";
 
 export default function Notifications() {
   const userNotifications = useSelector(
@@ -37,7 +38,7 @@ export default function Notifications() {
   return (
     <>
       <Helmet>
-        <title>შეტყობინებები - OnHome</title>
+        <title>{t("navbar.notifications")} - OnHome</title>
       </Helmet>
       <div className=" rounded-section shadow-sectionShadow bg-whiteMain relative flex overflow-hidden mobile:flex-col">
         {notifications.length > 0 ? (
@@ -60,7 +61,7 @@ export default function Notifications() {
           </>
         ) : (
           <div className="flex justify-center items-center w-full text-textDesc px-3 py-7">
-            შეტყობინებები ცარიელია
+            {t("navbar.there_are_no_messages")}
           </div>
         )}
       </div>
@@ -81,7 +82,7 @@ function NotificationsData({
   return (
     <div className=" px-7 py-5 w-7/12 flex justify-center items-center text-textDesc min-h-[400px] mobile:min-h-[0px] mobile:w-full">
       {activeMessage == -1 ? (
-        <>აირჩიეთ შეტყობინება</>
+        <>{t("global.choose_notification")}</>
       ) : (
         <div className="flex flex-col gap-3 text-center">
           <h1 className=" text-[16px] text-textHead">{data.title}</h1>
@@ -90,7 +91,7 @@ function NotificationsData({
           {data.link ? (
             <Link to={data.link}>
               <button className=" mt-[30px] bg-main rounded-[5px] w-[180px] h-[38px] font-mainBold text-buttonText text-[13px] tracking-widest block mx-auto transition-colors hover:bg-mainHover">
-                ბმულის ნახვა
+                {t("global.see_link")}
               </button>
             </Link>
           ) : null}

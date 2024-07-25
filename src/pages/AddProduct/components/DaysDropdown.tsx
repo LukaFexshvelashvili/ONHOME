@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { DropDownIcon } from "../../../assets/icons/Icons";
 import { TOffer } from "../../../assets/lists/offers";
 import { OutsideClickClose } from "../../../components/global/OutsideClickClose";
+import { t } from "i18next";
 
 export default function DaysDropdown({
   offerData,
@@ -29,7 +30,7 @@ export default function DaysDropdown({
       >
         <p className="text-Asmall " style={{ color: offerData.mainColor }}>
           {" "}
-          1 დღე -{" "}
+          1 {t("offers.day")} -{" "}
           {offerData.sale !== 0 ? (
             <>
               {(offerData.price - offerData.sale).toFixed(2) + "₾"}{" "}
@@ -47,7 +48,7 @@ export default function DaysDropdown({
             className="h-[34px] w-[120px] text-Asmall rounded-md flex justify-between items-center px-4 text-buttonText"
             style={{ backgroundColor: offerData.mainColor }}
           >
-            {value} დღე
+            {value} {t("offers.day")}
             <DropDownIcon className="h-2" />
           </button>
           {open && (
@@ -61,7 +62,7 @@ export default function DaysDropdown({
                   }}
                   className="text-sm py-[6px] text-textDesc transition-colors hover:bg-whiteHover"
                 >
-                  {e} დღე
+                  {e} {t("offers.day")}
                 </button>
               ))}
             </div>

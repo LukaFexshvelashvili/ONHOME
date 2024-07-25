@@ -30,8 +30,6 @@ function Home() {
   useLayoutEffect(() => {
     if (firstRender.current) {
       getCacheItem("home_page_fetch").then((chache) => {
-        // ვამოწმებთ ქეშში არის თუარა ინფორმაცია ან 5 წუთზე მეტი ხანი თუა
-
         if (chache == undefined || isDateLater(chache.date, 5)) {
           axiosCall.get("fetch/products").then((res) => {
             if (res.data.status == 100) {
@@ -54,20 +52,14 @@ function Home() {
       let productsList = products;
       productsList.sort((a, b) => b.views - a.views);
 
-      // Select the top 5 items
       let List = productsList.slice(0, 5);
       return List;
     }
   };
   const lastProducts = (): TProductCard[] => {
-    // Ensure products exist and the array is not empty
     if (products && products.length > 0) {
-      // Copy the products array to avoid modifying the original array
       let productsList = [...products];
 
-      // Sort the products based on views in descending order
-
-      // Sort the top viewed products by update_time in descending order
       productsList.sort(
         (a, b) =>
           new Date(b.update_time).getTime() - new Date(a.update_time).getTime()

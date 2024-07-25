@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { image_url_start } from "../../../hooks/axiosCall";
 import { FormatTime } from "../../../components/global/Addons";
+import { t } from "i18next";
 
 export default function LastSeenProducts() {
   const [products, setProducts] = useState<TProductData[]>([]);
@@ -22,11 +23,11 @@ export default function LastSeenProducts() {
   return (
     <>
       <Helmet>
-        <title>ბოლოს ნანახი - OnHome</title>
+        <title>{t("navbar.last_seen")} - OnHome</title>
       </Helmet>{" "}
       <div className=" rounded-section shadow-sectionShadow bg-whiteMain relative flex  py-2 flex-col gap-3">
         <p className="px-4 text-[13px] text-textDesc my-1">
-          სულ {products.length} განცხადება
+          {t("my_products.found")} {products.length} {t("my_products.form")}
         </p>
         <div className="flex flex-col  max-h-[550px] overflow-hidden overflow-y-auto">
           {products.length > 0 ? (
@@ -35,7 +36,7 @@ export default function LastSeenProducts() {
             ))
           ) : (
             <p className="px-4 text-[14px] text-textDesc my-3 text-center tracking-wider">
-              სია ცარიელია
+              {t("global.list_is_empty")}
             </p>
           )}
         </div>
@@ -63,21 +64,21 @@ function BasicBanner(props: { productData: TProductData }) {
           </h3>{" "}
         </Link>
         <p className="text-[13px] text-textDesc">
-          ქალაქი:{" "}
+          {t("global.placeholders.city")}:{" "}
           <span className="text-[13px] text-textHeadBlack">
             {props.productData.estate_city}
           </span>
         </p>
         <p className="text-[13px] text-textDesc">
-          ოთახები:{" "}
+          {t("global.placeholders.rooms")}:{" "}
           <span className="text-[13px] text-textHeadBlack">
             {props.productData.estate_rooms}
           </span>
         </p>
         <p className="text-[13px] text-textDesc">
-          ფართი:{" "}
+          {t("global.placeholders.space")}:{" "}
           <span className="text-[13px] text-textHeadBlack">
-            {props.productData.estate_size} მ²
+            {props.productData.estate_size} {t("global.m")}²
           </span>
         </p>
         <div className="flex items-center gap-5 mt-1 smallXl:mt-3 mobileSmall:flex-wrap ">

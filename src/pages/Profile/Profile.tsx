@@ -20,6 +20,7 @@ import LastSeenProducts from "./components/LastSeenProducts";
 import Settings from "./components/Settings";
 import ProfileInfo from "./components/ProfileInfo";
 import { Helmet } from "react-helmet";
+import { t } from "i18next";
 
 export default function Profile() {
   const userData = useSelector((store: RootState) => store.user);
@@ -88,7 +89,8 @@ export default function Profile() {
               </div>
               <div className="w-full">
                 <p className="text-[13px] text-textDesc mt-2 text-center px-4">
-                  ბალანსი{": "}
+                  {t("global.balance")}
+                  {": "}
                   <span className="text-main ml-1 font-mainSemiBold tracking-wider">
                     {(userData.money / 100)
                       .toFixed(2)
@@ -101,7 +103,7 @@ export default function Profile() {
 
           <div className=" rounded-section shadow-sectionShadow bg-whiteMain relative items-center overflow-hidden flex flex-col">
             {userData.isLogged
-              ? ProfileNavs.map((e: TProfileNav) => (
+              ? ProfileNavs().map((e: TProfileNav) => (
                   <Link
                     key={e.id}
                     onClick={() => setActiveNav(e.id)}
@@ -119,7 +121,7 @@ export default function Profile() {
                     </button>
                   </Link>
                 ))
-              : ProfileNavsGuest.map((e: TProfileNav) => (
+              : ProfileNavsGuest().map((e: TProfileNav) => (
                   <Link
                     key={e.id}
                     onClick={() => setActiveNav(e.id)}
@@ -141,7 +143,7 @@ export default function Profile() {
           {!userData.isLogged ? (
             <Link to={"/Login"} className="rounded-[10px] ">
               <button className="w-full h-[50px] rounded-[10px] text-buttonText bg-main tracking-wider text-[14px] transition-colors hover:bg-mainHover">
-                ანგარიშში შესვლა
+                {t("navbar.log_in")}
               </button>
             </Link>
           ) : null}
@@ -184,16 +186,16 @@ type TProfileNav = {
   link: string;
   icon: () => JSX.Element;
 };
-const ProfileNavs: TProfileNav[] = [
+const ProfileNavs = (): TProfileNav[] => [
   {
     id: 1,
-    name: "ჩემი განცხადებები",
+    name: t("navbar.my_forms"),
     link: "MyProducts",
     icon: () => <DocumentsIcon className="h-[26px] aspect-square mr-[10px]" />,
   },
   {
     id: 2,
-    name: "ბალანსი",
+    name: t("global.balance"),
     link: "Balance",
     icon: () => (
       <MoneyDollarIcon className="h-[26px] aspect-square mr-[10px] [&>path]:stroke-textHead" />
@@ -201,7 +203,7 @@ const ProfileNavs: TProfileNav[] = [
   },
   {
     id: 3,
-    name: "შენახული განცხადებები",
+    name: t("navbar.saved_forms"),
     link: "SavedProducts",
     icon: () => (
       <BookmarkIcon className="h-[26px] aspect-square mr-[10px] [&>path]:stroke-[1.5px] p-[3px] [&>path]:stroke-textHead" />
@@ -209,7 +211,7 @@ const ProfileNavs: TProfileNav[] = [
   },
   {
     id: 4,
-    name: "ბოლოს ნანახი",
+    name: t("navbar.last_seen"),
     link: "LastSeenProducts",
     icon: () => (
       <HistoryIcon className="h-[27px] aspect-square mr-[10px]  [&>path]:stroke-[1.5px] p-[3px] [&>path]:fill-textHead" />
@@ -217,7 +219,7 @@ const ProfileNavs: TProfileNav[] = [
   },
   {
     id: 5,
-    name: "შეტყობინებები",
+    name: t("navbar.notifications"),
     link: "Notifications",
     icon: () => (
       <ChatIcon className="h-[27px] aspect-square mr-[10px]  [&>path]:stroke-[1.5px] p-[3px] [&>path]:stroke-textHead" />
@@ -226,7 +228,7 @@ const ProfileNavs: TProfileNav[] = [
 
   {
     id: 6,
-    name: "პარამეტრები",
+    name: t("navbar.settings"),
     link: "Settings",
     icon: () => (
       <SettingsIcon className="h-[26px] aspect-square mr-[10px] [&>path]:stroke-[1.5px] p-[3px] [&>path]:stroke-textHead" />
@@ -234,17 +236,17 @@ const ProfileNavs: TProfileNav[] = [
   },
   {
     id: 7,
-    name: "ჩემს შესახებ",
+    name: t("navbar.profile_info"),
     link: "ProfileInfo",
     icon: () => (
       <UserLinearIcon className="h-[26px] aspect-square mr-[10px] [&>path]:stroke-[1.5px] p-[2px] [&>path]:fill-textHead" />
     ),
   },
 ];
-const ProfileNavsGuest: TProfileNav[] = [
+const ProfileNavsGuest = (): TProfileNav[] => [
   {
     id: 3,
-    name: "შენახული განცხადებები",
+    name: t("navbar.saved_forms"),
     link: "SavedProducts",
     icon: () => (
       <BookmarkIcon className="h-[26px] aspect-square mr-[10px] [&>path]:stroke-[1.5px] p-[3px] [&>path]:stroke-textHead" />
@@ -253,7 +255,7 @@ const ProfileNavsGuest: TProfileNav[] = [
 
   {
     id: 6,
-    name: "პარამეტრები",
+    name: t("navbar.settings"),
     link: "Settings",
     icon: () => (
       <SettingsIcon className="h-[26px] aspect-square mr-[10px] [&>path]:stroke-[1.5px] p-[3px] [&>path]:stroke-textHead" />

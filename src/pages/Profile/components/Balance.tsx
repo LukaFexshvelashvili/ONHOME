@@ -3,6 +3,7 @@ import masterCard from "../../../assets/images/logos/masterCard.jpg";
 import visa from "../../../assets/images/logos/visa.png";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
+import { t } from "i18next";
 export default function Balance() {
   const [amount, setAmount] = useState<number | null>(null);
   const [error, setError] = useState<string>("");
@@ -11,17 +12,17 @@ export default function Balance() {
     setError("");
     if (amount && amount >= 5) {
     } else {
-      setError("მინიმალური შეტანის თანხა: 5 ლარი");
+      setError(t("balance.minimum_amount"));
     }
   };
   return (
     <>
       <Helmet>
-        <title>ბალანსი - OnHome</title>
+        <title>{t("global.balance")} - OnHome</title>
       </Helmet>
       <div className=" rounded-section shadow-sectionShadow bg-whiteMain relative flex gap-6 flex-col  px-7 py-5 ">
         <h2 className="text-textHeadCard text-[15px] tracking-wider">
-          შეავსეთ ბალანსი
+          {t("balance.fill_balance")}
         </h2>
 
         <div className="flex justify-center items-center mt-3">
@@ -38,7 +39,7 @@ export default function Balance() {
               <div className="flex justify-center items-center h-[35px] w-[250px] relative overflow-hidden rounded-lg my-5">
                 <input
                   type="number"
-                  placeholder="შეიყვანეთ თანხა"
+                  placeholder={t("balance.enter_the_amount")}
                   className="h-full w-full absolute rounded-lg bg-bodyBg text-[14px] font-mainMedium px-2 text-blackMain outline-none text-center tracking-wider placeholder-textCardDesc"
                   onChange={(e) => setAmount(e.target.valueAsNumber)}
                   value={amount ? amount : ""}
@@ -48,14 +49,14 @@ export default function Balance() {
                 </div>
               </div>
               <button className="bg-main rounded-[5px] w-[200px] h-[40px] font-mainMedium text-buttonText text-[13px] tracking-wider transition-colors hover:bg-mainHover">
-                ბალანსის შევსება
+                {t("balance.fill_balance")}
               </button>
             </form>
             <p className="mt-5 text-textDesc text-[12px] tracking-wider">
-              (მინიმალური შენატანი 5 ლარი)
+              {t("balance.minimum_amount")}
             </p>
             <p className="mt-5 text-textDesc text-[12px] tracking-wider">
-              გადახდის მეთოდები
+              {t("balance.payment_methods")}
             </p>
             <div className="flex gap-2 mt-3">
               <img
@@ -73,7 +74,7 @@ export default function Balance() {
               to={"/Profile/ProfileInfo"}
               className="text-[14px] text-main mt-8 underline text-center"
             >
-              გადახდების ისტორია იხილეთ ინფორმაციის გვერდზე
+              {t("balance.payment_history")}
             </Link>
           </div>
         </div>

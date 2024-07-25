@@ -24,6 +24,7 @@ import AuthenticationHeader from "./AuthenticationHeader";
 import { Helmet } from "react-helmet";
 import { setWebLoader } from "../../store/data/webUISlice";
 import MailVerification from "./MailVerification";
+import { t } from "i18next";
 
 export default function Register() {
   const user: Tuser = useSelector((store: RootState) => store.user);
@@ -151,32 +152,32 @@ export default function Register() {
                     };
                     makeUserSession(dispatch, userData);
                   } else if (res.data.status === 2) {
-                    setError("მითითებულ მეილზე ანგარიში უკვე არსებობს");
+                    setError(t("login.r1"));
                   } else if (res.data.status === -1) {
-                    setError("სერვერზე წარმოიშვა პრობლემა, სცადეთ მოგვიანებით");
+                    setError(t("login.r2"));
                   }
                 });
             } else {
-              setError("პაროლები არ ემთხვევა");
+              setError(t("login.r3"));
             }
           } else {
-            setError("პაროლი უნდა შეიცავდეს მინიმუმ 8 სიმბოლოს");
+            setError(t("login.r4"));
           }
         } else {
-          setError("შეიყვანეთ სწორი მობილურის ნომერი");
+          setError(t("login.r5"));
         }
       } else {
-        setError("შეავსეთ ყველა სვალდებულო ველი");
+        setError(t("login.r6"));
       }
     } else {
-      setError("გთხოვთ დაეთანხმოთ წესებს და პირობებს");
+      setError(t("login.r7"));
     }
   };
 
   return (
     <>
       <Helmet>
-        <title>რეგისტრაცია - OnHome</title>
+        <title>{t("login.register")} - OnHome</title>
         <meta name="description" lang="ka" content="რეგისტრაცია - OnHome" />
         <meta
           name="keywords"
@@ -218,7 +219,7 @@ export default function Register() {
               }  medium:pb-[80px] ${showVerify ? "hidden" : "flex"}`}
             >
               <h1 className=" text-[32px] text-textHead font-mainBold mb-10 mobile:text-[22px] mobile:mb-6">
-                ანგარიშის შექმნა
+                {t("login.create_account")}
               </h1>
               <form
                 onSubmit={handleForm}
@@ -235,7 +236,7 @@ export default function Register() {
                       ref={nameRef}
                       type="text"
                       name="firstname"
-                      placeholder="სახელი"
+                      placeholder={t("profileInfo.name")}
                       className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                     />
                   </div>
@@ -244,7 +245,7 @@ export default function Register() {
                       ref={surnameRef}
                       type="text"
                       name="surname"
-                      placeholder="გვარი"
+                      placeholder={t("profileInfo.surname")}
                       className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                     />
                   </div>
@@ -255,7 +256,7 @@ export default function Register() {
                     type="email"
                     name="email"
                     ref={mailRef}
-                    placeholder="მეილი"
+                    placeholder={t("profileInfo.email")}
                     className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 pl-11 mobile:pl-10 text-textDesc tracking-wider text-[13px] transition-colors focus:bg-LoginInputActive"
                   />
                 </div>
@@ -267,7 +268,7 @@ export default function Register() {
                     type="tel"
                     name="mobile"
                     autoComplete="off"
-                    placeholder="ტელეფონის ნომერი"
+                    placeholder={t("profileInfo.mobile")}
                     className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 pl-11 mobile:pl-10 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                   />
                 </div>
@@ -275,7 +276,7 @@ export default function Register() {
                   <LockIcon className="w-[22px] mobile:h-[20px] aspect-square absolute left-3 [&>path]:stroke-blackMain z-[3] opacity-40" />
                   <input
                     type="password"
-                    placeholder="პაროლი"
+                    placeholder={t("login.password")}
                     ref={passwordRef}
                     autoComplete="off"
                     value={passwordInput}
@@ -289,7 +290,7 @@ export default function Register() {
                     ref={confirmPasswordRef}
                     autoComplete="off"
                     type="password"
-                    placeholder="გაიმეორეთ პაროლი"
+                    placeholder={t("login.repeat_password")}
                     className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 pl-11 mobile:pl-10 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                   />
                 </div>
@@ -305,10 +306,10 @@ export default function Register() {
                     ></div>
                   </div>
                   <p className="text-textDesc text-Asmall font-mainBold tracking-wider opacity-40 mt-2 mobile:text-[12px]">
-                    {passwordStatus == 0 && "პაროლი სუსტია"}
-                    {passwordStatus == 1 && "პაროლი სუსტია"}
-                    {passwordStatus == 2 && "საშუალო დონის პაროლია"}
-                    {passwordStatus == 3 && "კარგი პაროლია "}
+                    {passwordStatus == 0 && t("login.p1")}
+                    {passwordStatus == 1 && t("login.p2")}
+                    {passwordStatus == 2 && t("login.p3")}
+                    {passwordStatus == 3 && t("login.p4")}
                   </p>
                 </div>
                 <div className="flex items-center w-full justify-between ">
@@ -327,22 +328,24 @@ export default function Register() {
                       onClick={() => setAgreement((state) => !state)}
                       className="cursor-pointer "
                     >
-                      ვეთანხმები
+                      {t("login.agree")}
                     </p>
                     <span className="text-main cursor-pointer ml-2 mobile:text-[12px]">
-                      <Link to="/PrivacyPolicy">წესებს და პირობებს</Link>
+                      <Link to="/PrivacyPolicy">
+                        {t("login.terms_and_conditions")}
+                      </Link>
                     </span>
                   </div>
                 </div>
                 <button className=" mt-4 mobile:mt-0 linearButton font-mainBold text-buttonText h-[40px] w-[200px] mobile:text-[14px] mobile:h-[36px] rounded-normal tracking-wider transition-shadow hover:shadow-[0px_6px_15px_var(--mainClear)]">
-                  რეგისტრაცია
+                  {t("login.register")}
                 </button>
               </form>
 
               <p className="mt-8 mobile:mt-6 text-textDesc text-Asmall font-mainBold tracking-wider mobile:text-[12px]">
-                უკვე გაქვს ანგარიში?{" "}
+                {t("login.have_an_account")}{" "}
                 <span className="text-main cursor-pointer">
-                  <Link to="/Login">ავტორიზაცია</Link>
+                  <Link to="/Login"> {t("login.title")}</Link>
                 </span>
               </p>
             </div>

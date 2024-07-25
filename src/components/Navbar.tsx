@@ -176,6 +176,63 @@ function ResponsiveNavbar({
   const darkmode: boolean = useSelector(
     (store: RootState) => store.webUI.darkMode
   );
+  const profileResponsiveButtons: TProfileButton[] = [
+    {
+      link: "/Profile",
+      name: `${t("navbar.my_profile")}`,
+      icon: (
+        <UserLinearIcon className=" h-[26px] aspect-square fill-textHead mr-2" />
+      ),
+    },
+    {
+      link: "/Profile/MyProducts",
+      name: t("navbar.my_forms"),
+      icon: (
+        <DocumentsIcon className=" h-[26px] aspect-square stroke-textHead mr-2" />
+      ),
+    },
+    {
+      link: "ChangeDarkTheme",
+      name: t("navbar.dark_mode"),
+      icon: <MoonIcon className=" h-[26px] aspect-square fill-textHead mr-2" />,
+    },
+    {
+      link: "Profile/Notifications",
+      name: t("navbar.notifications"),
+      icon: (
+        <NotificationResponsiveIcon className=" h-[26px] flex items-center justify-center stroke-textHead mr-2" />
+      ),
+    },
+    {
+      link: "/Profile/Settings",
+      name: t("navbar.settings"),
+      icon: (
+        <SettingsIcon className=" h-[26px] aspect-square [&>path]:stroke-textHead mr-2" />
+      ),
+    },
+    {
+      link: "/Logout",
+      name: t("navbar.log_out"),
+      icon: (
+        <LogoutIcon className=" h-[26px] aspect-square stroke-textHead mr-2" />
+      ),
+    },
+  ];
+  const responsiveUnloggedButtons: TProfileButton[] = [
+    {
+      link: "/Login",
+      name: t("navbar.log_in"),
+      icon: (
+        <LogoutIcon className="h-[26px] aspect-square stroke-textHead mr-2" />
+      ),
+    },
+
+    {
+      link: "ChangeDarkTheme",
+      name: t("navbar.dark_mode"),
+      icon: <MoonIcon className="h-[26px] aspect-square fill-textHead mr-2" />,
+    },
+  ];
 
   const dispatch = useDispatch();
   const [active, setActive] = useState<boolean>(false);
@@ -356,7 +413,7 @@ function ResponsiveNavbar({
             {t("navbar.categories")}
           </p>
           <div className="flex gap-3 flex-wrap justify-center mt-5">
-            {RealEstateTypes.map(
+            {RealEstateTypes().map(
               (
                 e: {
                   icon: (props: any) => JSX.Element;
@@ -390,60 +447,3 @@ type TProfileButton = {
   icon: JSX.Element;
   link: string;
 };
-const profileResponsiveButtons: TProfileButton[] = [
-  {
-    link: "/Profile",
-    name: t("navbar.my_profile"),
-    icon: (
-      <UserLinearIcon className=" h-[26px] aspect-square fill-textHead mr-2" />
-    ),
-  },
-  {
-    link: "/Profile/MyProducts",
-    name: t("navbar.my_forms"),
-    icon: (
-      <DocumentsIcon className=" h-[26px] aspect-square stroke-textHead mr-2" />
-    ),
-  },
-  {
-    link: "ChangeDarkTheme",
-    name: t("navbar.dark_mode"),
-    icon: <MoonIcon className=" h-[26px] aspect-square fill-textHead mr-2" />,
-  },
-  {
-    link: "Profile/Notifications",
-    name: t("navbar.notifications"),
-    icon: (
-      <NotificationResponsiveIcon className=" h-[26px] flex items-center justify-center stroke-textHead mr-2" />
-    ),
-  },
-  {
-    link: "/Profile/Settings",
-    name: t("navbar.settings"),
-    icon: (
-      <SettingsIcon className=" h-[26px] aspect-square [&>path]:stroke-textHead mr-2" />
-    ),
-  },
-  {
-    link: "/Logout",
-    name: t("navbar.log_out"),
-    icon: (
-      <LogoutIcon className=" h-[26px] aspect-square stroke-textHead mr-2" />
-    ),
-  },
-];
-const responsiveUnloggedButtons: TProfileButton[] = [
-  {
-    link: "/Login",
-    name: t("navbar.log_in"),
-    icon: (
-      <LogoutIcon className="h-[26px] aspect-square stroke-textHead mr-2" />
-    ),
-  },
-
-  {
-    link: "ChangeDarkTheme",
-    name: t("navbar.dark_mode"),
-    icon: <MoonIcon className="h-[26px] aspect-square fill-textHead mr-2" />,
-  },
-];

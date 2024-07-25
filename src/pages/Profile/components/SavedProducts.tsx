@@ -14,6 +14,7 @@ import { Helmet } from "react-helmet";
 import { image_url_start } from "../../../hooks/axiosCall";
 import { FormatTime } from "../../../components/global/Addons";
 import { Link } from "react-router-dom";
+import { t } from "i18next";
 
 function SavedProducts() {
   const userFavorites = useSelector((store: RootState) => store.user.favorites);
@@ -26,16 +27,16 @@ function SavedProducts() {
   return (
     <>
       <Helmet>
-        <title>ფავორიტები - OnHome</title>
+        <title>{t("savedProducts.favorites")} - OnHome</title>
       </Helmet>{" "}
       <div className=" rounded-section text-textHead shadow-sectionShadow bg-whiteMain relative flex px-7 py-5 flex-col gap-3  mobile:px-3">
         <h1 className="mobileSmall:text-[14px] mobile:text-center">
-          შენახული განცხადებები
+          {t("savedProducts.saved_forms")}
         </h1>
 
         <input
           type="text"
-          placeholder="მოძებნა  ( ID ან სათაური )"
+          placeholder={t("my_products.search")}
           className=" text-[14px] h-[40px] w-full bg-LoginInput outline-none rounded-lg px-4 transition-colors focus:bg-LoginInputActive"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -45,7 +46,7 @@ function SavedProducts() {
         {products && search.length == 0 ? (
           products.length !== 0 && (
             <p className="px-4 text-[13px] text-textDesc my-1">
-              სულ {products.length} განცხადება
+              {t("my_products.found")} {products.length} {t("my_products.form")}
             </p>
           )
         ) : products &&
@@ -55,7 +56,7 @@ function SavedProducts() {
               item.estate_title.includes(search)
           ).length !== 0 ? (
           <p className="px-4 text-[13px] text-textDesc my-1">
-            სულ{" "}
+            {t("my_products.found")}{" "}
             {
               products.filter(
                 (item: TProductData) =>
@@ -63,11 +64,11 @@ function SavedProducts() {
                   item.estate_title.includes(search)
               ).length
             }{" "}
-            განცხადება
+            {t("my_products.form")}
           </p>
         ) : (
           <p className="px-4 text-[13px] text-textDesc my-1">
-            მსგავსი განცხადება ვერ მოიძებნა
+            {t("my_products.no_form_found")}
           </p>
         )}
         <div className="flex flex-col  max-h-[550px] overflow-x-hidden overflow-y-auto ">
@@ -117,21 +118,21 @@ function FavoriteBanner(props: { product: TProductData }) {
           </h3>{" "}
         </Link>
         <p className="text-[13px] text-textDesc">
-          ადგილი:{" "}
+          {t("global.placeholders.location")}:{" "}
           <span className="text-[13px] text-textHeadBlack">
             {props.product.estate_city}
           </span>
         </p>
         <p className="text-[13px] text-textDesc">
-          ოთახები:{" "}
+          {t("global.placeholders.rooms")}:{" "}
           <span className="text-[13px] text-textHeadBlack">
             {props.product.estate_rooms}
           </span>
         </p>
         <p className="text-[13px] text-textDesc">
-          ფართი:{" "}
+          {t("global.placeholders.space")}:{" "}
           <span className="text-[13px] text-textHeadBlack">
-            {props.product.estate_size} მ²
+            {props.product.estate_size} {t("global.m")}²
           </span>
         </p>
         <div className="flex items-center gap-5 mt-auto small:mt-2 flex-wrap">
@@ -152,7 +153,7 @@ function FavoriteBanner(props: { product: TProductData }) {
           className="group relative bg-orangeClear  h-[35px] aspect-square rounded-md  transition-colors p-2 hover:bg-orangeHover flex justify-center items-center"
         >
           <BookmarkIcon className="h-full aspect-square [&>path]:fill-orangeI [&>path]:stroke-orangeI" />
-          <HoverTitle title="ფავორიტებიდან ამოღება" left bottom />
+          <HoverTitle title={t("savedProducts.remove_favorite")} left bottom />
         </button>
       </div>
     </div>

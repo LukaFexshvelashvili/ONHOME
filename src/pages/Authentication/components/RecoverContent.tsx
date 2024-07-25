@@ -12,6 +12,7 @@ import { HomesbgDecor } from "../../../assets/images/decorations/svg/Decorations
 import SideSection from "./SideSection";
 import AuthenticationHeader from "../AuthenticationHeader";
 import { setWebLoader } from "../../../store/data/webUISlice";
+import { t } from "i18next";
 
 export default function RecoverContent() {
   const { url } = useParams();
@@ -75,17 +76,17 @@ export default function RecoverContent() {
             } else {
               setError({
                 status: true,
-                data: "წარმოიშვა შეცდომა, სცადეთ მოგვიანებით",
+                data: t("passwordRecover.d1"),
               });
             }
           });
       } else {
-        setError({ status: true, data: "პაროლები არ ემთხვევა" });
+        setError({ status: true, data: t("passwordRecover.d2") });
       }
     } else {
       setError({
         status: true,
-        data: "პაროლი უნდა შეიცავდეს მინიმუმ 8 სიმბოლოს",
+        data: t("passwordRecover.d3"),
       });
     }
   };
@@ -103,10 +104,10 @@ export default function RecoverContent() {
                 }  medium:pb-[100px] w-full`}
               >
                 <h1 className=" text-[32px] mobile:text-[24px] text-textHead font-mainBold mb-2">
-                  პაროლის აღდგენა
+                  {t("passwordRecover.d4")}
                 </h1>
                 <p className="mb-6 text-textDesc text-Asmall font-mainBold tracking-wider mobile:text-[14px]">
-                  შეიყვანეთ ახალი პაროლი
+                  {t("passwordRecover.d5")}
                 </p>
                 {error.status ? (
                   <div className="w-[380px] mb-5 h-auto p-3 rounded-lg bg-pinkClear text-pinkI border-2 border-pinkI  flex justify-center items-center text-center text-[14px] tracking-wider font-mainSemiBold">
@@ -125,7 +126,7 @@ export default function RecoverContent() {
                     <LockIcon className="h-[24px] mobile:h-[20px] aspect-square absolute left-3 [&>path]:stroke-textDescCard" />
                     <input
                       type="password"
-                      placeholder="პაროლი"
+                      placeholder={t("login.password")}
                       className="h-full w-full rounded-normal bg-LoginInput outline-none px-3 pl-11 mobile:text-[12px] mobile:pl-10 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                       onChange={(e) => setPassword(e.target.value)}
                       value={password}
@@ -135,7 +136,7 @@ export default function RecoverContent() {
                     <LockIcon className="h-[24px] mobile:h-[20px] aspect-square absolute left-3 [&>path]:stroke-textDescCard" />
                     <input
                       type="password"
-                      placeholder="გაიმეორეთ პაროლი"
+                      placeholder={t("login.repeat_password")}
                       className="h-full w-full rounded-normal bg-LoginInput outline-none px-3 pl-11 mobile:text-[12px] mobile:pl-10 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       value={confirmPassword}
@@ -153,19 +154,19 @@ export default function RecoverContent() {
                       ></div>
                     </div>
                     <p className="text-textDesc text-Asmall font-mainBold tracking-wider opacity-70 mt-2 mobile:text-[12px]">
-                      {passwordStatus == 0 && "პაროლი სუსტია"}
-                      {passwordStatus == 1 && "პაროლი სუსტია"}
-                      {passwordStatus == 2 && "საშუალო დონის პაროლია"}
-                      {passwordStatus == 3 && "კარგი პაროლია "}
+                      {passwordStatus == 0 && t("login.p1")}
+                      {passwordStatus == 1 && t("login.p2")}
+                      {passwordStatus == 2 && t("login.p3")}
+                      {passwordStatus == 3 && t("login.p4")}
                     </p>
                   </div>
                   <button className="linearButton mt-2 font-mainBold text-buttonText h-[40px] w-[200px] mobile:h-[36px] mobile:w-[180px] mobile:text-[14px] rounded-normal tracking-wider transition-shadow hover:shadow-[0px_6px_15px_var(--mainClear)]">
-                    დადასტურება
+                    {t("profileInfo.confirm")}
                   </button>
                 </form>
 
                 <p className="text-main text-Asmall mt-5 font-mainBold tracking-wider mobile:text-[12px] mobile:invisible cursor-pointer">
-                  <Link to={"/Login"}>უკან დაბრუნება</Link>
+                  <Link to={"/Login"}>{t("passwordRecover.go_back")}</Link>
                 </p>
               </div>
               <div className="absolute bottom-0 z-0 pointer-events-none w-full">
@@ -180,11 +181,11 @@ export default function RecoverContent() {
                 }  medium:pb-[100px] w-full`}
               >
                 <h1 className=" text-[32px] mobile:text-[24px] text-textHead font-mainBold mb-2 ">
-                  პაროლი წარმატებით განახლდა !
+                  {t("passwordRecover.password_updated_successfully")}
                 </h1>
                 <Link to={"/Login"} className="mobile:mt-4 mt-6 rounded-normal">
                   <button className="linearButton  font-mainBold text-buttonText h-[40px] w-[200px] mobile:h-[36px] mobile:w-[180px] mobile:text-[14px] rounded-normal tracking-wider transition-shadow hover:shadow-[0px_6px_15px_var(--mainClear)]">
-                    ანგარიშში შესვლა
+                    {t("passwordRecover.log_in")}
                   </button>
                 </Link>
               </div>

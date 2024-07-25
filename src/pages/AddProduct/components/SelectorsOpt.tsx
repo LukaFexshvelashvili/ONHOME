@@ -16,6 +16,7 @@ import OfferCard from "../../../components/global/OfferCard";
 import SearchPlace from "../../../components/placeSelector/SearchPlace";
 import { projectDealTypes } from "../../../assets/lists/productAddons";
 import { PopupCloseIcon } from "../../../assets/icons/Icons";
+import { t } from "i18next";
 
 export function EstateTitle(props: {
   error?: boolean;
@@ -29,16 +30,16 @@ export function EstateTitle(props: {
     <div className="flex flex-col">
       <div className="flex items-center gap-2 mobile:flex-col">
         <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
-          განცხადების სათაური *
+          {t("selectors.title")} *
         </p>{" "}
         <span className="text-Asmall text-textDescCard ">
-          (მაქსიმალური სიგრძე: 30)
+          ({t("selectors.min_title")})
         </span>
       </div>
       {title == "" && props.error && (
         <div className=" rounded-xl text-pinkI bg-pinkClear py-3 px-4 text-sm tracking-wider mt-2 text-center">
           {" "}
-          სავალდებულოა შეავსოთ სათაურის ველი
+          {t("selectors.required_title")}
         </div>
       )}
       <div className="flex gap-3 flex-wrap pl-3 mt-4 mobile:justify-center mobile:pl-0 ">
@@ -46,7 +47,7 @@ export function EstateTitle(props: {
           <input
             type="text"
             className="AddProductInputTitle"
-            placeholder="მაგ: იყიდება ბინა ზღვასთან"
+            placeholder={t("selectors.title_placeholder")}
             max={30}
             maxLength={30}
             value={title}
@@ -86,10 +87,10 @@ export function EstateDescription(props: {
     <div className="flex flex-col">
       <div className="flex items-center gap-2 mobile:flex-col">
         <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
-          განცხადების აღწერა
+          {t("selectors.desc")}
         </p>{" "}
         <span className="text-Asmall text-textDescCard ">
-          (მაქსიმალური სიგრძე: 600)
+          ({t("selectors.min_desc")})
         </span>
       </div>
 
@@ -97,7 +98,7 @@ export function EstateDescription(props: {
         <div className="inputBl relative flex items-center max-w-[700px] w-full">
           <textarea
             className="AddProductInputTitle textareaInput"
-            placeholder="განცხადების აღწერა"
+            placeholder={t("selectors.desc_placeholder")}
             value={description}
             onChange={(e) => {
               if (e.target.value.length <= 600) {
@@ -134,10 +135,10 @@ export function EstateOption() {
   return (
     <div className="flex flex-col">
       <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
-        შეთავაზება
+        {t("selectors.offer")}
       </p>
       <div className="flex items-center justify-center gap-5 mt-8 flex-wrap">
-        {ActiveOffers.map((e: TOffer, i: number) => (
+        {ActiveOffers().map((e: TOffer, i: number) => (
           <OfferCard offerData={e} activeStatus={status} key={i} />
         ))}
       </div>
@@ -163,10 +164,10 @@ export function DealType(props: { setData?: Function; defData?: number }) {
   return (
     <div className="flex flex-col">
       <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
-        გარიგების ტიპი *
+        {t("filters.deal")} *
       </p>
       <div className="flex gap-3 flex-wrap pl-3 mt-4 mobile:justify-center mobile:pl-0">
-        {projectDealTypes.map((e: string, i: number) => (
+        {projectDealTypes().map((e: string, i: number) => (
           <button
             key={i}
             onClick={() => setActive(i)}
@@ -202,9 +203,9 @@ export function EstateStatus({
     defData !== undefined ? defData : null
   );
   const [DealTypes, setDealTypes] = useState<string[]>([
-    "ახალი აშენებული",
-    "ძველი აშენებული",
-    "მშენებარე",
+    t("selectors.newly_built"),
+    t("selectors.old_building"),
+    t("selectors.under_construction"),
   ]);
   const dispatch = useDispatch();
 
@@ -220,30 +221,34 @@ export function EstateStatus({
   useEffect(() => {
     if (productData.estateType == 3 || (estateType && estateType == 3)) {
       setDealTypes([
-        "სასოფლო სამეურნეო",
-        "არა სასოფლო სამეურნეო",
-        "კომერციული",
-        "სპეციალური",
-        "საინვესტიციო/სამშენებლო",
+        t("selectors.agricultural"),
+        t("selectors.not_agricultural"),
+        t("selectors.commercial"),
+        t("selectors.special"),
+        t("selectors.investment_construction"),
       ]);
     } else if (productData.estateType == 2 || (estateType && estateType == 2)) {
       setDealTypes([
-        "საოფისე",
-        "სავაჭრო",
-        "სასაწყობე",
-        "საწარმოო ფართი",
-        "უნივერსალური",
-        "სპეციალური",
-        "კვების ობიექტები",
-        "ავტოფარეხი",
-        "სარდაფი",
-        "ნახევარსარდაფი",
-        "მთლიანი შენობა",
-        "ავტოსამრეცხაო",
-        "ავტოსერვისი",
+        t("selectors.office"),
+        t("selectors.shopping"),
+        t("selectors.warehouse"),
+        t("selectors.production"),
+        t("selectors.universal"),
+        t("selectors.special"),
+        t("selectors.catering_facilities"),
+        t("selectors.garage"),
+        t("selectors.basement"),
+        t("selectors.semi_basement"),
+        t("selectors.entire_building"),
+        t("selectors.car_wash"),
+        t("selectors.car_service"),
       ]);
     } else {
-      setDealTypes(["ახალი აშენებული", "ძველი აშენებული", "მშენებარე"]);
+      setDealTypes([
+        t("selectors.newly_built"),
+        t("selectors.old_building"),
+        t("selectors.under_construction"),
+      ]);
     }
     if (defData == undefined) {
       setActive(null);
@@ -255,7 +260,7 @@ export function EstateStatus({
   return (
     <div className="flex flex-col">
       <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
-        სტატუსი *
+        {t("product.status")} *
       </p>
       <div className="flex gap-3 flex-wrap pl-3 mt-4 mobile:justify-center mobile:pl-0">
         {DealTypes.map((e, i) => (
@@ -339,12 +344,12 @@ export function EstateAddress(props: { error: boolean }) {
         </>
       ) : null}
       <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
-        მისამართი*
+        {t("selectors.location")} *
       </p>
       {locations.city == "" && props.error && (
         <div className=" rounded-xl text-pinkI bg-pinkClear py-3 px-4 text-sm tracking-wider mt-2 text-center">
           {" "}
-          სავალდებულოა შეავსოთ ქალაქის ველი
+          {t("selectors.location_required")}
         </div>
       )}
       <div
@@ -352,16 +357,17 @@ export function EstateAddress(props: { error: boolean }) {
         className="cursor-pointer rounded-lg h-[40px]  max-w-[500px] w-full gap-2 flex items-center bg-whiteMain border-2 mt-2 text-textDesc text-[14px] border-lineBg font-mainRegular px-2"
       >
         <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
-          ქალაქი: {locations.city ? locations.city : "*"}{" "}
+          {t("filters.city")}: {locations.city ? locations.city : "*"}{" "}
         </div>
         <div className="h-[50%] w-[2px] bg-lineBg "></div>
         <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
-          რაიონი: {locations.district ? locations.district : "*"}{" "}
+          {t("filters.district")}:{" "}
+          {locations.district ? locations.district : "*"}{" "}
         </div>
         <div className="h-[50%] w-[2px] bg-lineBg "></div>
 
         <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
-          უბანი: {locations.urban ? locations.urban : "*"}{" "}
+          {t("filters.urban")}: {locations.urban ? locations.urban : "*"}{" "}
         </div>
       </div>
 
@@ -373,7 +379,7 @@ export function EstateAddress(props: { error: boolean }) {
             }}
             type="text"
             className="AddProductInput"
-            placeholder="ზუსტი მისამართი"
+            placeholder={t("selectors.exact_address")}
           />
         </div>
 
@@ -381,7 +387,7 @@ export function EstateAddress(props: { error: boolean }) {
           type="text"
           ref={getInput}
           className="AddProductInput "
-          placeholder="საკადასტრო კოდი"
+          placeholder={t("product.cadastral_code")}
           onChange={(e) => {
             let filteredValue = e.target.value.replace(/[^0-9.]/g, "");
             if (filteredValue == "") {

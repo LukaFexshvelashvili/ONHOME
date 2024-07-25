@@ -37,7 +37,7 @@ export default function Buypopup(props: {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store: RootState) => store.user);
-  let offerData = ActiveOffers.filter((item) => item.status == status)[0];
+  let offerData = ActiveOffers().filter((item) => item.status == status)[0];
   const buyVip = () => {
     setError("");
     if (status > 0) {
@@ -124,7 +124,7 @@ export default function Buypopup(props: {
                 სტატუსის გაძლიერება განცხადებაზე #{props.popbuy.id}
               </p>
               <div className="flex items-center justify-center gap-5 mt-8 mobileTab:flex-col mobileTab:justify-center py-5 flex-wrap overflow-y-auto max-h-[400px]">
-                {ActiveOffers.map(
+                {ActiveOffers().map(
                   (e: TOffer, i: number) =>
                     e.status !== 0 && (
                       <OfferCard
@@ -230,7 +230,7 @@ export default function Buypopup(props: {
                     სტატუსი:{" "}
                     <span
                       style={{
-                        color: ActiveOffers.filter(
+                        color: ActiveOffers().filter(
                           (item) => item.name == request.data?.vip_name
                         )[0].mainColor,
                       }}

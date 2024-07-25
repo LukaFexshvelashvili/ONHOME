@@ -3,6 +3,7 @@ import { DropDownIcon } from "../../assets/icons/Icons";
 import { deleteParams, updateParams } from "../../hooks/routerHooks";
 import { useSearchParams } from "react-router-dom";
 import { OutsideClickClose } from "./OutsideClickClose";
+import { t } from "i18next";
 
 export default function DropDownSelector(props: {
   name: string;
@@ -66,7 +67,7 @@ export default function DropDownSelector(props: {
           >
             <input
               type="text"
-              placeholder="მოძებნა"
+              placeholder={t("filters.search")}
               onChange={(e) => setSearch(e.target.value)}
               value={search}
               className="w-full h-[35px] bg-LoginInputBg font-mainRegular text-blackMain text-[14px] px-2 tracking-wider outline-none caret-blackMain"
@@ -100,7 +101,7 @@ export default function DropDownSelector(props: {
                 ))
               ) : (
                 <div className="text-center w-full flex justify-center items-center font-mainRegular text-[14px] tracking-wider p-2 text-textHead ">
-                  შედეგი ვერ მოიძებნა
+                  {t("filters.no_result_found")}
                 </div>
               )}
             </div>

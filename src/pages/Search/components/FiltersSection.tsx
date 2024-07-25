@@ -10,6 +10,7 @@ import { PriceSlider, SelectNumbers, SelectType, SizeSlider } from "./Filters";
 import DropDownSelector from "../../../components/global/DropDownSelector";
 import SearchPlace from "../../../components/placeSelector/SearchPlace";
 import { PopupCloseIcon } from "../../../assets/icons/Icons";
+import { t } from "i18next";
 function FiltersSection(props: {
   openFilters: boolean;
   setOpenFilters: Function;
@@ -100,20 +101,20 @@ function FiltersSection(props: {
 
                     props.setSearchTitle("");
                   }}
-                  className="absolute top-3 mobile:top-0 right-6 text-buttonText px-3 py-1 rounded-md bg-main text-[12px] tracking-widest font-mainMedium cursor-pointer transition-colors hover:bg-mainHover"
+                  className="absolute top-3 mobile:top-[-10px] right-6 text-buttonText px-3 py-1 rounded-md bg-main text-[12px] tracking-widest font-mainMedium cursor-pointer transition-colors hover:bg-mainHover"
                 >
-                  ფილტრების წაშლა
+                  {t("filters.delete_filters")}
                 </button>
               ) : null}
               <p className=" text-textHead tracking-wider text-center font-mainBold ">
-                გარიგების ტიპი
+                {t("filters.deal")}
               </p>
               <div className="flex flex-wrap gap-2 justify-center">
                 <ProjectDealSelector />
               </div>
               <div className="flex flex-col items-center">
                 <p className=" text-textHead tracking-wider font-mainBold ">
-                  ადგილმდებარეობა
+                  {t("filters.location")}
                 </p>
 
                 <div
@@ -121,40 +122,42 @@ function FiltersSection(props: {
                   className="cursor-pointer rounded-lg h-[40px]  max-w-[500px] w-full gap-2 flex items-center bg-whiteMain border-2 mt-2 text-textDesc text-[14px] border-lineBg font-mainRegular px-2"
                 >
                   <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
-                    ქალაქი: {params.get("city") ? params.get("city") : "*"}{" "}
+                    {t("filters.city")}:{" "}
+                    {params.get("city") ? params.get("city") : "*"}{" "}
                   </div>
                   <div className="h-[50%] w-[2px] bg-lineBg "></div>
                   <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
-                    რაიონი:{" "}
+                    {t("filters.district")}:{" "}
                     {params.get("district") ? params.get("district") : "*"}{" "}
                   </div>
                   <div className="h-[50%] w-[2px] bg-lineBg "></div>
 
                   <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
-                    უბანი: {params.get("urban") ? params.get("urban") : "*"}{" "}
+                    {t("filters.urban")}:{" "}
+                    {params.get("urban") ? params.get("urban") : "*"}{" "}
                   </div>
                 </div>
               </div>
               <div className="flex flex-col items-center">
                 <p className=" text-textHead tracking-wider font-mainBold ">
-                  მდგომარეობა
+                  {t("filters.condition")}
                 </p>
 
                 <DropDownSelector
-                  name="არჩევა"
-                  itemsList={projectStatuses}
+                  name={t("filters.choose")}
+                  itemsList={projectStatuses()}
                   engName={"condition"}
                   changeParams={true}
                 />
               </div>
               <div className="flex flex-col items-center">
                 <p className=" text-textHead tracking-wider font-mainBold ">
-                  პროექტის ტიპი
+                  {t("filters.project")}
                 </p>
 
                 <DropDownSelector
-                  name="არჩევა"
-                  itemsList={projectTypes}
+                  name={t("filters.choose")}
+                  itemsList={projectTypes()}
                   engName={"project_type"}
                   changeParams={true}
                 />
@@ -165,17 +168,17 @@ function FiltersSection(props: {
               <SelectNumbers
                 changeParams={true}
                 engName="rooms"
-                name="ოთახები"
+                name={t("filters.rooms")}
               />
               <SelectNumbers
                 changeParams={true}
                 engName="bedrooms"
-                name="საძინებლები"
+                name={t("filters.bedrooms")}
               />
               <SelectNumbers
                 changeParams={true}
                 engName="wet_points"
-                name="სველი წერტილი"
+                name={t("filters.wet_point")}
               />
             </div>
           </div>
@@ -200,7 +203,7 @@ function ProjectDealSelector() {
   }, [params]);
   return (
     <>
-      {projectDealTypes.map((e: string, i: number) => (
+      {projectDealTypes().map((e: string, i: number) => (
         <button
           key={i}
           onClick={() => {

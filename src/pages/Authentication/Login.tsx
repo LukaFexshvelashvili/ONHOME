@@ -20,6 +20,7 @@ import { makeUserSession, mergeFavorites } from "../../hooks/serverFunctions";
 import AuthenticationHeader from "./AuthenticationHeader";
 import { Helmet } from "react-helmet";
 import { setWebLoader } from "../../store/data/webUISlice";
+import { t } from "i18next";
 
 export default function Login() {
   const user: Tuser = useSelector((store: RootState) => store.user);
@@ -76,25 +77,25 @@ export default function Login() {
               navigate("/");
             }
             if (res.data.status === 0) {
-              setError("მომხმარებლის მეილი/ნომერი ან პაროლი არასწორია");
+              setError(t("login.password_or_mail_is_incorrect"));
             }
             if (res.data.status === -1) {
-              setError("სერვერზე წარმოიშვა პრობლემა, სცადეთ მოგვიანებით");
+              setError(t("login.an_error_occurred_try_again_later"));
             }
           })
           .catch((err) => console.log(err));
       } else {
-        setError("შეავსეთ ყველა ველი");
+        setError(t("login.fill_all_inputs"));
       }
     } else {
-      setError("შეავსეთ ყველა ველი");
+      setError(t("login.fill_all_inputs"));
     }
   };
 
   return (
     <>
       <Helmet>
-        <title>ავტორიზაცია - OnHome</title>
+        <title>{t("login.title")} - OnHome</title>
         <meta name="description" lang="ka" content="ავტორიზაცია - OnHome" />
         <meta
           name="keywords"
@@ -125,7 +126,7 @@ export default function Login() {
               }  medium:pb-[100px] mobile:w-full`}
             >
               <h1 className=" text-[32px] text-textHead font-mainBold mb-10 mobile:text-[22px] mobile:mb-6">
-                ავტორიზაცია
+                {t("login.title")}
               </h1>
 
               <form
@@ -141,7 +142,7 @@ export default function Login() {
                   <MailIcon className=" h-[24px] mobile:h-[20px] aspect-square absolute left-3 [&>path]:stroke-blackMain z-[3] opacity-40" />
                   <input
                     type="text"
-                    placeholder="მეილი ან ნომერი"
+                    placeholder={t("login.email_or_number")}
                     name="email"
                     ref={mailRef}
                     className="h-full w-full rounded-normal bg-LoginInput outline-none px-3 pl-11 mobile:pl-10 text-textDesc tracking-wider text-Asmall mobile:text-[12px] transition-colors focus:bg-LoginInputActive"
@@ -151,7 +152,7 @@ export default function Login() {
                   <LockIcon className="z-[3] h-[24px] mobile:h-[20px] aspect-square absolute left-3 [&>path]:stroke-blackMain opacity-40" />
                   <input
                     type={passwordShow ? "text" : "password"}
-                    placeholder="პაროლი"
+                    placeholder={t("login.password")}
                     name="password"
                     ref={passwordRef}
                     className="h-full w-full rounded-normal bg-LoginInput outline-none px-3 pl-11 mobile:pl-10 text-textDesc tracking-wider text-Asmall mobile:text-[12px] transition-colors focus:bg-LoginInputActive"
@@ -184,20 +185,22 @@ export default function Login() {
                       onClick={() => setRemember((state) => !state)}
                       className="cursor-pointer  relative z-10"
                     >
-                      დამახსოვრება
+                      {t("login.remember")}
                     </p>
                   </div>
                   <p className="text-main text-Asmall font-mainBold tracking-wider mobile:text-[12px] mobile:invisible cursor-pointer relative z-10">
-                    <Link to={"/ForgotPassword"}>პაროლის აღდგენა</Link>
+                    <Link to={"/ForgotPassword"}>
+                      {t("login.password_recover")}
+                    </Link>
                   </p>
                 </div>
                 <button className="linearButton mobile:mt-4  relative z-10 font-mainBold text-buttonText h-[40px] w-[200px] mobile:h-[36px] mobile:w-[180px] mobile:text-[14px] rounded-normal tracking-wider transition-shadow hover:shadow-[0px_6px_15px_var(--mainClear)]">
-                  შესვლა
+                  {t("login.log_in")}
                 </button>
               </form>
 
               <p className="mt-8  relative z-10 text-textDesc text-Asmall font-mainBold tracking-wider mobile:mt-6 mobile:text-[12px]">
-                არ გაქვს ანგარიში?{" "}
+                {t("login.dont_have_an_account")}{" "}
                 <span className="text-main cursor-pointer">
                   <Link
                     onClick={() => {
@@ -208,12 +211,12 @@ export default function Login() {
                     }}
                     to="/Register"
                   >
-                    რეგისტრაცია
+                    {t("login.register")}
                   </Link>
                 </span>
               </p>
               <p className="text-main hidden relative z-10 mobile:block text-Asmall font-mainBold mt-3 tracking-wider mobile:text-[12px] cursor-pointer">
-                პაროლის აღდგენა
+                {t("login.password_recover")}
               </p>
             </div>
             <div className="absolute bottom-0 z-0 pointer-events-none w-full">

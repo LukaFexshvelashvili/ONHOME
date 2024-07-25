@@ -19,6 +19,7 @@ import HoverTitle from "../../../components/global/HoverTitle";
 import { setWebLoader } from "../../../store/data/webUISlice";
 import { image_url_start } from "../../../hooks/axiosCall";
 import { FormatTime } from "../../../components/global/Addons";
+import { t } from "i18next";
 
 export default function ProductBanner(props: {
   setPopbuy: Function;
@@ -29,7 +30,7 @@ export default function ProductBanner(props: {
   setEditBlock: Function;
 }) {
   const dispatch = useDispatch();
-  const vipOffer = ActiveOffers.filter(
+  const vipOffer = ActiveOffers().filter(
     (item) => item.id == props.productData.estate_vip
   )[0];
   return (
@@ -60,7 +61,7 @@ export default function ProductBanner(props: {
             : props.productData.estate_title}
         </h3>
         <p className="text-[13px] text-textDesc">
-          განახლდა:{" "}
+          {t("productBanner.update")}:{" "}
           <span className="text-[13px] text-textHeadBlack">
             {" "}
             {props.productData.update_time
@@ -69,7 +70,7 @@ export default function ProductBanner(props: {
           </span>
         </p>{" "}
         <p className="text-[13px] text-textDesc">
-          სტატუსი:{" "}
+          {t("productBanner.status")}:{" "}
           <span
             style={{
               color: vipOffer.mainColor,
@@ -80,7 +81,7 @@ export default function ProductBanner(props: {
         </p>
         {vipOffer.id !== 0 ? (
           <p className="text-[13px] text-textDesc mb-2">
-            სტატუსის ვადა:{" "}
+            {t("productBanner.status_expire")}:{" "}
             <span className="text-[13px] text-textHeadBlack">
               {" "}
               {FormatTime(props.productData.estate_vip_expire.toString())}
@@ -105,15 +106,15 @@ export default function ProductBanner(props: {
       <div className="flex items-center gap-3 ml-auto mediumSmallXl:flex-wrap mediumSmallXl:justify-end small:justify-start small:w-full small:mt-5">
         {props.productData.macler_status == 1 ? (
           <button className="bg-maclerMainClear pointer-events-none mobile:mt-5  text-maclerMain h-[35px] w-[200px] rounded-md text-[13px] font-mainBold tracking-wide">
-            მოთხოვნა გაგზავნილია
+            {t("productBanner.request_sended")}
           </button>
         ) : props.productData.macler_status == 2 ? (
           <button className="bg-redClear pointer-events-none mobile:mt-5  text-redI h-[35px] w-[220px] rounded-md text-[13px] font-mainMedium tracking-wider">
-            მოთხოვნა უარყოფილია
+            {t("productBanner.request_rejected")}
           </button>
         ) : props.productData.macler_status == 3 ? (
           <button className="bg-maclerMainClear pointer-events-none mobile:mt-5  text-maclerMain h-[35px] w-[240px] rounded-md text-[13px] font-mainBold tracking-wide">
-            მოთხოვნა დადასტურებულია
+            {t("productBanner.request_approved")}
           </button>
         ) : null}
 
@@ -125,7 +126,7 @@ export default function ProductBanner(props: {
                 className="group relative bg-purpleClear text-blueI h-[35px] aspect-square rounded-md  transition-colors p-2 hover:bg-purpleHover flex justify-center items-center"
               >
                 <LightningIcon className="h-full aspect-square [&>path]:fill-purpleI" />
-                <HoverTitle title="გაძლიერება" />
+                <HoverTitle title={t("productBanner.boost")} />
               </button>
             ) : (
               <button
@@ -150,7 +151,7 @@ export default function ProductBanner(props: {
           className="group relative bg-orangeClear text-blueI h-[35px] aspect-square rounded-md  transition-colors p-2 hover:bg-orangeHover flex justify-center items-center"
         >
           <EditIcon className="h-full aspect-square [&>path]:fill-orangeI" />
-          <HoverTitle title="რედაქტირება" />
+          <HoverTitle title={t("productBanner.edit")} />
         </button>
         {props.productData.product_status !== 2 ? (
           props.productData.product_status !== 1 ? (
@@ -158,9 +159,8 @@ export default function ProductBanner(props: {
               onClick={() =>
                 props.setPopAlert({
                   open: true,
-                  headText: "განცხადების დამალვა",
-                  descText:
-                    "ნამდვილად გსურთ დამალოთ განცხადება? (თქვენ ნებისმიერ დროს შეგიძლიათ გახადოთ ის ხილვადი)",
+                  headText: t("productBanner.hide_form_title"),
+                  descText: t("productBanner.hide_form_description"),
                   nextFunction: () => {
                     hideProduct(
                       props.userData,
@@ -181,15 +181,15 @@ export default function ProductBanner(props: {
               className="group relative bg-blueClear text-blueI h-[35px] aspect-square rounded-md  transition-colors p-2 hover:bg-blueHover flex justify-center items-center"
             >
               <LoginEyeCloseIcon className="h-full aspect-square [&>path]:stroke-blueI" />
-              <HoverTitle title="დამალვა" />
+              <HoverTitle title={t("productBanner.hide")} />
             </button>
           ) : (
             <button
               onClick={() =>
                 props.setPopAlert({
                   open: true,
-                  headText: "განცხადების გამოჩენა",
-                  descText: "ნამდვილად გსურთ გამოაჩინოთ განცხადება?",
+                  headText: t("productBanner.show_form_title"),
+                  descText: t("productBanner.show_form_description"),
                   nextFunction: () => {
                     hideProduct(
                       props.userData,
@@ -210,7 +210,7 @@ export default function ProductBanner(props: {
               className="group relative bg-blueI text-blueI h-[35px] aspect-square rounded-md  transition-colors p-2 hover:bg-blueLightI flex justify-center items-center"
             >
               <LoginEyeIcon className="h-full aspect-square [&>path]:fill-buttonText" />
-              <HoverTitle title="გამოჩენა" />
+              <HoverTitle title={t("productBanner.show")} />
             </button>
           )
         ) : null}
@@ -218,9 +218,8 @@ export default function ProductBanner(props: {
           onClick={() => {
             props.setPopAlert({
               open: true,
-              headText: "განცხადების წაშლა",
-              descText:
-                "ნამდვილად გსურთ განცხადების წაშლა? ( ქმედება უკან ვეღარ დაბრუნდება )",
+              headText: t("productBanner.delete_form_title"),
+              descText: t("productBanner.delete_form_description"),
               nextFunction: () => {
                 dispatch(setWebLoader({ active: true, opacity: true }));
 
@@ -244,7 +243,7 @@ export default function ProductBanner(props: {
           className="group relative bg-redClear text-redI h-[35px] aspect-square rounded-md  transition-colors p-2 hover:bg-redHover flex justify-center items-center"
         >
           <TrashIcon className="h-full aspect-square" />
-          <HoverTitle title="წაშლა" />
+          <HoverTitle title={t("productBanner.delete")} />
         </button>
       </div>
     </div>

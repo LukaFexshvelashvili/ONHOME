@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { Helmet } from "react-helmet";
 import PopEditBlock from "./components/PopEditBlock";
+import { t } from "i18next";
 
 export type TProductData = {
   id: number;
@@ -122,27 +123,27 @@ function MyProducts() {
   }, [choice, saveProducts.current]);
 
   const choices: string[] = [
-    `აქტიური (${
+    `${t("my_products.active")} (${
       saveProducts.current
         ? saveProducts.current.filter(
             (item: TProductData) => item.product_status == 0 && item.banned == 0
           ).length
         : ""
     })`,
-    `დამალული (${
+    `${t("my_products.hidden")} (${
       saveProducts.current
         ? saveProducts.current.filter(
             (item: TProductData) => item.product_status == 1 && item.banned == 0
           ).length
         : ""
     })`,
-    `დაბლოკილი (${
+    `${t("my_products.blocked")} (${
       saveProducts.current
         ? saveProducts.current.filter((item: TProductData) => item.banned == 1)
             .length
         : ""
     })`,
-    `სააგენტოს მოთხოვნები (${
+    `${t("my_products.agency_requests")} (${
       saveProducts.current
         ? saveProducts.current.filter(
             (item: TProductData) => item.macler_status !== 0 && item.banned == 0
@@ -154,7 +155,7 @@ function MyProducts() {
   return (
     <>
       <Helmet>
-        <title>ჩემი განცხადებები - OnHome</title>
+        <title>{t("my_products.my_forms")} - OnHome</title>
       </Helmet>
       {editBlock.id && editBlock.productData ? (
         <PopEditBlock
@@ -187,7 +188,7 @@ function MyProducts() {
       ) : null}
       <div className=" rounded-section text-textHead shadow-sectionShadow bg-whiteMain relative flex px-7 py-5 flex-col gap-3  mobile:px-3">
         <h1 className="mobileSmall:text-[14px] mobile:text-center">
-          ჩემი განცხადებები
+          {t("my_products.my_forms")}
         </h1>
         <div className="flex gap-3 items-center flex-wrap mobile:justify-center">
           {choices.map((e: string, i: number) =>
@@ -220,7 +221,7 @@ function MyProducts() {
         </div>
         <input
           type="text"
-          placeholder="მოძებნა  ( ID ან სათაური )"
+          placeholder={t("my_products.search")}
           className=" text-[14px] h-[40px] w-full bg-LoginInput outline-none rounded-lg px-4 transition-colors focus:bg-LoginInputActive"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -231,7 +232,8 @@ function MyProducts() {
         {myProducts && search.length == 0 ? (
           myProducts.length !== 0 && (
             <p className="px-4 text-[13px] text-textDesc my-1">
-              სულ {myProducts.length} განცხადება
+              {t("my_products.found")} {myProducts.length}{" "}
+              {t("my_products.form")}
             </p>
           )
         ) : myProducts &&
@@ -241,7 +243,7 @@ function MyProducts() {
               item.estate_title.includes(search)
           ).length !== 0 ? (
           <p className="px-4 text-[13px] text-textDesc my-1">
-            სულ{" "}
+            {t("my_products.found")}{" "}
             {
               myProducts.filter(
                 (item: TProductData) =>
@@ -249,11 +251,11 @@ function MyProducts() {
                   item.estate_title.includes(search)
               ).length
             }{" "}
-            განცხადება
+            {t("my_products.form")}
           </p>
         ) : (
           <p className="px-4 text-[13px] text-textDesc my-1">
-            მსგავსი განცხადება ვერ მოიძებნა
+            {t("my_products.no_form_found")}
           </p>
         )}
         <div className="flex flex-col  max-h-[550px] overflow-hidden overflow-y-auto">
@@ -274,12 +276,12 @@ function MyProducts() {
               choice !== choices.length - 1 ? (
                 <div>
                   <p className="px-4 text-[15px] text-textDesc my-2 text-center">
-                    განცხადებები ვერ მოიძებნა
+                    {t("my_products.no_form_found")}
                   </p>
                   <div className="flex justify-center my-3 mt-5">
                     <Link to={"/addProduct"} className=" rounded-lg">
                       <button className=" block text-buttonText bg-main rounded-lg text-[14px] px-4 py-2 tracking-wide">
-                        განცხადების დამატება
+                        {t("my_products.add_form")}
                       </button>
                     </Link>
                   </div>
@@ -287,12 +289,12 @@ function MyProducts() {
               ) : (
                 <div>
                   <p className="px-4 text-[15px] text-textDesc my-2 text-center">
-                    სააგენტოს მოთხოვნები ვერ მოიძებნა
+                    {t("my_products.no_request_found")}
                   </p>
                   <div className="flex justify-center my-3 mt-5">
                     <Link to={"/agencyChoose"} className=" rounded-lg">
                       <button className=" block text-buttonText bg-maclerMain rounded-lg text-[14px] px-4 py-2 tracking-wide">
-                        მოთხოვნის გაგზავნა
+                        {t("my_products.send_request")}
                       </button>
                     </Link>
                   </div>

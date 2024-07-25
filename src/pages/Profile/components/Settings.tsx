@@ -3,6 +3,7 @@ import { useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { setDarkMode, setMainColor } from "../../../store/data/webUISlice";
+import { t } from "i18next";
 
 export default function Settings() {
   const dispatch = useDispatch();
@@ -23,9 +24,11 @@ export default function Settings() {
   }, [UISettings]);
   return (
     <div className=" rounded-section shadow-sectionShadow bg-whiteMain relative flex px-7 py-5 flex-col gap-3">
-      <h2 className="text-textHeadCard mb-2 font-mainBold">ვიზუალი</h2>
+      <h2 className="text-textHeadCard mb-2 font-mainBold">{t("global.UI")}</h2>
       <div className="flex items-center justify-between">
-        <p className=" text-textDesc mr-3 text-[14px] ">ღამის რეჟიმი</p>
+        <p className=" text-textDesc mr-3 text-[14px] ">
+          {t("navbar.dark_mode")}
+        </p>
         <div
           onClick={() => {
             setWebDarkMode((state) => {
@@ -46,9 +49,9 @@ export default function Settings() {
       </div>
       <div className="flex items-center justify-between">
         <p className=" text-textDesc mr-4 text-[14px] ">
-          მთავარი ფერის დაყენება
+          {t("settings.choose_main_color")}
           <span className="text-[12px] text-textDescCard ml-2">
-            (BETA VERSION)
+            ({t("settings.beta_version")})
           </span>
         </p>
         <div className="flex items-center gap-2">

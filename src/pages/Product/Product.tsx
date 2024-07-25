@@ -23,6 +23,7 @@ import {
   setProductCache,
 } from "../../components/cache/cacheFunctions";
 import { Helmet } from "react-helmet";
+import { t } from "i18next";
 
 export type TproductPage = {
   productData: TProductData;
@@ -138,17 +139,17 @@ export default function Product() {
               <div className="flex-[2] flex flex-col gap-3">
                 <div className=" rounded-block bg-whiteMain p-4">
                   <p className=" text-[15px] font-mainBold text-textHeadCard">
-                    აღწერა
+                    {t("product.description")}
                   </p>
                   <p className=" text-[14px] font-mainSemiBold text-textDescCard leading-[23px] mt-2 tracking-normal">
                     {pageData.productData.estate_description &&
                     pageData.productData.estate_description !== "null"
                       ? pageData.productData.estate_description.slice(0, 600)
-                      : "აღწერა არ არის დამატებული"}
+                      : t("product.no_description")}
                   </p>
                   {pageData.productData.estate_ipcode !== "null" && (
                     <p className="text-[14px] font-mainSemiBold text-textDesc leading-[23px] mt-2 tracking-normal">
-                      საკადასტრო კოდი:{" "}
+                      {t("product.cadastral_code")}:{" "}
                       <span className="text-main underline cursor-pointer">
                         {" "}
                         {pageData.productData.estate_ipcode}
@@ -158,12 +159,12 @@ export default function Product() {
                 </div>
                 <div className=" rounded-block bg-whiteMain p-4">
                   <p className=" text-[15px] font-mainBold text-textHeadCard">
-                    დამატებითი ინფორმაცია
+                    {t("product.more_info")}
                   </p>
                   <div className="flex items-start justify-center gap-3 flex-col flex-wrap max-h-[150px] my-[25px] pl-5 medium:max-h-none medium:flex-row ">
                     {JSON.parse(pageData.productData.estate_addons) !== null
                       ? pageData.productData.estate_type == 3
-                        ? productAddonsListForLand.map(
+                        ? productAddonsListForLand().map(
                             (item: TProductAddon, i: number) => (
                               <div
                                 key={i}
@@ -184,7 +185,7 @@ export default function Product() {
                             )
                           )
                         : pageData.productData.estate_type == 4
-                        ? productAddonsListForHotel.map(
+                        ? productAddonsListForHotel().map(
                             (item: TProductAddon, i: number) => (
                               <div
                                 key={i}
@@ -204,11 +205,11 @@ export default function Product() {
                               </div>
                             )
                           )
-                        : productAddonsList.map(
+                        : productAddonsList().map(
                             (item: TProductAddon, i: number) => {
                               if (
                                 pageData.productData.estate_type !== 0 &&
-                                item.name == "კანალიზაცია"
+                                item.name == t("addons.sewage")
                               ) {
                                 return null;
                               }
@@ -240,7 +241,7 @@ export default function Product() {
                 <AdBanner3 />
                 <div className=" rounded-block bg-whiteMain p-4">
                   <p className=" text-[15px] font-mainBold text-textHeadCard">
-                    ახლოს მდებარეობს
+                    {t("product.close_places")}
                   </p>
                   <div className="flex gap-3 flex-wrap mt-5 mobile:justify-center">
                     {JSON.parse(pageData.productData.estate_close_places) !==
@@ -274,7 +275,7 @@ export default function Product() {
               {pageData.sameProducts && (
                 <>
                   <p className="p-2 text-[16px] font-mainBold text-textHeadCard mb-1">
-                    მსგავსი განცხადებები
+                    {t("product.similar_forms")}
                   </p>
 
                   <CardSlider products={pageData.sameProducts} />

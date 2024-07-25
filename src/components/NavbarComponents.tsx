@@ -160,6 +160,65 @@ export function ProfileBar({
 }) {
   const dispatch = useDispatch();
 
+  const unloggedButtons: TProfileButton[] = [
+    {
+      link: "/Login",
+      name: t("navbar.log_in"),
+      icon: (
+        <LogoutIcon className="h-[20px] aspect-square stroke-textHead mr-2" />
+      ),
+    },
+
+    {
+      link: "ChangeDarkTheme",
+      name: t("navbar.dark_mode"),
+      icon: <MoonIcon className="h-[20px] aspect-square fill-textHead mr-2" />,
+    },
+  ];
+
+  const profileButtons: TProfileButton[] = [
+    {
+      link: "/Profile",
+      name: t("navbar.my_profile"),
+      icon: (
+        <UserLinearIcon className=" h-[20px] aspect-square fill-textHead mr-2" />
+      ),
+    },
+    {
+      link: "/Profile/MyProducts",
+      name: t("navbar.my_forms"),
+      icon: (
+        <DocumentsIcon className=" h-[20px] aspect-square stroke-textHead mr-2" />
+      ),
+    },
+    {
+      link: "ChangeDarkTheme",
+      name: t("navbar.dark_mode"),
+      icon: <MoonIcon className=" h-[20px] aspect-square fill-textHead mr-2" />,
+    },
+    {
+      link: "/Profile/Settings",
+      name: t("navbar.settings"),
+      icon: (
+        <SettingsIcon className=" h-[20px] aspect-square [&>path]:stroke-textHead mr-2" />
+      ),
+    },
+    {
+      link: "/Contact",
+      name: t("navbar.contact"),
+      icon: (
+        <MessageIcon className=" h-[20px] aspect-square stroke-textHead mr-2" />
+      ),
+    },
+    {
+      link: "/Logout",
+      name: t("navbar.log_out"),
+      icon: (
+        <LogoutIcon className=" h-[20px] aspect-square stroke-textHead mr-2" />
+      ),
+    },
+  ];
+
   const popupBlock = useRef<null | HTMLDivElement>(null);
   useEffect(() => {
     function handleClickOutside(event: any) {
@@ -281,62 +340,3 @@ type TProfileButton = {
   icon: JSX.Element;
   link: string;
 };
-
-const unloggedButtons: TProfileButton[] = [
-  {
-    link: "/Login",
-    name: t("navbar.log_in"),
-    icon: (
-      <LogoutIcon className="h-[20px] aspect-square stroke-textHead mr-2" />
-    ),
-  },
-
-  {
-    link: "ChangeDarkTheme",
-    name: t("navbar.dark_mode"),
-    icon: <MoonIcon className="h-[20px] aspect-square fill-textHead mr-2" />,
-  },
-];
-
-const profileButtons: TProfileButton[] = [
-  {
-    link: "/Profile",
-    name: t("navbar.my_profile"),
-    icon: (
-      <UserLinearIcon className=" h-[20px] aspect-square fill-textHead mr-2" />
-    ),
-  },
-  {
-    link: "/Profile/MyProducts",
-    name: t("navbar.my_forms"),
-    icon: (
-      <DocumentsIcon className=" h-[20px] aspect-square stroke-textHead mr-2" />
-    ),
-  },
-  {
-    link: "ChangeDarkTheme",
-    name: t("navbar.dark_mode"),
-    icon: <MoonIcon className=" h-[20px] aspect-square fill-textHead mr-2" />,
-  },
-  {
-    link: "/Profile/Settings",
-    name: t("navbar.settings"),
-    icon: (
-      <SettingsIcon className=" h-[20px] aspect-square [&>path]:stroke-textHead mr-2" />
-    ),
-  },
-  {
-    link: "/Contact",
-    name: t("navbar.contact"),
-    icon: (
-      <MessageIcon className=" h-[20px] aspect-square stroke-textHead mr-2" />
-    ),
-  },
-  {
-    link: "/Logout",
-    name: t("navbar.log_out"),
-    icon: (
-      <LogoutIcon className=" h-[20px] aspect-square stroke-textHead mr-2" />
-    ),
-  },
-];

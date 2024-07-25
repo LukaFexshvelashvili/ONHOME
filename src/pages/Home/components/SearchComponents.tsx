@@ -148,7 +148,7 @@ export function ProjectDealSelectorSearch(props: {
 
   return (
     <>
-      {projectDealTypes.map((e: string, i: number) => (
+      {projectDealTypes().map((e: string, i: number) => (
         <button
           key={i}
           onClick={() => {

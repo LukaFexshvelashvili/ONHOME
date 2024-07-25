@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { TOffer } from "../../assets/lists/offers";
 import { updateVip } from "../../store/data/addProductSlice";
+import { t } from "i18next";
 
 export default function OfferCard(props: {
   offerData: TOffer;
@@ -41,12 +42,12 @@ export default function OfferCard(props: {
           style={{ color: props.offerData.mainColor }}
         >
           {props.offerData.price !== 0
-            ? `1 დღე - ${
+            ? `1 ${t("offers.day")} - ${
                 props.offerData.sale
                   ? (props.offerData.price - props.offerData.sale).toFixed(2)
                   : props.offerData.price
               }₾`
-            : "უფასო"}
+            : t("offers.free")}
           {props.offerData.sale ? (
             <span className="  line-through opacity-30 ml-2">
               {props.offerData.price.toFixed(2)}₾
@@ -76,7 +77,9 @@ export default function OfferCard(props: {
             dispatch(updateVip(props.offerData.status));
           }}
         >
-          {props.activeStatus == props.offerData.status ? "არჩეული" : "არჩევა"}
+          {props.activeStatus == props.offerData.status
+            ? t("offers.choosed")
+            : t("offers.choose")}
         </button>
       </div>
     </div>

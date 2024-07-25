@@ -27,6 +27,7 @@ import {
   getType,
 } from "../../../components/global/getTypes";
 import { FormatTime } from "../../../components/global/Addons";
+import { t } from "i18next";
 export default function ProductSideBar({
   pageData,
 }: {
@@ -95,7 +96,7 @@ export default function ProductSideBar({
             </div>{" "}
           </div>
           <div className=" flex text-textHead items-center h-[26px] font-mainSemiBold tracking-wider rounded-lg text-[13px] mobile:mx-auto mobileSmall:text-[12px] mobileSmall:h-[28px]">
-            ტიპი:{" "}
+            {t("product.type")}:{" "}
             <Link
               className="ml-2 "
               to={"/search?estate_type=" + pageData.productData.estate_type}
@@ -107,7 +108,7 @@ export default function ProductSideBar({
           </div>{" "}
           {pageData.productData.estate_district ? (
             <div className=" flex text-textHead items-center h-[26px] font-mainSemiBold tracking-wider rounded-lg text-[13px] mobile:mx-auto mobileSmall:text-[12px] mobileSmall:h-[28px]">
-              რაიონი:{" "}
+              {t("product.district")}:{" "}
               <Link
                 className="ml-2 "
                 to={"/search?district=" + pageData.productData.estate_district}
@@ -120,7 +121,7 @@ export default function ProductSideBar({
           ) : null}
           {pageData.productData.estate_urban ? (
             <div className=" flex text-textHead items-center h-[26px] font-mainSemiBold tracking-wider rounded-lg text-[13px] mobile:mx-auto mobileSmall:text-[12px] mobileSmall:h-[28px]">
-              უბანი:{" "}
+              {t("product.urban")}:{" "}
               <Link
                 className="ml-2 "
                 to={"/search?urban=" + pageData.productData.estate_urban}
@@ -133,7 +134,7 @@ export default function ProductSideBar({
           ) : null}
           {pageData.productData.estate_land_size ? (
             <div className=" flex text-textHead items-center h-[26px] font-mainSemiBold tracking-wider rounded-lg text-[13px] mobile:mx-auto mobileSmall:text-[12px] mobileSmall:h-[28px]">
-              ეზოს ფართი:{" "}
+              {t("product.yard_area")}:{" "}
               <span className="ml-2 text-textDesc ">
                 {pageData.productData.estate_land_size}
               </span>
@@ -141,9 +142,9 @@ export default function ProductSideBar({
           ) : null}
           {pageData.productData.estate_condition ? (
             <div className=" flex text-textHead items-center h-[30px] font-mainSemiBold tracking-wider rounded-lg text-Asmall mobile:mx-auto mobileSmall:text-[12px] mobileSmall:h-[28px]">
-              მდგომარეობა:{" "}
+              {t("product.condition")}:{" "}
               <span className="ml-2 text-main ">
-                {projectStatuses[pageData.productData.estate_condition]}
+                {projectStatuses()[pageData.productData.estate_condition]}
               </span>
             </div>
           ) : null}
@@ -197,7 +198,7 @@ export default function ProductSideBar({
                     pageData.userData.mobile.slice(5, 7) +
                     " " +
                     pageData.userData.mobile.slice(7, 9) +
-                    " დარეკვა"}
+                    ` ${t("product.call")}`}
                 </button>
               </Link>
             ) : (
@@ -209,7 +210,7 @@ export default function ProductSideBar({
                 {pageData.userData.mobile.slice(0, 3) +
                   " " +
                   pageData.userData.mobile.slice(3, 5) +
-                  " ** ** ნომრის ჩვენება"}
+                  ` ** ** ${t("product.show_number")}`}
               </button>
             )}{" "}
             <div className="flex-1 ">
@@ -221,7 +222,7 @@ export default function ProductSideBar({
                       {pageData.userData.name}
                     </p>
                     <p className="text-Asmallest text-textDescCard font-mainBold leading-4 mobile:text-[13px] mobileSmall:text-[12px] mobile:leading-[18px]">
-                      ყველა განცხადების ნახვა
+                      {t("product.see_all_forms")}
                     </p>
                   </div>
                 </div>
@@ -235,7 +236,7 @@ export default function ProductSideBar({
           <SquareFrameIcon className=" h-[25px] aspect-square [&>path]:stroke-textHeadCard" />
           <div className="flex flex-col ml-3">
             <p className=" text-textDesc text-Asmaller font-mainBold tracking-wider">
-              ფართი
+              {t("product.space")}
             </p>
             <p className="text-textHeadCard text-Asmall font-mainBold ml-1 tracking-wider">
               {pageData.productData.estate_size}{" "}
@@ -247,7 +248,7 @@ export default function ProductSideBar({
           <RoomIcon className=" h-[26px] aspect-auto [&>path]:fill-textHeadCard translate-y-[2px]" />
           <div className="flex flex-col ml-3">
             <p className=" text-textDesc text-Asmaller font-mainBold tracking-wider">
-              ოთახები
+              {t("product.rooms")}
             </p>
             <p className="text-textHeadCard text-Asmall font-mainBold ml-1 tracking-wider">
               {pageData.productData.estate_rooms}
@@ -258,7 +259,7 @@ export default function ProductSideBar({
           <BedIcon className="min-w-[26px] h-[26px] aspect-square [&>path]:fill-textHeadCard" />
           <div className="flex flex-col ml-3">
             <p className=" text-textDesc text-Asmaller font-mainBold tracking-wider">
-              საძინებელი
+              {t("product.bedrooms")}
             </p>
             <p className="text-textHeadCard text-Asmall font-mainBold ml-1 tracking-wider">
               {pageData.productData.estate_bedrooms}
@@ -270,7 +271,7 @@ export default function ProductSideBar({
             <StairsIcon className=" h-[25px] aspect-square [&>path]:stroke-textHeadCard" />
             <div className="flex flex-col ml-3">
               <p className=" text-textDesc text-Asmaller font-mainBold tracking-wider">
-                სართული
+                {t("product.floor")}
               </p>
               <p className="text-textHeadCard text-Asmall font-mainBold ml-1 tracking-wider">
                 {pageData.productData.estate_floor}{" "}
@@ -289,7 +290,7 @@ export default function ProductSideBar({
       <div className="bg-whiteMain rounded-block h-[70px] flex items-center justify-between  shadow-sectionShadow mobile:h-auto mobile:p-3 mobile:flex-wrap mobile:justify-center mobile:gap-y-3">
         <div className="flex flex-col mobile:text-center px-4 gap-[2px]">
           <p className=" text-textDesc text-Asmaller font-mainSemiBold tracking-wider">
-            მდებარეობა
+            {t("product.location")}
           </p>
           <p className="text-textHeadCard text-[13px] font-mainBold tracking-wider">
             {pageData.productData.estate_city}
@@ -297,7 +298,7 @@ export default function ProductSideBar({
         </div>
         <div className=" flex flex-col mobile:text-center px-4 gap-[2px]">
           <p className=" text-textDesc text-Asmaller font-mainSemiBold tracking-wider">
-            პროექტი
+            {t("product.project")}
           </p>
           <p className="text-textHeadCard text-[13px] font-mainBold tracking-wider">
             {getProject(pageData.productData.estate_project)}
@@ -305,7 +306,7 @@ export default function ProductSideBar({
         </div>
         <div className=" flex flex-col mobile:text-center px-4 gap-[2px]">
           <p className=" text-textDesc text-Asmaller font-mainSemiBold tracking-wider">
-            სტატუსი
+            {t("product.status")}
           </p>
           <p className="text-textHeadCard text-[13px] font-mainBold tracking-wider">
             {pageData.productData.estate_status}
@@ -324,7 +325,7 @@ export default function ProductSideBar({
               favorited ? "[&>path]:fill-orangeI" : "[&>path]:fill-transparent"
             } `}
           />{" "}
-          {favorited ? "შენახულია" : "შენახვა"}
+          {favorited ? t("product.saved") : t("product.save")}
         </div>
         <div
           onClick={() =>
@@ -338,7 +339,7 @@ export default function ProductSideBar({
           className=" shadow-sectionShadow flex items-center px-3 pr-6 h-[40px] w-auto bg-whiteMain rounded-[8px] text-[13px] text-textHeadCard tracking-wider cursor-pointer transition-colors hover:bg-whiteHover"
         >
           <ShareIcon className="h-[16px] aspect-square [&>path]:stroke-main mr-3" />{" "}
-          გაზიარება
+          {t("product.share")}
         </div>
         <div
           onClick={() =>
@@ -353,7 +354,7 @@ export default function ProductSideBar({
           className=" shadow-sectionShadow flex items-center px-3 pr-6 h-[40px] w-auto bg-whiteMain rounded-[8px] text-[13px] text-textHeadCard tracking-wider cursor-pointer transition-colors hover:bg-whiteHover"
         >
           <ReportIcon className="h-[16px] aspect-square [&>path]:fill-reportIcon mr-3" />{" "}
-          გასაჩივრება
+          {t("product.report")}
         </div>
       </div>
     </div>

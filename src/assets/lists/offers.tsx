@@ -1,3 +1,5 @@
+import { t } from "i18next";
+
 export type TOffer = {
   id: number;
   status: number;
@@ -10,12 +12,12 @@ export type TOffer = {
   price: number;
 };
 
-export const ActiveOffers = [
+export const ActiveOffers = () => [
   {
     id: 0,
     status: 0,
-    name: "უფასო",
-    benefits: ["განთავსება საერთო სიაში"],
+    name: t("offers.free"),
+    benefits: [t("offers.add_in_common_list")],
     mainColor: "var(--main)",
 
     secondColor: "var(--mainClear)",
@@ -27,7 +29,7 @@ export const ActiveOffers = [
     id: 3,
     status: 3,
     name: "AUTO",
-    benefits: ["ავტომატური განახლება", "მოძებნისას მაღალი რანკი"],
+    benefits: [t("offers.auto.condition1"), t("offers.auto.condition2")],
     mainColor: "#0fb196",
 
     secondColor: "rgba(15, 177, 150, 0.15)",
@@ -40,9 +42,9 @@ export const ActiveOffers = [
     status: 1,
     name: "VIP",
     benefits: [
-      "მარკინგი",
-      "სპეციალურ ადგილებზე გამოჩენა",
-      "ძებნისას მაღალი რანკი",
+      t("offers.vip.condition1"),
+      t("offers.vip.condition2"),
+      t("offers.vip.condition3"),
     ],
     mainColor: "#FF9900",
 
@@ -57,11 +59,11 @@ export const ActiveOffers = [
     status: 2,
     name: "VIP+",
     benefits: [
-      "მარკინგი",
-      "სპეციალურ ადგილებზე გამოჩენა",
-      "ძებნისას მაღალი რანკი",
-      "ბარათის ფერის გამორჩევა",
-      "განცხადებების დეტალურ გვერდებზე გამოჩენა",
+      t("offers.vip+.condition1"),
+      t("offers.vip+.condition2"),
+      t("offers.vip+.condition3"),
+      t("offers.vip+.condition4"),
+      t("offers.vip+.condition5"),
     ],
     mainColor: "#ff005c",
 

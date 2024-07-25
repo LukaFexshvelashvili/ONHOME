@@ -26,6 +26,7 @@ import { Helmet } from "react-helmet";
 import CookieAgreement from "./pages/Profile/components/CookieAgreement";
 import NotFound from "./pages/NotFound";
 import AddProduct from "./pages/AddProduct/AddProduct";
+import { t } from "i18next";
 
 const SuspendedAccount = lazy(() => import("./pages/SuspendedAccount"));
 const Notifications = lazy(
@@ -114,7 +115,7 @@ function App() {
   return (
     <>
       <Helmet>
-        <title>უძრავი ქონების ყიდვა, გაყიდვა, გაქირავება - OnHome.ge</title>
+        <title>{t("seo.title")}</title>
 
         <meta
           name="description"

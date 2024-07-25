@@ -21,17 +21,17 @@ export default function AgencyService() {
   const services: Tservice[] = [
     {
       icon: <ClientContact className="h-[30px] mobileTab:h-[22px]" />,
-      title: "კლიენტთან მოლაპარაკება",
+      title: t("homePage.agencyService.service3"),
       color: "#3DBE00",
     },
     {
       icon: <MediaFiles className="h-[30px] mobileTab:h-[22px]" />,
-      title: "სოციალურ ქსელებში განთავსება",
+      title: t("homePage.agencyService.service1"),
       color: "#3DBE00",
     },
     {
       icon: <Speedometer className="h-[30px] mobileTab:h-[22px] " />,
-      title: "სწრაფი მომსახურება",
+      title: t("homePage.agencyService.service4"),
       color: "#3DBE00",
     },
     {
@@ -40,7 +40,7 @@ export default function AgencyService() {
           VIP+
         </div>
       ),
-      title: "VIP+ სტატუსი",
+      title: t("homePage.agencyService.service2"),
       color: "#ff005c",
     },
   ];
@@ -107,7 +107,7 @@ export default function AgencyService() {
               className="mt-5 block small:mx-auto   small:mt-8 w-min"
             >
               <button className="block  bg-maclerMain rounded-[5px] w-[190px] h-[40px] text-buttonText text-[15px] tracking-widest transition-colors hover:bg-maclerMainHover">
-                დაწყება
+                {t("homePage.agencyService.start")}
               </button>
             </Link>
           </div>
@@ -119,11 +119,10 @@ export default function AgencyService() {
         </section>
         <div className=" w-full rounded-section bg-whiteMain shadow-sectionShadow mt-[50px] p-3 px-5">
           <p className="text-maclerMain font-mainBold tracking-wider">
-            მომსახურება
+            {t("homePage.agencyService.service")}
           </p>
           <p className="mt-2 text-textDesc text-[14px]">
-            ჩვენ გთავაზობთ მომსახურებას და დახმარებას თქვენი უძრავი ქონების
-            სწრაფად გაყიდვა/გაქირავება ში, სერვისში შედის:
+            {t("homePage.agencyService.service_description")}
           </p>
           <div className="flex justify-center gap-10 items-center mt-7 mb-3 flex-wrap">
             {services.map((e: Tservice, i: number) => (

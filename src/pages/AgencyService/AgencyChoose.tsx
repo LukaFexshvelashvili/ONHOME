@@ -52,7 +52,10 @@ export default function MaclerChoose() {
   return (
     <>
       <Helmet>
-        <title>განცხადების არჩევა - სააგენტო სერვისი</title>
+        <title>
+          {t("homePage.agencyService.choose_form")} -{" "}
+          {t("homePage.agencyService.title")}
+        </title>
       </Helmet>
       <main className="min-h-screen mt-[30px]">
         {message.status !== -1 && (
@@ -67,40 +70,39 @@ export default function MaclerChoose() {
               {message.status == 100 ? (
                 <div className="w-[550px] mx-auto">
                   <h2 className="text-maclerMain font-mainBold text-center text-[18px]  mb-4">
-                    მოთხოვნა წარმატებით გაიგზავნა
+                    {t("homePage.agencyService.request_success")}
                   </h2>
                   <p className="text-textDesc  text-center text-[14px] mt-2">
-                    სააგენტოს სერვისის მოთხოვნა განცხადებაზე #{productId.id}
+                    {t("homePage.agencyService.request")} #{productId.id}
                   </p>
                   <p className="text-textDesc  text-center text-[14px] ">
-                    სერვისის დადასტურების შემთხვევაში დაგიკავშირდებით თქვენი
-                    ანგარიშის ნომერზე
+                    {t("homePage.agencyService.request_feedback")}
                   </p>
                   <Link
                     to={"/Profile/MyProducts"}
                     className="block w-min mx-auto"
                   >
                     <button className="bg-maclerMain text-[14px] h-[35px] w-[200px] text-buttonText tracking-wider rounded-md mx-auto block mt-6  transition-colors hover:bg-maclerMainHover">
-                      გასაგებია
+                      {t("homePage.agencyService.confirm")}
                     </button>
                   </Link>
                 </div>
               ) : (
                 <div className="w-[550px] mx-auto  max-w-[100%] ">
                   <h2 className="text-redI font-mainBold text-center text-[18px]  mb-4">
-                    წარმოიშვა შეცდომა
+                    {t("homePage.agencyService.an_error_occurred")}
                   </h2>
                   <p className="text-textDesc  text-center text-[14px] mt-2">
-                    სერვისი ამჟამად მიუწვდომელია
+                    {t("homePage.agencyService.service_is_offline")}
                   </p>
                   <p className="text-textDesc  text-center text-[14px] ">
-                    სცადეთ მოგვიანებით
+                    {t("homePage.agencyService.try_again_later")}
                   </p>
                   <button
                     onClick={() => setMessage({ status: -1 })}
                     className="bg-redI text-[14px] h-[35px] w-[200px] text-buttonText tracking-wider rounded-md mx-auto block mt-6  transition-colors hover:bg-redCloseI"
                   >
-                    გასაგებია
+                    {t("homePage.agencyService.confirm")}
                   </button>
                 </div>
               )}
@@ -112,10 +114,11 @@ export default function MaclerChoose() {
             <>
               <div className="p-4">
                 <h1 className="text-[18px] text-maclerMain  font-mainBold">
-                  {t("homePage.agencyService.title")} - აირჩიეთ განცხადება{" "}
+                  {t("homePage.agencyService.title")} -{" "}
+                  {t("agencyService.choose_form")}{" "}
                 </h1>
                 <p className="text-[15px] text-textDesc mt-4 ">
-                  თქვენი განცხადებები
+                  {t("agencyService.your_forms")}
                 </p>
               </div>
               {myProducts.length > 0
@@ -132,7 +135,8 @@ export default function MaclerChoose() {
             <>
               <div className="p-4">
                 <h1 className="text-[18px] text-maclerMain  font-mainBold">
-                  {t("homePage.agencyService.title")} - შეთანხმება
+                  {t("homePage.agencyService.title")} -{" "}
+                  {t("agencyService.deal")}
                 </h1>
                 <div className="bg-maclerMainClear rounded-xl [&>div]:border-none mt-[30px]">
                   <ProductBannerMacler
@@ -146,7 +150,7 @@ export default function MaclerChoose() {
                   />
                 </div>
                 <p className="text-textHead  mt-[30px] mb-[20px]">
-                  უძრავი ქონების ფასი
+                  {t("agencyService.real_estate_price")}
                 </p>
                 <div className="flex items-center gap-[30px] mobile:flex-col-reverse">
                   <div className="flex flex-col flex-1 gap-8  mobile:w-full">
@@ -162,7 +166,9 @@ export default function MaclerChoose() {
                           : ""}
                       </div>
                       <div className="flex justify-between my-3 mb-5">
-                        <p className="text-maclerMain">სერვისი</p>
+                        <p className="text-maclerMain">
+                          {t("agencyService.service")}
+                        </p>
                         <p className="text-maclerMain">
                           -
                           {numeral(
@@ -179,7 +185,7 @@ export default function MaclerChoose() {
                       </div>
                       <div className="w-full h-[1px] bg-maclerMain rounded-md"></div>
                       <p className="w-full text-maclerMain text-center">
-                        გაყიდვის შემოსავალი
+                        {t("agencyService.profit")}
                       </p>
                       <p className="w-full text-maclerMain text-center">
                         {numeral(
@@ -199,24 +205,21 @@ export default function MaclerChoose() {
                   <div className="flex flex-col flex-1">
                     <div className="bg-maclerMainClear rounded-section p-4 px-5">
                       <p className="text-center text-maclerMain font-mainBold">
-                        სერვისის პირობები
+                        {t("agencyService.service_conditions")}
                       </p>
                       <div className="flex flex-col gap-3 mt-5">
                         <p className=" text-[14px] text-maclerMain font-mainBold">
-                          წინასწარი შენატანის გარეშე
+                          {t("agencyService.con1")}
                         </p>
                         <p className=" text-[14px] text-maclerMain font-mainBold">
-                          სერვისის გააქტიურების შემდეგ ადმინი გადახედავს
-                          განცხადებას და{" "}
+                          {t("agencyService.con2")}
                           <span className="text-main underline cursor-pointer">
-                            კრიტერიუმების
+                            {t("agencyService.con3")}
                           </span>{" "}
-                          მიხედვით დაადასტურებს მას
+                          {t("agencyService.con4")}
                         </p>
                         <p className=" text-[14px] text-maclerMain font-mainBold">
-                          სერვისის საფასურს უძრავი ქონების გარიგების დასრულების
-                          შემდეგ იხდით (თუ ჩვენი დახმარებით გაყიდეთ უძრავი
-                          ქონება)
+                          {t("agencyService.con5")}
                         </p>
                       </div>
                     </div>
@@ -226,7 +229,7 @@ export default function MaclerChoose() {
                   onClick={maclerRequest}
                   className="bg-maclerMain text-[14px] h-[36px] w-[220px] text-buttonText tracking-wider font-mainMedium rounded-md mx-auto block mt-8 mb-2 transition-colors hover:bg-maclerMainHover"
                 >
-                  სერვისის მოთხოვნა
+                  {t("agencyService.request_service")}
                 </button>
               </div>
             </>
@@ -256,13 +259,13 @@ function ProductBannerMacler(props: {
           {props.productData.estate_title}
         </h3>
         <p className="text-[13px] text-textDesc">
-          განახლდა:{" "}
+          {t("productBanner.update")}:{" "}
           <span className="text-[13px] text-textHeadBlack">
             {FormatTime(props.productData.update_time.toString())}
           </span>
         </p>
         <p className="text-[13px] text-textDesc">
-          ვადა:{" "}
+          {t("productBanner.expire")}:{" "}
           <span className="text-[13px] text-textHeadBlack">
             {FormatTime(props.productData.update_time.toString())}
           </span>
@@ -289,27 +292,27 @@ function ProductBannerMacler(props: {
                 })
               }
             >
-              არჩევა
+              {t("offers.choose")}
             </button>
           ) : (
             <button
               className="bg-whiteMain text-maclerMain mobile:mt-5  h-[35px] w-[180px] rounded-md text-[13px] font-mainBold tracking-wide transition-colors hover:bg-whiteHover"
               onClick={() => props.setProduct(null)}
             >
-              არჩეული
+              {t("offers.choosed")}
             </button>
           )
         ) : props.productData.macler_status == 1 ? (
           <button className="bg-maclerMainClear pointer-events-none mobile:mt-5  text-maclerMain h-[35px] w-[200px] rounded-md text-[13px] font-mainBold tracking-wide">
-            მოთხოვნა გაგზავნილია
+            {t("productBanner.request_sended")}
           </button>
         ) : props.productData.macler_status == 2 ? (
           <button className="bg-redClear pointer-events-none mobile:mt-5  text-redI h-[35px] w-[220px] rounded-md text-[13px] font-mainMedium tracking-wider">
-            მოთხოვნა უარყოფილია
+            {t("productBanner.request_rejected")}
           </button>
         ) : props.productData.macler_status == 3 ? (
           <button className="bg-maclerMainClear pointer-events-none mobile:mt-5  text-maclerMain h-[35px] w-[240px] rounded-md text-[13px] font-mainBold tracking-wide">
-            მოთხოვნა დადასტურებულია
+            {t("productBanner.request_approved")}
           </button>
         ) : null}
       </div>

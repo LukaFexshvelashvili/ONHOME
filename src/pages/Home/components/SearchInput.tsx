@@ -51,7 +51,7 @@ function SearchInput() {
   const handleSearch = () => {
     const params = new URLSearchParams();
     if (getType) {
-      const TypeIndex: number = RealEstateTypes.findIndex(
+      const TypeIndex: number = RealEstateTypes().findIndex(
         (item: TRealEstateTypes) => item.name == getType
       );
       if (TypeIndex !== -1) {
@@ -235,7 +235,7 @@ function SearchInput() {
               </button>
             )}
           </div>
-          <div className="flex small:border-none beforeInputBlock items-center w-[25%] text-textDesc  small:w-full h-full cursor-pointer transition-colors hover:bg-[#ffffff11] relative">
+          <div className="flex small:border-none items-center w-[25%] text-textDesc  small:w-full h-full cursor-pointer transition-colors hover:bg-[#ffffff11] relative">
             <div
               onClick={() => setInputSelect(5)}
               className="flex h-full items-center gap-2  px-3 w-full small:h-[52px]"
@@ -392,7 +392,7 @@ function SelectType(props: { setData: Function; closeWindow: Function }) {
   return (
     <div className="flex flex-col items-center">
       <div className="flex gap-3 flex-wrap justify-center mt-4">
-        {RealEstateTypes.map(
+        {RealEstateTypes().map(
           (
             e: { icon: (props: any) => JSX.Element; name: string },
             i: number

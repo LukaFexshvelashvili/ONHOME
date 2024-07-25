@@ -5,6 +5,7 @@ import {
   updateImages,
 } from "../../../store/data/addProductSlice";
 import { useEffect } from "react";
+import { t } from "i18next";
 
 export default function statusBlock({
   status,
@@ -43,8 +44,8 @@ export default function statusBlock({
         <UploadSuccessed close={closeAlert} />
       ) : status == 12 ? (
         <ErrorBlock
-          title="არასაკმარისი თანხა"
-          description="ანგარიშზე არ არის საკმარისი თანხა აირჩიეთ სხვა პაკეტი ან შეცვალეთ ვადა"
+          title={t("alert.no_enough_money")}
+          description={t("alert.no_enough_money_description")}
           close={closeAlert}
         />
       ) : status == 7 ? (
@@ -53,15 +54,15 @@ export default function statusBlock({
         <NoSupportedFImageormats close={closeAlert} />
       ) : status == 5 ? (
         <ErrorBlock
-          title="გადაამოწმეთ ინფორმაცია"
-          description="გთხოვთ გადაამოწმოთ შეყვანილი ინფორმაცია და სცადოთ ხელახლა"
+          title={t("alert.re_check_info")}
+          description={t("alert.re_check_info_description")}
           close={closeAlert}
         />
       ) : (
         status === 0 && (
           <ErrorBlock
-            title="სერვერზე შეფერხებაა"
-            description="სერვერზე შეფერხებაა სცადეთ მოგვიანებით"
+            title={t("alert.error_on_server")}
+            description={t("alert.error_on_server_description")}
             close={closeAlert}
           />
         )
@@ -94,7 +95,7 @@ function ErrorBlock({
           }}
           className="px-4 py-2 rounded-md text-buttonText bg-main tracking-wider text-[14px] transition-colors hover:bg-mainHover"
         >
-          დახურვა
+          {t("alert.close")}
         </button>{" "}
       </div>
     </>
@@ -106,10 +107,10 @@ function NoSupportedFImageormats({ close }: { close: () => void }) {
   return (
     <>
       <h2 className="text-pinkI text-center text-[20px] font-mainBold">
-        შეუსაბამო ფოტოების ფორმატი
+        {t("alert.incorrect_image_type")}
       </h2>
       <p className="text-textDesc text-center text-[16px] font-mainBold my-3">
-        გთხოვთ გადაამოწმოთ შეყვანილი ინფორმაცია და სცადოთ ხელახლა
+        {t("alert.incorrect_image_type_description")}
       </p>
       <div className="flex items-center gap-5 justify-center mt-5">
         <button
@@ -120,7 +121,7 @@ function NoSupportedFImageormats({ close }: { close: () => void }) {
           }}
           className="px-4 py-2 rounded-md text-buttonText bg-main tracking-wider text-[14px] transition-colors hover:bg-mainHover"
         >
-          დახურვა
+          {t("alert.close")}
         </button>{" "}
       </div>
     </>
@@ -131,10 +132,10 @@ function ExceedImageSize({ close }: { close: () => void }) {
   return (
     <>
       <h2 className="text-pinkI text-center text-[20px] font-mainBold">
-        სურათი აჭარბებს ზომას
+        {t("alert.oversized_image")}
       </h2>
       <p className="text-textDesc text-center text-[16px] font-mainBold my-3">
-        სურათის ზომა აჭარბებს 15 მეგაბაიტს, გთხოვთ ატვირთოთ ფოტოები ხელახლა
+        {t("alert.oversized_image_description")}
       </p>
       <div className="flex items-center gap-5 justify-center mt-5">
         <button
@@ -145,7 +146,7 @@ function ExceedImageSize({ close }: { close: () => void }) {
           }}
           className="px-4 py-2 rounded-md text-buttonText bg-main tracking-wider text-[14px] transition-colors hover:bg-mainHover"
         >
-          დახურვა
+          {t("alert.close")}
         </button>{" "}
       </div>
     </>
@@ -156,21 +157,20 @@ function UploadSuccessed({ close }: { close: () => void }) {
   return (
     <>
       <h2 className="text-greenI text-center text-[20px] font-mainBold">
-        განცხადება წარმატებით დამატდა
+        {t("alert.form_added")}
       </h2>
       <p className="text-textDesc text-center text-[16px] font-mainBold my-3">
-        განცხადება წარმატებით დამატდა მონაცემთა ბაზაში, მის გამოჩენას შესაძლოა
-        დაჭირდეს რამოდენიმე წუთი
+        {t("alert.form_added_description")}
       </p>
       <div className="flex items-center gap-5 justify-center mt-5 flex-wrap">
         <Link to={"/Profile/MyProducts"}>
           <button className="px-4 py-2 rounded-md text-buttonText bg-main tracking-wider text-[14px] transition-colors hover:bg-mainHover">
-            განცხადებების ნახვა
+            {t("alert.see_form")}
           </button>
         </Link>{" "}
         <Link to={"/"}>
           <button className="px-4 py-2 rounded-md text-buttonText bg-main tracking-wider text-[14px] transition-colors hover:bg-mainHover">
-            მთავარ გვერდზე დაბრუნება
+            {t("alert.go_to_home_page")}
           </button>{" "}
         </Link>
         <button
@@ -179,7 +179,7 @@ function UploadSuccessed({ close }: { close: () => void }) {
           }}
           className="px-4 py-2 rounded-md text-buttonText bg-main tracking-wider text-[14px] transition-colors hover:bg-mainHover"
         >
-          ახალი განცხადების დამატება
+          {t("alert.add_new_form")}
         </button>{" "}
       </div>
     </>

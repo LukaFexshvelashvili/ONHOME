@@ -15,6 +15,7 @@ import {
 import { Helmet } from "react-helmet";
 import FiltersSection from "./components/FiltersSection";
 import SearchCard from "./components/SearchCard";
+import { t } from "i18next";
 function Search() {
   const [searched, setSearched] = useState<any>(null);
   const [vipSearched, setVipSearched] = useState<any[] | null>(null);
@@ -138,11 +139,13 @@ function Search() {
     <>
       {searchTitle ? (
         <Helmet>
-          <title>ძებნა - {searchTitle}</title>
+          <title>
+            {t("searchPage.search")} - {searchTitle}
+          </title>
         </Helmet>
       ) : (
         <Helmet>
-          <title>ძებნა - OnHome</title>
+          <title>{t("searchPage.search")} - OnHome</title>
         </Helmet>
       )}
 
@@ -158,7 +161,7 @@ function Search() {
             >
               <input
                 type="text"
-                placeholder="სიტყვით ძებნა..."
+                placeholder={t("searchPage.search_placeholder")}
                 className="w-full h-full px-4 bg-bodyBg outline-none text-blackMain tracking-wider text-[14px] transition-colors focus:bg-whiteLoad"
                 onChange={(e) => {
                   setSearchTitle(e.target.value);
@@ -211,7 +214,9 @@ function Search() {
           <section className="rounded-normal w-full">
             <p className="text-Asmall text-textDesc tracking-wider font-mainSemiBold m-3 mt-0 mobile:text-[12px]">
               {!loader && searched !== null
-                ? `ნაპოვნია ${getFullCount.current} შედეგი`
+                ? `${t("searchPage.found")} ${getFullCount.current} ${t(
+                    "searchPage.forms"
+                  )}`
                 : ""}
             </p>
             <div className="flex flex-wrap relative min-h-[150px] gap-[10px] gap-y-[18px] searchCardLow:gap-y-[13px] large:justify-center large:gap-5  justify-evenly mediumSmallXl:flex-col">

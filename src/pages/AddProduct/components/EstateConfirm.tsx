@@ -20,6 +20,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosCall from "../../../hooks/axiosCall";
 import { makeUserSession } from "../../../hooks/serverFunctions";
 import { clearSession } from "../../../store/data/userSlice";
+import { t } from "i18next";
 
 export default function EstateConfirm(props: {
   setShowError: Function;
@@ -41,7 +42,7 @@ export default function EstateConfirm(props: {
     setActiveOffer(vipStatus);
   }, [vipStatus]);
 
-  let offerData = ActiveOffers.filter((item) => item.id == activeOffer)[0];
+  let offerData = ActiveOffers().filter((item) => item.id == activeOffer)[0];
   let sendAddress = {
     city: data.estateCity,
     address: data.estateDistrict,
@@ -62,11 +63,14 @@ export default function EstateConfirm(props: {
             currency={data.estateCurrency}
             address={sendAddress}
           />
-          <p className=" text-Asmall text-textDesc mt-3">ბარათის ვიზუალი</p>
+          <p className=" text-Asmall text-textDesc mt-3">
+            {t("confirm.card_UI")}
+          </p>
         </div>
         <div className="text-Asmall text-textDesc mt-3 flex justify-center flex-col ">
           <p className="">
-            ბალანსი{": "}
+            {t("global.balance")}
+            {": "}
             <span className="text-main ml-1">
               {(user.money / 100)
                 .toFixed(2)
@@ -77,11 +81,11 @@ export default function EstateConfirm(props: {
             className="text-main underline  w-min text-nowrap"
             to={"/Profile/Balance"}
           >
-            ბალანსის შევსება
+            {t("global.fill_balance")}
           </Link>
         </div>
         <div className="flex gap-2 items-center mt-5">
-          {ActiveOffers.map((e: TOffer, i: number) => (
+          {ActiveOffers().map((e: TOffer, i: number) => (
             <div
               key={i}
               onClick={() => {
@@ -115,7 +119,9 @@ export default function EstateConfirm(props: {
           />
         )}
         <div className="flex justify-between mt-6">
-          <p className="text-Asmall text-textDesc font-mainMedium">სტატუსი</p>
+          <p className="text-Asmall text-textDesc font-mainMedium">
+            {t("product.status")}
+          </p>
 
           <p className="text-Asmall" style={{ color: offerData.mainColor }}>
             {offerData.name}
@@ -126,7 +132,9 @@ export default function EstateConfirm(props: {
             <div className="h-1 w-[50px] rounded-md bg-mainClear mx-auto my-2"></div>
 
             <div className="flex items-center justify-between font-mainBold rounded-lg mt-1">
-              <p className=" text-textDesc font-mainMedium">ფასი</p>
+              <p className=" text-textDesc font-mainMedium">
+                {t("filters.price")}
+              </p>
 
               <p className=" text-main">
                 {offerData.sale !== 0 ? (
@@ -161,7 +169,7 @@ export default function EstateConfirm(props: {
                 100 >
               user.money
             ) {
-              setError("საკმარის თანხა არარის ბალანსზე");
+              setError(t("alert.no_enough_money_on_balance"));
             } else {
               submitProduct(
                 data,
@@ -192,7 +200,7 @@ export default function EstateConfirm(props: {
           }}
           className="h-[42px] w-full rounded-md bg-main text-buttonText tracking-wider text-[15px] transition-colors mt-3 hover:bg-mainHover"
         >
-          გამოქვეყნება
+          {t("confirm.publish")}
         </button>
       </div>
     </>
@@ -270,20 +278,20 @@ export function CardExample(props: {
                 ? props.size.toString().slice(0, 7) + "+"
                 : props.size.toString()
               : 0}
-            მ²
+            {t("global.m")}²
           </div>
         </div>
       </div>
 
       <div className="flex flex-col  py-1 pt-2 px-3">
         <h2 className="text-textHeadCard font-mainMedium w-[80%] text-[15px] overflow-hidden text-nowrap text-ellipsis">
-          {props.title ? props.title : "სათაური"}
+          {props.title ? props.title : t("confirm.title")}
         </h2>
         <p className="text-textDescCard  font-mainRegular text-[13px]">
           {props.address.city
             ? props.address.city +
               `${props.address.address ? ", " + props.address.address : ""}`
-            : "ქალაქი"}
+            : t("filters.city")}
         </p>
       </div>
       <div className="flex items-center mt-2 bottom-3 w-full absolute left-0 px-3">
@@ -299,7 +307,7 @@ export function CardExample(props: {
           {props.currency == 0 ? "$" : props.currency == 1 && "₾"}
         </div>
         <p className="text-textDescCard text-Asmall mx-3 ">
-          მ² - {getSizePrice()}
+          {t("global.m")}² - {getSizePrice()}
           {props.currency == 0 ? "$" : props.currency == 1 && "₾"}
         </p>
         <button className="p-[5px] rounded-md absolute right-3">
