@@ -9,7 +9,6 @@ import {
 } from "./components/Selectors";
 import { RootState } from "../../store/store";
 import { useEffect, useLayoutEffect, useState } from "react";
-import ContentLoader from "../../components/global/ContentLoader";
 import { useNavigate } from "react-router-dom";
 import { updateLandSize, updateStatus } from "../../store/data/addProductSlice";
 import {
@@ -23,6 +22,7 @@ import {
 import UploadStatusBlock from "./components/UploadStatusBlock";
 import { Helmet } from "react-helmet";
 import { t } from "i18next";
+import UploadProgressBar from "./components/UploadProgressBar";
 
 export default function AddProduct() {
   const productData = useSelector((store: RootState) => store.addProduct);
@@ -54,7 +54,7 @@ export default function AddProduct() {
           <div className="fixed w-full h-full top-0 left-0 z-50 flex justify-center items-center bg-blackFade">
             <div className=" w-[650px] h-auto min-h-[150px] rounded-section bg-whiteMain p-5 relative z-10">
               {uploadStatus === null ? (
-                <ContentLoader />
+                <UploadProgressBar />
               ) : (
                 <UploadStatusBlock
                   status={uploadStatus}

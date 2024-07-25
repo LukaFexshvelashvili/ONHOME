@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { DropDownIcon } from "../assets/icons/Icons";
 import { Link } from "react-router-dom";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="w-full mt-[50px] h-auto bg-navBg pt-10 shadow-footerShadow medium:pt-5 font-mainRegular">
       <div className="content_container">
@@ -34,7 +35,7 @@ export default function Footer() {
           <div className="flex flex-col gap-3 ">
             <h3 className="mb-2  text-textHeadBlack">{t("footer.sell")}</h3>
             <div className="flex flex-wrap flex-col gap-2 gap-x-6 h-[160px] [&>a]:text-Asmall text-Asmall [&>a]:text-textDesc [&>a]:cursor-pointer">
-              <Link to={"search?deal=2"}>{t("footer.renting_daily")}</Link>
+              <Link to={"search?deal=2"}>{t("footer.ft0")}</Link>
 
               <Link to={"search?deal=0&estate_type=1&rooms=1"}>
                 {t("footer.ft1")}
@@ -101,6 +102,8 @@ export default function Footer() {
             title="იყიდება"
             content={
               <>
+                <Link to={"search?deal=2"}>{t("footer.ft0")}</Link>
+
                 <Link to={"search?deal=0&estate_type=1&rooms=1"}>
                   {t("footer.ft1")}
                 </Link>

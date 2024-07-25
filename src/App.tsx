@@ -26,7 +26,7 @@ import { Helmet } from "react-helmet";
 import CookieAgreement from "./pages/Profile/components/CookieAgreement";
 import NotFound from "./pages/NotFound";
 import AddProduct from "./pages/AddProduct/AddProduct";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const SuspendedAccount = lazy(() => import("./pages/SuspendedAccount"));
 const Notifications = lazy(
@@ -54,6 +54,7 @@ const ForgotPassword = lazy(
 );
 
 function App() {
+  const { t } = useTranslation();
   const UISettings = useSelector((store: RootState) => store.webUI);
   const user: Tuser = useSelector((store: RootState) => store.user);
   const popups: TPopups = useSelector((store: RootState) => store.popups);

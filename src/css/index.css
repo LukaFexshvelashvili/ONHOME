@@ -157,6 +157,20 @@ body.no-scroll {
     width: 26px;
   }
 }
+.greenAnim {
+  animation: greenAnimation 1s linear infinite;
+}
+@keyframes greenAnimation {
+  0% {
+    background-color: var(--greenI);
+  }
+  50% {
+    background-color: var(--greenHover);
+  }
+  100% {
+    background-color: var(--greenI);
+  }
+}
 
 .login_container {
   width: calc(100% - 40px);

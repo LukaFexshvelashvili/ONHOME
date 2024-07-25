@@ -2,12 +2,14 @@ import { memo, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { getCacheItem, setCacheItem } from "../cache/cacheFunctions";
 import axiosCall from "../../hooks/axiosCall";
 import { Tlocation } from "../../store/data/addProductSlice";
+import { useTranslation } from "react-i18next";
 
 function SearchPlace(props: {
   setData: Function;
   closeWindow?: Function;
   defData?: Tlocation | any;
 }) {
+  const { t } = useTranslation();
   const [districtSearch, setDistrictSearch] = useState<string>(
     props.defData?.district ? props.defData.district : ""
   );
@@ -15,15 +17,18 @@ function SearchPlace(props: {
     props.defData?.city ? props.defData.city : ""
   );
   const firstRender = useRef<boolean>(true);
-  const [city, setCity] = useState<string>(
-    props.defData?.city ? props.defData.city : ""
-  );
-  const [urban, setUrban] = useState<string>(
-    props.defData?.urban ? props.defData.urban : ""
-  );
-  const [district, setDistrict] = useState<string>(
-    props.defData?.district ? props.defData.district : ""
-  );
+  const [city, setCity] = useState<any>({
+    ka: props.defData?.city ? props.defData.city : "",
+    display: "",
+  });
+  const [urban, setUrban] = useState<any>({
+    ka: props.defData?.urban ? props.defData.urban : "",
+    display: "",
+  });
+  const [district, setDistrict] = useState<any>({
+    ka: props.defData?.district ? props.defData.district : "",
+    display: "",
+  });
 
   const [locationsAPI, setLocationsAPI] = useState<any>([]);
   useLayoutEffect(() => {
@@ -46,9 +51,9 @@ function SearchPlace(props: {
     });
   }, []);
   useEffect(() => {
-    setDistrict("");
+    setDistrict({ ka: "", display: "" });
     setDistrictSearch("");
-    setUrban("");
+    setUrban({ ka: "", display: "" });
   }, [city]);
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -62,7 +67,7 @@ function SearchPlace(props: {
     };
   }, [city, district, urban]);
   const submitLocations = () => {
-    props.setData({ city: city, district: district, urban: urban });
+    props.setData({ city: city.ka, district: district.ka, urban: urban.ka });
     if (props.closeWindow) {
       props.closeWindow();
     }
@@ -75,7 +80,7 @@ function SearchPlace(props: {
           <div className="w-[30%]  small:w-full">
             <input
               type="text"
-              placeholder="ქალაქი"
+              placeholder={t("filters.city")}
               className="text-blackMain mt-6 small:mt-2 text-[14px] small:text-[13px] h-[40px] w-full bg-LoginInput outline-none rounded-lg px-4 transition-colors focus:bg-LoginInputActive my-3"
               onChange={(e) => setCitySearch(e.target.value)}
               value={citySearch}
@@ -94,12 +99,12 @@ function SearchPlace(props: {
           <div className="w-[70%] small:w-full">
             <input
               type="text"
-              placeholder="რაიონი"
+              placeholder={t("filters.district")}
               className="text-blackMain mt-6 small:mt-2 text-[14px] small:text-[13px] h-[40px] w-full bg-LoginInput outline-none rounded-lg px-4 transition-colors focus:bg-LoginInputActive my-3"
               onChange={(e) => setDistrictSearch(e.target.value)}
               value={districtSearch}
             />
-            {city !== "" ? (
+            {city.ka !== "" ? (
               <div className="smScroll  small:justify-center flex flex-wrap  gap-2.5 h-auto max-h-[400px] small:min-h-[150px] small:max-h-[150px] overflow-auto pr-2">
                 <GetDistricts
                   search={districtSearch}
@@ -113,22 +118,26 @@ function SearchPlace(props: {
               </div>
             ) : (
               <p className=" text-center text-textHead my-5 text-[14px] ">
-                აირჩიეთ ქალაქი
+                {t("search.chooce_city")}
               </p>
             )}
           </div>
         </div>
       ) : (
-        <p className=" text-center text-textHead my-5">იტვირთება...</p>
+        <p className=" text-center text-textHead my-5">{t("search.loading")}</p>
       )}
       <div className="h-[70px] w-full flex items-center justify-start flex-col gap-3 small:justify-end small:flex-row small:items-center mobileSmall:border-t border-lineBg mobileSmall:flex-col mobileSmall:h-[80px] mobileSmall:justify-center">
         <p className="text-center text-textHead text-[12px] font-mainRegular translate-y-1 small:translate-y-0">
-          {city !== ""
-            ? district !== ""
-              ? urban
-                ? city + " > " + district + " > " + urban
-                : city + " > " + district
-              : city
+          {city.display !== ""
+            ? district.display !== ""
+              ? urban.display
+                ? city.display +
+                  " > " +
+                  district.display +
+                  " > " +
+                  urban.display
+                : city.display + " > " + district.display
+              : city.display
             : null}
         </p>
 
@@ -138,7 +147,7 @@ function SearchPlace(props: {
           }}
           className=" DefButton"
         >
-          დადასტურება
+          {t("search.confirm")}
         </button>
       </div>
     </>
@@ -151,16 +160,17 @@ function GetDistricts(props: {
   setDistrict: Function;
   setUrban: Function;
   district: string;
-  urban: string;
-  city: string;
+  urban: any;
+  city: any;
   search: string;
   locationsAPI: any;
 }) {
+  const { i18n } = useTranslation();
   return (
     <>
-      {props.city !== "" &&
+      {props.city.ka !== "" &&
         props.locationsAPI
-          .filter((cities: any) => cities.display_name == props.city)[0]
+          .filter((cities: any) => cities.display_name == props.city.ka)[0]
           .districts.filter(
             (district: any) =>
               district.translations.ka.display_name
@@ -180,37 +190,53 @@ function GetDistricts(props: {
             >
               <div
                 onClick={() =>
-                  props.setDistrict((state: string) =>
-                    state !== item.display_name ? item.display_name : ""
+                  props.setDistrict((state: any) =>
+                    state.ka !== item.display_name
+                      ? {
+                          ka: item.display_name,
+                          display:
+                            item.translations[i18n.language].display_name,
+                        }
+                      : { ka: "", display: "" }
                   )
                 }
                 className={`flex items-center rounded-lg px-2 py-1 min-h-[26px] text-textHead font-mainRegular text-[13px] cursor-pointer transition-colors ${
-                  props.district == item.display_name
+                  props.district ==
+                  item.translations[i18n.language].display_name
                     ? "bg-whiteHover"
                     : "bg-whiteMani"
                 } duration-150 hover:bg-whiteHover`}
               >
-                {item.display_name}
+                {item.translations[i18n.language].display_name}
               </div>
 
               {item.urbans.map((urban_item: any) => (
                 <div
                   key={urban_item.id}
                   onClick={() => {
-                    props.setDistrict(item.display_name);
-                    props.setUrban((state: string) =>
-                      state !== urban_item.display_name
-                        ? urban_item.display_name
-                        : ""
+                    props.setDistrict({
+                      ka: item.display_name,
+                      display: item.translations[i18n.language].display_name,
+                    });
+                    props.setUrban((state: any) =>
+                      state.ka !== urban_item.display_name
+                        ? {
+                            ka: urban_item.display_name,
+                            display:
+                              urban_item.translations[i18n.language]
+                                .display_name,
+                          }
+                        : { ka: "", display: "" }
                     );
                   }}
                   className={`flex items-center rounded-lg  px-2 py-1 min-h-[26px] text-textDescCard font-mainRegular text-[12px] cursor-pointer transition-colors ${
-                    props.urban == urban_item.display_name
+                    props.urban ==
+                    urban_item.translations[i18n.language].display_name
                       ? "bg-whiteHover"
                       : "bg-whiteMani"
                   } duration-150 hover:bg-whiteHover`}
                 >
-                  {urban_item.display_name}
+                  {urban_item.translations[i18n.language].display_name}
                 </div>
               ))}
             </div>
@@ -221,10 +247,11 @@ function GetDistricts(props: {
 
 function GetCities(props: {
   setCity: Function;
-  city: string;
+  city: any;
   search: string;
   locationsAPI: any;
 }) {
+  const { i18n } = useTranslation();
   return (
     <>
       {props.locationsAPI
@@ -244,15 +271,23 @@ function GetCities(props: {
           <div
             key={item.id}
             onClick={() =>
-              props.setCity((state: string) =>
-                state !== item.display_name ? item.display_name : ""
+              props.setCity((state: any) =>
+                state.ka !== item.display_name
+                  ? {
+                      ka: item.display_name,
+                      display: item.translations[i18n.language].display_name,
+                    }
+                  : { ka: "", display: "" }
               )
             }
             className={`small:w-full text-center justify-center bg-whiteLower select-none flex items-center rounded-lg px-2 py-2 min-h-[30px] small:min-h-[24px] small:text-[12px] text-textHead font-mainRegular text-[14px] cursor-pointer transition-colors ${
-              props.city == item.display_name ? "bg-whiteHover" : "bg-whiteMani"
+              props.city.display ==
+              item.translations[i18n.language].display_name
+                ? "bg-whiteHover"
+                : "bg-whiteMani"
             } duration-150 hover:bg-whiteHover`}
           >
-            {item.display_name}
+            {item.translations[i18n.language].display_name}
           </div>
         ))}
     </>

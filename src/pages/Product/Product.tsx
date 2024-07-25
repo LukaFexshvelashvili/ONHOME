@@ -246,7 +246,7 @@ export default function Product() {
                   <div className="flex gap-3 flex-wrap mt-5 mobile:justify-center">
                     {JSON.parse(pageData.productData.estate_close_places) !==
                     null
-                      ? closePlacesList.map((item: TClosePlace, i: number) =>
+                      ? closePlacesList().map((item: TClosePlace, i: number) =>
                           JSON.parse(
                             pageData.productData.estate_close_places
                           ).includes(i) ? (

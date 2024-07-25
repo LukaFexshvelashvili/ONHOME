@@ -223,7 +223,7 @@ export default function Register() {
               </h1>
               <form
                 onSubmit={handleForm}
-                className="w-[380px] flex flex-col gap-5 items-center relative z-10 mobile:gap-4 mobile:max-w-[360px] mobile:w-[100%] mobile:px-[5px]"
+                className="w-[420px] flex flex-col gap-5 items-center relative z-10 mobile:gap-4 mobile:max-w-[360px] mobile:w-[100%] mobile:px-[5px]"
               >
                 {error !== "" && (
                   <div className="max-w-full w-full h-auto p-3 rounded-lg bg-pinkClear text-pinkI border-2 border-pinkI  flex justify-center items-center text-center text-[14px] tracking-wider font-mainSemiBold">
@@ -231,7 +231,7 @@ export default function Register() {
                   </div>
                 )}
                 <div className="flex items-center gap-5 mobile:gap-3">
-                  <div className="h-[40px] w-full rounded-normal flex items-center relative">
+                  <div className="h-[50px] w-full rounded-normal flex items-center relative">
                     <input
                       ref={nameRef}
                       type="text"
@@ -240,7 +240,7 @@ export default function Register() {
                       className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                     />
                   </div>
-                  <div className="h-[40px] w-full rounded-normal flex items-center relative">
+                  <div className="h-[50px] w-full rounded-normal flex items-center relative">
                     <input
                       ref={surnameRef}
                       type="text"
@@ -250,7 +250,7 @@ export default function Register() {
                     />
                   </div>
                 </div>
-                <div className="h-[40px] w-full rounded-normal flex items-center relative">
+                <div className="h-[50px] w-full rounded-normal flex items-center relative">
                   <MailIcon className="h-[22px] mobile:h-[20px] aspect-square absolute left-3 [&>path]:stroke-blackMain z-[3] opacity-40" />
                   <input
                     type="email"
@@ -261,7 +261,7 @@ export default function Register() {
                   />
                 </div>
 
-                <div className="h-[40px] w-full rounded-normal flex items-center relative">
+                <div className="h-[50px] w-full rounded-normal flex items-center relative">
                   <PhoneIcon className="h-[22px] mobile:h-[20px] aspect-square absolute left-3 [&>path]:stroke-blackMain z-[3] opacity-40" />
                   <input
                     ref={mobileRef}
@@ -272,7 +272,7 @@ export default function Register() {
                     className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 pl-11 mobile:pl-10 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                   />
                 </div>
-                <div className="h-[40px] w-full rounded-normal flex items-center relative">
+                <div className="h-[50px] w-full rounded-normal flex items-center relative">
                   <LockIcon className="w-[22px] mobile:h-[20px] aspect-square absolute left-3 [&>path]:stroke-blackMain z-[3] opacity-40" />
                   <input
                     type="password"
@@ -284,7 +284,7 @@ export default function Register() {
                     className="h-full w-full rounded-normal mobile:text-[12px] bg-LoginInput outline-none px-3 pl-11 mobile:pl-10 text-textDesc tracking-wider text-Asmall transition-colors focus:bg-LoginInputActive"
                   />
                 </div>
-                <div className="h-[40px] w-full rounded-normal flex items-center relative">
+                <div className="h-[50px] w-full rounded-normal flex items-center relative">
                   <LockIcon className="w-[22px] mobile:h-[20px] aspect-square absolute left-3 [&>path]:stroke-blackMain z-[3] opacity-40" />
                   <input
                     ref={confirmPasswordRef}

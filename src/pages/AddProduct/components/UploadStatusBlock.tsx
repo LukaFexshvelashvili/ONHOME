@@ -12,7 +12,7 @@ export default function statusBlock({
   setStatus,
   setAlertBlock,
 }: {
-  status: number;
+  status: number | null;
   setStatus: Function;
   setAlertBlock: Function;
 }) {

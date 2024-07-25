@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useRef } from "react";
 import HoverTitle from "./global/HoverTitle";
 import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 export function NotificationBar({
   userData,
@@ -158,6 +159,8 @@ export function ProfileBar({
   setActivePop: Function;
   darkmode: boolean;
 }) {
+  const { i18n } = useTranslation();
+
   const dispatch = useDispatch();
 
   const unloggedButtons: TProfileButton[] = [
@@ -264,7 +267,11 @@ export function ProfileBar({
           </div>
           <div className=" flex flex-col ml-3">
             <p className="text-[13px] font-mainBold text-userName">
-              {userData.name}
+              {userData.name == "სტუმარი"
+                ? i18n.language == "en"
+                  ? "Guest"
+                  : "სტუმარი"
+                : userData.name}
             </p>
             <p className="text-[11px] font-mainBold text-userLastName">
               {userData.surname}

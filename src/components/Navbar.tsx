@@ -24,7 +24,23 @@ import { Tuser } from "../store/data/userSlice";
 import HoverTitle from "./global/HoverTitle";
 import { t } from "i18next";
 import { OutsideClickClose } from "./global/OutsideClickClose";
+import { useTranslation } from "react-i18next";
 export default function Navbar() {
+  const { i18n } = useTranslation();
+
+  const handleLanguageChange = (lng: string) => {
+    if (lng == "ka") {
+      localStorage.setItem("lang", "ka");
+      setActiveLang(false);
+      setLangImg(georgianFlag);
+      i18n.changeLanguage(lng);
+    } else if (lng == "en") {
+      localStorage.setItem("lang", "en");
+      setActiveLang(false);
+      setLangImg(englishFlag);
+      i18n.changeLanguage(lng);
+    }
+  };
   const userData = useSelector((store: RootState) => store.user);
   const darkmode: boolean = useSelector(
     (store: RootState) => store.webUI.darkMode
@@ -32,7 +48,13 @@ export default function Navbar() {
 
   const [activePop, setActivePop] = useState<null | string>(null);
   const [activeLang, setActiveLang] = useState<boolean>(false);
-  const [langImg, setLangImg] = useState<string>(georgianFlag);
+  const [langImg, setLangImg] = useState<string>(
+    i18n.language == "ka"
+      ? georgianFlag
+      : i18n.language == "en"
+      ? englishFlag
+      : georgianFlag
+  );
 
   let favNums = 0;
   if (localStorage.getItem("favorites")) {
@@ -66,11 +88,7 @@ export default function Navbar() {
                 onClick={() => setActiveLang((state) => !state)}
                 className=" h-[26px] aspect-square rounded-circle border border-buttonStroke flex items-center justify-center cursor-pointer"
               >
-                <img
-                  className="max-h-[20px] aspect-square"
-                  src={langImg}
-                  alt="georgia"
-                />
+                <img className="max-h-[20px] aspect-square" src={langImg} />
               </button>
               <div
                 className={` absolute h-auto w-[150px] overflow-hidden flex flex-col bg-whiteMain rounded-normal shadow-sectionShadow top-[50px] left-0 duration-200 transition-[opacity,visibility]  ${
@@ -79,8 +97,7 @@ export default function Navbar() {
               >
                 <button
                   onClick={() => {
-                    setActiveLang(false);
-                    setLangImg(georgianFlag);
+                    handleLanguageChange("ka");
                   }}
                   className="px-4 text-start py-3 transition-colors hover:bg-whiteHover text-[12px] flex items-center text-textHead"
                 >
@@ -93,8 +110,7 @@ export default function Navbar() {
                 </button>
                 <button
                   onClick={() => {
-                    setActiveLang(false);
-                    setLangImg(englishFlag);
+                    handleLanguageChange("en");
                   }}
                   className="px-4 text-start py-3 transition-colors hover:bg-whiteHover text-[12px] flex items-center text-textHead"
                 >
@@ -173,6 +189,7 @@ function ResponsiveNavbar({
   userData: Tuser;
   favNums: number;
 }) {
+  const { i18n } = useTranslation();
   const darkmode: boolean = useSelector(
     (store: RootState) => store.webUI.darkMode
   );
@@ -309,7 +326,11 @@ function ResponsiveNavbar({
             </div>
             <div className="ml-1">
               <p className=" font-mainBold text-textHeadCard leading-[25px] text-[16px]">
-                {userData.name}
+                {userData.name == "სტუმარი"
+                  ? i18n.language == "en"
+                    ? "Guest"
+                    : "სტუმარი"
+                  : userData.name}
               </p>
               <p className=" font-mainBold text-textDescCard leading-[25px] text-[15px]">
                 {userData.surname}

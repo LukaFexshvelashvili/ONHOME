@@ -47,8 +47,8 @@ export const projectTypes = () => [
 export const projectStatuses = () => [
   t("projectStatuses.newly_renovated"),
   t("projectStatuses.ongoing_refurnishment"),
-  t("projectStatuses.repair_conditioner"),
-  t("projectStatuses.old_repair_conditionered"),
+  t("projectStatuses.repair"),
+  t("projectStatuses.old_repaired"),
   t("projectStatuses.white_frame"),
   t("projectStatuses.black_frame"),
   t("projectStatuses.green_frame"),

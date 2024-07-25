@@ -166,7 +166,7 @@ export function EstateClosePlaces(props: {
         ახლოს მდებარეობს
       </p>
       <div className="flex items-start justify-center gap-3 flex-col flex-wrap max-h-[200px] my-[25px] pl-5 mobileTab:pl-0 mobileSmall:pl-5 mobileSmall:max-h-fit">
-        {closePlacesList.map((e: TClosePlace, i: number) => (
+        {closePlacesList().map((e: TClosePlace, i: number) => (
           <ClosePlaceBlock
             key={i}
             i={i}
@@ -380,16 +380,16 @@ export function EstateImages(props: { error: boolean }) {
     <div className="flex flex-col">
       <div className="flex items-center mobile:flex-col">
         <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
-          ფოტოები{" "}
+          {t("selectors.photos")}{" "}
         </p>
         <p className="text-Asmall text-textDescCard ml-2 mobile:ml-0 text-center">
-          (მაქსიმუმ 12 ფოტო, სურათის მოცულობა: 10MB, PNG, JPG, JPEG)
+          ({t("selectors.photo_condition")})
         </p>{" "}
       </div>
       {images.length == 0 && props.error && (
         <div className=" rounded-xl text-pinkI bg-pinkClear py-3 px-4 text-sm tracking-wider mt-4 text-center">
           {" "}
-          სავალდებულოა მინიმუმ ერთი ფოტო (ფორმატით: png, jpg ან jpeg)
+          {t("selectors.photo_required")}
         </div>
       )}
       <div className="flex gap-3 flex-wrap pl-3 mt-4 mobile:justify-center mobile:pl-0">
@@ -436,7 +436,7 @@ export function EstateImages(props: { error: boolean }) {
                     onClick={() => makeMainImage(i)}
                     className="invisible transition-opacity group-hover:visible opacity-0 group-hover:opacity-100   h-[30px] w-[150px] rounded-md bg-main text-buttonText z-[2] text-Asmaller tracking-wider"
                   >
-                    ფონად დაყენება
+                    {t("selectors.set_cover")}
                   </button>
                   <button
                     onClick={() => removeImage(i)}
@@ -447,7 +447,7 @@ export function EstateImages(props: { error: boolean }) {
                 </div>
                 {e.cover == true && (
                   <div className="absolute bottom-1 left-1 w-[70px] h-[26px] flex items-center justify-center rounded-lg tracking-widest bg-main text-buttonText text-Asmaller z-[2]">
-                    ფონი
+                    {t("selectors.cover")}
                   </div>
                 )}
                 <img
