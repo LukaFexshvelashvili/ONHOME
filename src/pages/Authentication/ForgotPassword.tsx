@@ -86,7 +86,6 @@ export default function ForgotPassword() {
   };
   if (user.isLogged === null || user.isLogged == true) {
     navigate("/");
-    return null;
   }
   return (
     <>

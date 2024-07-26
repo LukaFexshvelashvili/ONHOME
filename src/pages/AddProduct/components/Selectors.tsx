@@ -733,7 +733,7 @@ export function EstateInformation(props: {
                     <input
                       type="number"
                       className="AddProductInput mobile:w-[100%_!important]"
-                      placeholder={`${t("global.m")}² ${t("product.price")}`}
+                      placeholder={`${t("global.m")}² ${t("addProduct.price")}`}
                       onChange={(e) => {
                         setSizePrice(e.target.valueAsNumber);
                         calculateFullPrice(e.target.valueAsNumber);

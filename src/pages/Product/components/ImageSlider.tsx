@@ -10,7 +10,7 @@ function ImageSlider(props: { productData: any }) {
 
   const imageList = useMemo(
     () => JSON.parse(props.productData.estate_images),
-    [props.productData]
+    [props.productData.id]
   );
 
   const sliderNext = () => {
@@ -27,17 +27,20 @@ function ImageSlider(props: { productData: any }) {
       setSlider((state) => state - 1);
     }
   };
-  if (Math.floor(Math.random() * 15) == 4) {
-    if (
-      props.productData.estate_images.length > 1 &&
-      !imageList.includes("AD")
-    ) {
-      imageList.splice(1, 0, "AD");
+  useEffect(() => {
+    if (Math.floor(Math.random() * 15) == 4) {
+      if (
+        props.productData.estate_images.length > 1 &&
+        !imageList.includes("AD")
+      ) {
+        imageList.splice(1, 0, "AD");
+      }
     }
-  }
+  }, [props.productData.id]);
+
   useEffect(() => {
     setSlider(0);
-  }, [props.productData]);
+  }, [props.productData.id]);
 
   return (
     <>
@@ -49,7 +52,7 @@ function ImageSlider(props: { productData: any }) {
           setFullSlider={setFullSlider}
         />
       ) : null}
-      <div className="flex-[1.3] bg-whiteMain rounded-block relative flex items-center justify-center  shadow-sectionShadow max-h-[450px] overflow-hidden">
+      <div className="flex-[1.3] bg-whiteMain rounded-block relative flex items-center justify-center  shadow-sectionShadow max-h-[450px]">
         <div className="slider-shade absolute h-full w-full left-0 top-0 z-[2] rounded-b-block"></div>
         <div className="flex items-center gap-4 absolute bottom-3 z-[3] mobileSmall:gap-3 max-w-[90%] overflow-hidden">
           <Swiper spaceBetween={15} slidesPerView="auto">

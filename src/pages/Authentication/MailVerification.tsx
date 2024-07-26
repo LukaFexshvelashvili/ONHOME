@@ -82,7 +82,6 @@ export default function MailVerification(props: {
   };
   if (user.isLogged === null || user.isLogged == true) {
     navigate("/");
-    return null;
   }
   return (
     <>

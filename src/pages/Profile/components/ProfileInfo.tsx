@@ -43,9 +43,7 @@ export default function ProfileInfo() {
   if (user.isLogged == false) {
     navigate("/Login");
   }
-  if (user.isLogged == null) {
-    return null;
-  }
+
   useEffect(() => {
     axiosCall
       .get("user/info", { withCredentials: true })

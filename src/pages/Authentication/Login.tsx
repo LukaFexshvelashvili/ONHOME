@@ -38,7 +38,6 @@ export default function Login() {
 
   if (user.isLogged === true) {
     navigate("/");
-    return null;
   }
 
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {

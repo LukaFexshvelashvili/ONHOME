@@ -39,7 +39,6 @@ export default function PasswordRecover() {
     if (user.isLogged === true) {
       navigate("/");
     }
-    return null;
   }
   return (
     <>
