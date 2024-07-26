@@ -60,6 +60,8 @@ export default function Navbar() {
       ? georgianFlag
       : i18n.language == "en"
       ? englishFlag
+      : i18n.language == "ru"
+      ? russianFlag
       : georgianFlag
   );
 

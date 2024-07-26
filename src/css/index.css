@@ -180,6 +180,9 @@ body.no-scroll {
 .DefButton {
   @apply bg-main rounded-[5px] w-[170px] h-[35px] small:h-[32px] font-mainMedium text-buttonText text-[12px] tracking-widest transition-colors hover:bg-mainHover;
 }
+.DefCloseButton {
+  @apply bg-mainClear rounded-[5px] w-[170px] h-[35px] small:h-[32px] font-mainMedium text-main text-[12px] tracking-widest transition-colors hover:bg-mainClearHover;
+}
 
 .swiper-pagination-bullet {
   @apply bg-whiteMain opacity-80 transition-[background-color,opacity];
@@ -221,4 +224,9 @@ input[type="file"] {
 }
 input[type="file"]::-webkit-file-upload-button {
   visibility: hidden;
+}
+@media (max-width: 800px) {
+  .hideRespo {
+    display: none;
+  }
 }

@@ -3,6 +3,7 @@ import { getCacheItem, setCacheItem } from "../cache/cacheFunctions";
 import axiosCall from "../../hooks/axiosCall";
 import { Tlocation } from "../../store/data/addProductSlice";
 import { useTranslation } from "react-i18next";
+import { PopupCloseIcon } from "../../assets/icons/Icons";
 
 function SearchPlace(props: {
   setData: Function;
@@ -11,9 +12,7 @@ function SearchPlace(props: {
   forParams?: boolean;
 }) {
   const { t } = useTranslation();
-  const [districtSearch, setDistrictSearch] = useState<string>(
-    props.defData?.display.district ? props.defData.display.district : ""
-  );
+  const [districtSearch, setDistrictSearch] = useState<string>("");
   const [citySearch, setCitySearch] = useState<string>(
     props.defData?.display.city ? props.defData.display.city : ""
   );
@@ -52,11 +51,7 @@ function SearchPlace(props: {
       }
     });
   }, []);
-  useEffect(() => {
-    setDistrict({ ka: "", display: "" });
-    setDistrictSearch("");
-    setUrban({ ka: "", display: "" });
-  }, [city]);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Enter") {
@@ -102,40 +97,85 @@ function SearchPlace(props: {
       props.closeWindow();
     }
   };
-
+  const clearInfo = () => {
+    setDistrict({ ka: "", display: "" });
+    setDistrictSearch("");
+    setUrban({ ka: "", display: "" });
+  };
   return (
     <>
       {locationsAPI && locationsAPI.length > 1 ? (
         <div className="flex gap-2 mt-3 small:flex-col small:gap-0">
-          <div className="w-[30%]  small:w-full">
-            <input
-              type="text"
-              placeholder={t("filters.city")}
-              className="text-blackMain mt-6 small:mt-2 text-[14px] small:text-[13px] h-[40px] w-full bg-LoginInput outline-none rounded-lg px-4 transition-colors focus:bg-LoginInputActive my-3"
-              onChange={(e) => setCitySearch(e.target.value)}
-              value={citySearch}
-            />
+          <div
+            className={`w-[30%]  small:w-full ${
+              city.display ? "hideRespo" : ""
+            }`}
+          >
+            <div className="relative flex items-center mt-6 my-3  small:mt-2 ">
+              <input
+                type="text"
+                placeholder={t("filters.city")}
+                className="text-blackMain text-[14px] small:text-[13px] h-[40px] w-full bg-LoginInput outline-none rounded-lg px-4 transition-colors focus:bg-LoginInputActive"
+                onChange={(e) => setCitySearch(e.target.value)}
+                value={citySearch}
+              />
+              {citySearch !== "" ? (
+                <button
+                  onClick={() => setCitySearch("")}
+                  className="h-[20px] aspect-square absolute right-2 flex justify-center items-center p-1 z-10"
+                >
+                  <PopupCloseIcon className=" [&>path]:fill-white" />
+                </button>
+              ) : null}
+            </div>
             <div className="border-r-2 border-lineBg pr-1">
-              <div className="smScroll gap-2 grid-cols-1 grid small:grid-cols-3 searchCardLow:grid-cols-2 mobileSmallest:grid-cols-1 justify-center items-middle min-h-[400px] max-h-[400px] small:min-h-[150px] small:max-h-[150px] overflow-auto pr-2">
+              <div className="smScroll auto-rows-auto gap-2 grid-cols-1 grid small:grid-cols-3 searchCardLow:grid-cols-2 mobileSmallest:grid-cols-1 justify-center items-middle min-h-[400px] max-h-[400px] small:min-h-[150px] small:max-h-[250px] overflow-auto pr-2">
                 <GetCities
                   search={citySearch}
                   city={city}
                   setCity={setCity}
                   locationsAPI={locationsAPI}
+                  clearInfo={clearInfo}
                 />
               </div>
             </div>
           </div>
-          <div className="w-[70%] small:w-full">
-            <input
-              type="text"
-              placeholder={t("filters.district")}
-              className="text-blackMain mt-6 small:mt-2 text-[14px] small:text-[13px] h-[40px] w-full bg-LoginInput outline-none rounded-lg px-4 transition-colors focus:bg-LoginInputActive my-3"
-              onChange={(e) => setDistrictSearch(e.target.value)}
-              value={districtSearch}
-            />
+          {city.display ? (
+            <div
+              onClick={() => {
+                clearInfo();
+                setCity({ ka: "", display: "" });
+              }}
+              className={`small:w-full h-min text-center justify-center select-none hidden mobile:flex items-center rounded-lg px-2 py-2 min-h-[30px]  small:min-h-[24px] small:text-[12px] font-mainRegular text-[14px] cursor-pointer transition-colors bg-main text-buttonText hover:bg-mainHover duration-150 `}
+            >
+              {city.display}
+            </div>
+          ) : null}
+          <div
+            className={`w-[70%] small:w-full ${
+              city.display ? "" : "hideRespo"
+            } `}
+          >
+            {" "}
+            <div className="relative flex items-center mt-6 my-3 small:mt-2 ">
+              <input
+                type="text"
+                placeholder={t("filters.district")}
+                className="text-blackMain text-[14px] small:text-[13px] h-[40px] w-full bg-LoginInput outline-none rounded-lg px-4 transition-colors focus:bg-LoginInputActive"
+                onChange={(e) => setDistrictSearch(e.target.value)}
+                value={districtSearch}
+              />
+              {districtSearch !== "" ? (
+                <button
+                  onClick={() => setDistrictSearch("")}
+                  className="h-[20px] aspect-square absolute right-2 flex justify-center items-center p-1 z-10"
+                >
+                  <PopupCloseIcon className=" [&>path]:fill-white" />
+                </button>
+              ) : null}{" "}
+            </div>
             {city.ka !== "" ? (
-              <div className="smScroll  small:justify-center flex flex-wrap  gap-2.5 h-auto max-h-[400px] small:min-h-[150px] small:max-h-[150px] overflow-auto pr-2">
+              <div className="smScroll  small:justify-center flex flex-wrap  gap-2.5 h-auto max-h-[400px] small:min-h-[150px] small:max-h-[250px] overflow-auto pr-2">
                 <GetDistricts
                   search={districtSearch}
                   district={district}
@@ -156,8 +196,8 @@ function SearchPlace(props: {
       ) : (
         <p className=" text-center text-textHead my-5">{t("search.loading")}</p>
       )}
-      <div className="h-[70px] w-full flex items-center justify-start flex-col gap-3 small:justify-end small:flex-row small:items-center mobileSmall:border-t border-lineBg mobileSmall:flex-col mobileSmall:h-[80px] mobileSmall:justify-center">
-        <p className="text-center text-textHead text-[12px] font-mainRegular translate-y-1 small:translate-y-0">
+      <div className="h-[70px] mobile:h-auto mobile:pt-2 mobile:gap-2 w-full flex items-center justify-start  flex-col gap-3 small:justify-end small:items-center mobileSmall:border-t border-lineBg mobileSmall:flex-col mobileSmall:justify-center">
+        <p className="text-center text-textHead text-[12px] font-mainRegular translate-y-1 small:translate-y-0 h-[18px] -translate-x-1 w-full overflow-hidden text-nowrap text-ellipsis">
           {city.display !== ""
             ? district.display !== ""
               ? urban.display
@@ -170,15 +210,28 @@ function SearchPlace(props: {
               : city.display
             : null}
         </p>
-
-        <button
-          onClick={() => {
-            submitLocations();
-          }}
-          className=" DefButton"
-        >
-          {t("search.confirm")}
-        </button>
+        <div className="flex gap-2 flex-wrap-reverse justify-center items-center">
+          <button
+            onClick={() => {
+              setCitySearch("");
+              setDistrictSearch("");
+              setCity({ ka: "", display: "" });
+              setDistrict({ ka: "", display: "" });
+              setUrban({ ka: "", display: "" });
+            }}
+            className=" DefCloseButton mobile:w-full"
+          >
+            {t("clear")}
+          </button>
+          <button
+            onClick={() => {
+              submitLocations();
+            }}
+            className=" DefButton mobile:w-full"
+          >
+            {t("search.confirm")}
+          </button>
+        </div>
       </div>
     </>
   );
@@ -189,13 +242,14 @@ export default memo(SearchPlace);
 function GetDistricts(props: {
   setDistrict: Function;
   setUrban: Function;
-  district: string;
+  district: any;
   urban: any;
   city: any;
   search: string;
   locationsAPI: any;
 }) {
   const { i18n } = useTranslation();
+
   return (
     <>
       {props.city.ka !== "" &&
@@ -219,7 +273,9 @@ function GetDistricts(props: {
               key={item.id}
             >
               <div
-                onClick={() =>
+                onClick={() => {
+                  props.setUrban({ ka: "", display: "" });
+
                   props.setDistrict((state: any) =>
                     state.ka !== item.display_name
                       ? {
@@ -228,14 +284,13 @@ function GetDistricts(props: {
                             item.translations[i18n.language].display_name,
                         }
                       : { ka: "", display: "" }
-                  )
-                }
-                className={`flex items-center rounded-lg px-2 py-1 min-h-[26px] text-textHead font-mainRegular text-[13px] cursor-pointer transition-colors ${
-                  props.district ==
-                  item.translations[i18n.language].display_name
-                    ? "bg-whiteHover"
-                    : "bg-whiteMani"
-                } duration-150 hover:bg-whiteHover`}
+                  );
+                }}
+                className={`flex items-center rounded-lg px-2 py-1 min-h-[26px] font-mainRegular text-[13px] cursor-pointer transition-colors ${
+                  props.district.ka == item.display_name
+                    ? "bg-main text-buttonText hover:bg-mainHover"
+                    : "text-textHead hover:bg-whiteLow"
+                } duration-150 `}
               >
                 {item.translations[i18n.language].display_name}
               </div>
@@ -259,12 +314,11 @@ function GetDistricts(props: {
                         : { ka: "", display: "" }
                     );
                   }}
-                  className={`flex items-center rounded-lg  px-2 py-1 min-h-[26px] text-textDescCard font-mainRegular text-[12px] cursor-pointer transition-colors ${
-                    props.urban ==
-                    urban_item.translations[i18n.language].display_name
-                      ? "bg-whiteHover"
-                      : "bg-whiteMani"
-                  } duration-150 hover:bg-whiteHover`}
+                  className={`flex items-center rounded-lg  px-2 py-1 min-h-[26px]  font-mainRegular text-[12px] cursor-pointer transition-colors ${
+                    props.urban.ka == urban_item.display_name
+                      ? "bg-main text-buttonText hover:bg-mainHover"
+                      : "text-textDescCard hover:bg-whiteLow"
+                  } duration-150 `}
                 >
                   {urban_item.translations[i18n.language].display_name}
                 </div>
@@ -280,6 +334,7 @@ function GetCities(props: {
   city: any;
   search: string;
   locationsAPI: any;
+  clearInfo: Function;
 }) {
   const { i18n } = useTranslation();
   return (
@@ -300,7 +355,8 @@ function GetCities(props: {
         .map((item: any) => (
           <div
             key={item.id}
-            onClick={() =>
+            onClick={() => {
+              props.clearInfo();
               props.setCity((state: any) =>
                 state.ka !== item.display_name
                   ? {
@@ -308,9 +364,9 @@ function GetCities(props: {
                       display: item.translations[i18n.language].display_name,
                     }
                   : { ka: "", display: "" }
-              )
-            }
-            className={`small:w-full text-center justify-center select-none flex items-center rounded-lg px-2 py-2 min-h-[30px] small:min-h-[24px] small:text-[12px] font-mainRegular text-[14px] cursor-pointer transition-colors ${
+              );
+            }}
+            className={`small:w-full h-min text-center justify-center select-none flex items-center rounded-lg px-2 py-2 min-h-[30px]  small:min-h-[24px] small:text-[12px] font-mainRegular text-[14px] cursor-pointer transition-colors ${
               props.city.display ==
               item.translations[i18n.language].display_name
                 ? "bg-main text-buttonText hover:bg-mainHover"

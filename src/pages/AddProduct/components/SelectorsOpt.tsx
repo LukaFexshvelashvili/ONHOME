@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  Tlocation,
   updateDeal,
   updateDescription,
   updateExactAddress,
