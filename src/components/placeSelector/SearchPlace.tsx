@@ -8,28 +8,30 @@ function SearchPlace(props: {
   setData: Function;
   closeWindow?: Function;
   defData?: Tlocation | any;
+  forParams?: boolean;
 }) {
   const { t } = useTranslation();
   const [districtSearch, setDistrictSearch] = useState<string>(
-    props.defData?.district ? props.defData.district : ""
+    props.defData?.display.district ? props.defData.display.district : ""
   );
   const [citySearch, setCitySearch] = useState<string>(
-    props.defData?.city ? props.defData.city : ""
+    props.defData?.display.city ? props.defData.display.city : ""
   );
   const firstRender = useRef<boolean>(true);
   const [city, setCity] = useState<any>({
     ka: props.defData?.city ? props.defData.city : "",
-    display: "",
+    display: props.defData?.display.city ? props.defData.display.city : "",
   });
   const [urban, setUrban] = useState<any>({
     ka: props.defData?.urban ? props.defData.urban : "",
-    display: "",
+    display: props.defData?.display.urban ? props.defData.display.urban : "",
   });
   const [district, setDistrict] = useState<any>({
     ka: props.defData?.district ? props.defData.district : "",
-    display: "",
+    display: props.defData?.display.district
+      ? props.defData.display.district
+      : "",
   });
-
   const [locationsAPI, setLocationsAPI] = useState<any>([]);
   useLayoutEffect(() => {
     getCacheItem("locations").then((cachedLocations) => {
@@ -67,7 +69,35 @@ function SearchPlace(props: {
     };
   }, [city, district, urban]);
   const submitLocations = () => {
-    props.setData({ city: city.ka, district: district.ka, urban: urban.ka });
+    if (props.forParams) {
+      props.setData({
+        city: city.ka,
+        district: district.ka,
+        urban: urban.ka,
+        display: {
+          city: city.display,
+          district: district.display,
+          urban: urban.display,
+        },
+        displaySearch: JSON.stringify({
+          city: city.display,
+          district: district.display,
+          urban: urban.display,
+        }),
+      });
+    } else {
+      props.setData({
+        city: city.ka,
+        district: district.ka,
+        urban: urban.ka,
+        display: {
+          city: city.display,
+          district: district.display,
+          urban: urban.display,
+        },
+      });
+    }
+
     if (props.closeWindow) {
       props.closeWindow();
     }
@@ -118,7 +148,7 @@ function SearchPlace(props: {
               </div>
             ) : (
               <p className=" text-center text-textHead my-5 text-[14px] ">
-                {t("search.chooce_city")}
+                {t("search.choose_city")}
               </p>
             )}
           </div>
@@ -280,12 +310,12 @@ function GetCities(props: {
                   : { ka: "", display: "" }
               )
             }
-            className={`small:w-full text-center justify-center bg-whiteLower select-none flex items-center rounded-lg px-2 py-2 min-h-[30px] small:min-h-[24px] small:text-[12px] text-textHead font-mainRegular text-[14px] cursor-pointer transition-colors ${
+            className={`small:w-full text-center justify-center select-none flex items-center rounded-lg px-2 py-2 min-h-[30px] small:min-h-[24px] small:text-[12px] font-mainRegular text-[14px] cursor-pointer transition-colors ${
               props.city.display ==
               item.translations[i18n.language].display_name
-                ? "bg-whiteHover"
-                : "bg-whiteMani"
-            } duration-150 hover:bg-whiteHover`}
+                ? "bg-main text-buttonText hover:bg-mainHover"
+                : "bg-whiteHover text-textHead hover:bg-whiteLow"
+            } duration-150 `}
           >
             {item.translations[i18n.language].display_name}
           </div>

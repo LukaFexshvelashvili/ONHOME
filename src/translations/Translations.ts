@@ -8,7 +8,8 @@ const mainLanguage = "ka";
 // Function to get the language from local storage or default
 function getLanguage(): string {
   const storedLang = localStorage.getItem("lang");
-  return storedLang && (storedLang === "ka" || storedLang === "en")
+  return storedLang &&
+    (storedLang === "ka" || storedLang === "en" || storedLang === "ru")
     ? storedLang
     : mainLanguage;
 }

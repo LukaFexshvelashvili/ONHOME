@@ -163,7 +163,7 @@ export function EstateClosePlaces(props: {
   return (
     <div className="flex flex-col">
       <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
-        ახლოს მდებარეობს
+        {t("nearby_locations")}
       </p>
       <div className="flex items-start justify-center gap-3 flex-col flex-wrap max-h-[200px] my-[25px] pl-5 mobileTab:pl-0 mobileSmall:pl-5 mobileSmall:max-h-fit">
         {closePlacesList().map((e: TClosePlace, i: number) => (
@@ -267,7 +267,7 @@ export function EstateAddons({
   return (
     <div className="flex flex-col">
       <p className=" text-textHead tracking-wider font-mainBold  mobile:text-[15px]  mobile:text-center ">
-        მონიშნეთ დამატებები
+        {t("mark_the_additions")}
       </p>
       <div className="flex items-start justify-center gap-3 flex-col flex-wrap max-h-[200px] my-[25px] pl-5 mediumSmallXl:max-h-[350px] mobileTab:pl-0 mobileSmall:pl-5 mobileSmall:max-h-fit">
         {addonList.map((e: TProductAddon, i: number) => {

@@ -12,7 +12,8 @@ import {
   UserLinearIcon,
 } from "../assets/icons/Icons";
 import georgianFlag from "../assets/images/languages/georgia.png";
-import englishFlag from "../assets/images/languages/english.png";
+import englishFlag from "../assets/images/languages/english.webp";
+import russianFlag from "../assets/images/languages/russia.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { Link } from "react-router-dom";
@@ -25,6 +26,7 @@ import HoverTitle from "./global/HoverTitle";
 import { t } from "i18next";
 import { OutsideClickClose } from "./global/OutsideClickClose";
 import { useTranslation } from "react-i18next";
+import WebIcon from "../assets/icons/WebIcon";
 export default function Navbar() {
   const { i18n } = useTranslation();
 
@@ -38,6 +40,11 @@ export default function Navbar() {
       localStorage.setItem("lang", "en");
       setActiveLang(false);
       setLangImg(englishFlag);
+      i18n.changeLanguage(lng);
+    } else if (lng == "ru") {
+      localStorage.setItem("lang", "ru");
+      setActiveLang(false);
+      setLangImg(russianFlag);
       i18n.changeLanguage(lng);
     }
   };
@@ -73,12 +80,22 @@ export default function Navbar() {
           <Link
             to="/"
             onClick={() => window.scrollTo(0, 0)}
+            className="flex items-center gap-[6px]"
+          >
+            <WebIcon className="h-[30px] aspect-square" />
+            <div className=" rounded-[3px] cursor-pointer text-textHead font-mainBold text-[16px] tracking-[2px]">
+              <span className="text-main ">ON</span>HOME
+            </div>
+          </Link>
+          {/* <Link
+            to="/"
+            onClick={() => window.scrollTo(0, 0)}
             className="flex items-center gap-3"
           >
             <div className=" h-[32px] w-[140px] flex justify-center items-center bg-gradient-to-tr from-main to-mainHover rounded-[5px] mobile:h-[30px] mobile:w-[130px]  cursor-pointer text-buttonText font-logoBold text-[18px] font-thin  tracking-[2.5px] [text-shadow:_2px_2px_10px_rgb(0_0_0_/_10%)] ">
               ONHOME
             </div>
-          </Link>
+          </Link> */}
           <OutsideClickClose
             setActivePop={setActiveLang}
             activePop={activeLang}
@@ -86,9 +103,12 @@ export default function Navbar() {
             <div className="relative h-[36px] aspect-square flex items-center justify-center">
               <button
                 onClick={() => setActiveLang((state) => !state)}
-                className=" h-[26px] aspect-square rounded-circle border border-buttonStroke flex items-center justify-center cursor-pointer"
+                className=" h-[26px] relative aspect-square rounded-circle border border-buttonStroke flex items-center justify-center cursor-pointer"
               >
-                <img className="max-h-[20px] aspect-square" src={langImg} />
+                <img
+                  className="max-h-[20px] rounded-circle aspect-square "
+                  src={langImg}
+                />
               </button>
               <div
                 className={` absolute h-auto w-[150px] overflow-hidden flex flex-col bg-whiteMain rounded-normal  shadow-sectionShadow top-[50px] left-2/4 duration-200 transition-[opacity,visibility] -translate-x-2/4 ${
@@ -120,6 +140,19 @@ export default function Navbar() {
                     alt="uk flag"
                   />
                   English
+                </button>
+                <button
+                  onClick={() => {
+                    handleLanguageChange("ru");
+                  }}
+                  className="px-4 text-start py-3 transition-colors hover:bg-whiteHover text-[12px] flex items-center text-textHead"
+                >
+                  <img
+                    className="max-h-[18px] rounded-circle aspect-square mr-3"
+                    src={russianFlag}
+                    alt="uk flag"
+                  />
+                  Русский
                 </button>
               </div>
             </div>

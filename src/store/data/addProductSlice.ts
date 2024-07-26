@@ -60,7 +60,11 @@ const initialState: TproductInfoStart = {
   estateVip: 0,
   estateVipDays: null,
 };
-export type Tlocation = { city: string; district: string; urban: string };
+export type Tlocation = {
+  city: string;
+  district: string;
+  urban: string;
+};
 type TlocationN = {
   city: string | null;
   district: string | null;

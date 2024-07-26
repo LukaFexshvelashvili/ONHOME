@@ -286,10 +286,16 @@ export function EstateStatus({
 }
 export function EstateAddress(props: { error: boolean }) {
   const [openLocations, setOpenLocations] = useState<boolean>(false);
-  const [locations, setLocations] = useState<Tlocation>({
+  const [locations, setLocations] = useState<{
+    city: string;
+    district: string;
+    urban: string;
+    display: { city: string; district: string; urban: string };
+  }>({
     city: "",
     district: "",
     urban: "",
+    display: { city: "", district: "", urban: "" },
   });
   const getInput = useRef<any>(null);
   const dispatch = useDispatch();
@@ -315,7 +321,6 @@ export function EstateAddress(props: { error: boolean }) {
       document.body.classList.remove("no-scroll");
     };
   }, [openLocations]);
-
   return (
     <div className="flex flex-col relative z-10">
       {openLocations ? (
@@ -357,17 +362,19 @@ export function EstateAddress(props: { error: boolean }) {
         className="cursor-pointer rounded-lg h-[40px]  max-w-[500px] w-full gap-2 flex items-center bg-whiteMain border-2 mt-2 text-textDesc text-[14px] border-lineBg font-mainRegular px-2"
       >
         <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
-          {t("filters.city")}: {locations.city ? locations.city : "*"}{" "}
+          {t("filters.city")}:{" "}
+          {locations.display.city ? locations.display.city : "*"}{" "}
         </div>
         <div className="h-[50%] w-[2px] bg-lineBg "></div>
         <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
           {t("filters.district")}:{" "}
-          {locations.district ? locations.district : "*"}{" "}
+          {locations.display.district ? locations.display.district : "*"}{" "}
         </div>
         <div className="h-[50%] w-[2px] bg-lineBg "></div>
 
         <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
-          {t("filters.urban")}: {locations.urban ? locations.urban : "*"}{" "}
+          {t("filters.urban")}:{" "}
+          {locations.display.urban ? locations.display.urban : "*"}{" "}
         </div>
       </div>
 

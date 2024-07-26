@@ -38,11 +38,17 @@ function SearchInput() {
   const [inputSelect, setInputSelect] = useState<null | number>(null);
   const [getType, setGetType] = useState<null | string>(null);
   const [getDeal, setGetDeal] = useState<null | number>(null);
-  const [getLocation, setGetLoaction] = useState<{
+  const [getLocation, setGetLocation] = useState<{
     city: string;
     district: string;
     urban: string;
-  }>({ city: "", district: "", urban: "" });
+    display: { city: string; district: string; urban: string };
+  }>({
+    city: "",
+    district: "",
+    urban: "",
+    display: { city: "", district: "", urban: "" },
+  });
   const [searchTitle, setSearchTitle] = useState<string>("");
   const [getSizes, setGetSizes] = useState<null | number[]>(null);
   const [getRooms, setGetRooms] = useState<number | null>(null);
@@ -171,17 +177,24 @@ function SearchInput() {
             >
               <FilterPlaceIcon className=" small:w-[20px] h-[16px] [&>path]:fill-white" />{" "}
               <p className="max-w-[150px] text-[13px] font-mainRegular text-[#ffffffd3] overflow-hidden text-nowrap text-ellipsis">
-                {getLocation.city !== ""
-                  ? getLocation.district
-                    ? getLocation.city + " > " + getLocation.district
-                    : getLocation.city
+                {getLocation.display.city !== ""
+                  ? getLocation.display.district
+                    ? getLocation.display.city +
+                      " > " +
+                      getLocation.display.district
+                    : getLocation.display.city
                   : t("global.placeholders.location")}
               </p>
             </div>
             {getLocation.city !== "" && (
               <button
                 onClick={() =>
-                  setGetLoaction({ city: "", district: "", urban: "" })
+                  setGetLocation({
+                    city: "",
+                    district: "",
+                    urban: "",
+                    display: { city: "", district: "", urban: "" },
+                  })
                 }
                 className="h-[20px] aspect-square absolute right-2 flex justify-center items-center p-1 z-10"
               >
@@ -285,8 +298,9 @@ function SearchInput() {
                     {t("global.titles.choose_location")}
                   </p>
                   <SearchPlace
-                    setData={setGetLoaction}
-                    closeWindow={setInputSelect}
+                    setData={setGetLocation}
+                    closeWindow={() => setInputSelect(null)}
+                    defData={getLocation}
                   />
                 </>
               ) : inputSelect == 3 ? (

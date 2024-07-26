@@ -20,6 +20,7 @@ function FiltersSection(props: {
 
   const [openLocations, setOpenLocations] = useState(false);
 
+  const paramsData: any = params.get("displaySearch");
   useEffect(() => {
     if (props.openFilters) {
       document.body.classList.add("no-scroll");
@@ -53,10 +54,16 @@ function FiltersSection(props: {
               setData={(locations: any) => {
                 updateParams(params, setParams, locations);
               }}
+              forParams
               defData={{
                 city: params.get("city") ? params.get("city") : "",
                 district: params.get("district") ? params.get("district") : "",
                 urban: params.get("urban") ? params.get("urban") : "",
+                display: {
+                  city: paramsData ? JSON.parse(paramsData).city : "",
+                  district: paramsData ? JSON.parse(paramsData).district : "",
+                  urban: paramsData ? JSON.parse(paramsData).urban : "",
+                },
               }}
               closeWindow={() => setOpenLocations(false)}
             />
@@ -123,18 +130,18 @@ function FiltersSection(props: {
                 >
                   <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
                     {t("filters.city")}:{" "}
-                    {params.get("city") ? params.get("city") : "*"}{" "}
+                    {paramsData ? JSON.parse(paramsData).city : "*"}{" "}
                   </div>
                   <div className="h-[50%] w-[2px] bg-lineBg "></div>
                   <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
                     {t("filters.district")}:{" "}
-                    {params.get("district") ? params.get("district") : "*"}{" "}
+                    {paramsData ? JSON.parse(paramsData).district : "*"}{" "}
                   </div>
                   <div className="h-[50%] w-[2px] bg-lineBg "></div>
 
                   <div className=" w-[33%] overflow-hidden max-w-[33%] text-nowrap text-ellipsis">
                     {t("filters.urban")}:{" "}
-                    {params.get("urban") ? params.get("urban") : "*"}{" "}
+                    {paramsData ? JSON.parse(paramsData).urban : "*"}{" "}
                   </div>
                 </div>
               </div>
