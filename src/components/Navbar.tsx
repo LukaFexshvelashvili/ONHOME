@@ -24,7 +24,7 @@ import { NotificationBar, ProfileBar } from "./NavbarComponents";
 import { Tuser } from "../store/data/userSlice";
 import HoverTitle from "./global/HoverTitle";
 import { t } from "i18next";
-import { OutsideClickClose } from "./global/OutsideClickClose";
+// import { OutsideClickClose } from "./global/OutsideClickClose";
 import { useTranslation } from "react-i18next";
 import WebIcon from "../assets/icons/WebIcon";
 export default function Navbar() {
@@ -33,18 +33,18 @@ export default function Navbar() {
   const handleLanguageChange = (lng: string) => {
     if (lng == "ka") {
       localStorage.setItem("lang", "ka");
-      setActiveLang(false);
-      setLangImg(georgianFlag);
+      // setActiveLang(false);
+      // setLangImg(georgianFlag);
       i18n.changeLanguage(lng);
     } else if (lng == "en") {
       localStorage.setItem("lang", "en");
-      setActiveLang(false);
-      setLangImg(englishFlag);
+      // setActiveLang(false);
+      // setLangImg(englishFlag);
       i18n.changeLanguage(lng);
     } else if (lng == "ru") {
       localStorage.setItem("lang", "ru");
-      setActiveLang(false);
-      setLangImg(russianFlag);
+      // setActiveLang(false);
+      // setLangImg(russianFlag);
       i18n.changeLanguage(lng);
     }
   };
@@ -54,16 +54,16 @@ export default function Navbar() {
   );
 
   const [activePop, setActivePop] = useState<null | string>(null);
-  const [activeLang, setActiveLang] = useState<boolean>(false);
-  const [langImg, setLangImg] = useState<string>(
-    i18n.language == "ka"
-      ? georgianFlag
-      : i18n.language == "en"
-      ? englishFlag
-      : i18n.language == "ru"
-      ? russianFlag
-      : georgianFlag
-  );
+  // const [activeLang, setActiveLang] = useState<boolean>(false);
+  // const [langImg, setLangImg] = useState<string>(
+  //   i18n.language == "ka"
+  //     ? georgianFlag
+  //     : i18n.language == "en"
+  //     ? englishFlag
+  //     : i18n.language == "ru"
+  //     ? russianFlag
+  //     : georgianFlag
+  // );
 
   let favNums = 0;
   if (localStorage.getItem("favorites")) {
@@ -85,20 +85,57 @@ export default function Navbar() {
             className="flex items-center gap-[6px]"
           >
             <WebIcon className="h-[30px] aspect-square" />
-            <div className=" rounded-[3px] cursor-pointer text-textHead font-mainBoldLg text-[16px] tracking-[2px]">
+            <div className=" rounded-[3px] cursor-pointer text-textHead font-mainBoldLg text-[16px] tracking-[2px] mobileTab:hidden">
               <span className="text-main ">ON</span>HOME
             </div>
           </Link>
-          {/* <Link
-            to="/"
-            onClick={() => window.scrollTo(0, 0)}
-            className="flex items-center gap-3"
-          >
-            <div className=" h-[32px] w-[140px] flex justify-center items-center bg-gradient-to-tr from-main to-mainHover rounded-[5px] mobile:h-[30px] mobile:w-[130px]  cursor-pointer text-buttonText font-logoBold text-[18px] font-thin  tracking-[2.5px] [text-shadow:_2px_2px_10px_rgb(0_0_0_/_10%)] ">
-              ONHOME
-            </div>
-          </Link> */}
-          <OutsideClickClose
+
+          <div className=" flex items-center gap-3 ml-3">
+            <button
+              onClick={() => {
+                handleLanguageChange("ka");
+              }}
+              className={`text-start rounded-circle outline outline-[2px] p-[2px] font-mainBoldLg transition-colors hover:bg-whiteHover text-[12px] flex items-center text-textHead ${
+                i18n.language == "ka" ? "outline-main" : "outline-whiteLoad"
+              }`}
+            >
+              <img
+                className="max-h-[18px] aspect-square"
+                src={georgianFlag}
+                alt="georgian flag"
+              />
+            </button>
+            <button
+              onClick={() => {
+                handleLanguageChange("en");
+              }}
+              className={`text-start rounded-circle outline outline-[2px] p-[2px] font-mainBoldLg transition-colors hover:bg-whiteHover text-[12px] flex items-center text-textHead ${
+                i18n.language == "en" ? "outline-main" : "outline-whiteLoad"
+              }`}
+            >
+              <img
+                className="max-h-[18px] aspect-square"
+                src={englishFlag}
+                alt="uk flag"
+              />
+            </button>
+            <button
+              onClick={() => {
+                handleLanguageChange("ru");
+              }}
+              className={`text-start rounded-circle outline outline-[2px] p-[2px]  font-rsnf transition-colors hover:bg-whiteHover text-[12px] flex items-center text-textHead ${
+                i18n.language == "ru" ? "outline-main" : "outline-whiteLoad"
+              }`}
+            >
+              <img
+                className="max-h-[18px] rounded-circle aspect-square"
+                src={russianFlag}
+                alt="uk flag"
+              />
+            </button>
+          </div>
+          {/* <OutsideClickClose
+            className="hidden"
             setActivePop={setActiveLang}
             activePop={activeLang}
           >
@@ -158,7 +195,7 @@ export default function Navbar() {
                 </button>
               </div>
             </div>
-          </OutsideClickClose>
+          </OutsideClickClose> */}
         </div>
         <div className="mobile:hidden flex items-center gap-4">
           <Link to={"/Contact"}>
@@ -176,7 +213,11 @@ export default function Navbar() {
             </Link>
           ) : (
             <Link to={"/Login"}>
-              <button className=" font-mainSemiBold flex items-center justify-center gap-3 tracking-widest w-[140px] h-[34px] bg-mainClear text-main rounded-[8px] text-[12px] transition-colors hover:bg-mainClearHover">
+              <button
+                className={` font-mainSemiBold flex items-center justify-center gap-3 tracking-widest ${
+                  i18n.language == "ru" ? "w-[160px]" : "w-[140px]"
+                } h-[34px] bg-mainClear text-main rounded-[8px] text-[12px] transition-colors hover:bg-mainClearHover`}
+              >
                 <PlusIcon className="h-[13px] aspect-square  [&>path]:fill-main" />
                 {t("navbar.add_form")}
               </button>

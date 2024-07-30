@@ -72,12 +72,13 @@ export default function Register() {
       passwordVerifier.filter((item: number) => item == 1).length
     );
   }, [passwordInput]);
-
-  if (user.isLogged === null) {
-    if (user.isLogged === true) {
-      navigate("/");
+  useEffect(() => {
+    if (user.isLogged === null) {
+      if (user.isLogged === true) {
+        navigate("/");
+      }
     }
-  }
+  }, [user.isLogged, navigate]);
 
   const handleForm = (e?: React.FormEvent<HTMLFormElement>) => {
     if (e) {

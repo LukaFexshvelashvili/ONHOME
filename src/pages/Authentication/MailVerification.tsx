@@ -80,9 +80,11 @@ export default function MailVerification(props: {
       }
     }
   };
-  if (user.isLogged === null || user.isLogged == true) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (user.isLogged === null || user.isLogged == true) {
+      navigate("/");
+    }
+  }, [user.isLogged, navigate]);
   return (
     <>
       <Helmet>

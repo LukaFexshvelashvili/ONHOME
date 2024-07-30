@@ -4,9 +4,11 @@ export function OutsideClickClose({
   activePop,
   children,
   setActivePop,
+  className,
 }: {
   activePop: boolean;
   children: ReactElement;
+  className?: string;
   setActivePop: Function;
 }) {
   const popupBlock = useRef<null | HTMLDivElement>(null);
@@ -30,5 +32,9 @@ export function OutsideClickClose({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [popupBlock, activePop]);
-  return <div ref={popupBlock}>{children}</div>;
+  return (
+    <div className={className} ref={popupBlock}>
+      {children}
+    </div>
+  );
 }

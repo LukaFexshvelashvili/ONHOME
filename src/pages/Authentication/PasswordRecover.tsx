@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { Tuser } from "../../store/data/userSlice";
@@ -35,11 +35,13 @@ export default function PasswordRecover() {
       });
   }, []);
 
-  if (user.isLogged === null) {
-    if (user.isLogged === true) {
-      navigate("/");
+  useEffect(() => {
+    if (user.isLogged === null) {
+      if (user.isLogged === true) {
+        navigate("/");
+      }
     }
-  }
+  }, [user.isLogged, navigate]);
   return (
     <>
       {show == 0 ? (

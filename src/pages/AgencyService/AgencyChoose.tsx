@@ -22,9 +22,7 @@ export default function MaclerChoose() {
   });
   const [message, setMessage] = useState<{ status: number }>({ status: -1 });
   const [myProducts, setMyProducts] = useState<any[]>([]);
-  if (userData.isLogged === false) {
-    navigate("/Login");
-  }
+
   const maclerRequest = () => {
     if (productId.id) {
       sendMaclerRequest(
@@ -35,6 +33,9 @@ export default function MaclerChoose() {
     }
   };
   useEffect(() => {
+    if (userData.isLogged === false) {
+      navigate("/Login");
+    }
     if (firstRender.current) {
       if (userData.id) {
         axiosCall

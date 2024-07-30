@@ -27,6 +27,9 @@ import CookieAgreement from "./pages/Profile/components/CookieAgreement";
 import AddProduct from "./pages/AddProduct/AddProduct";
 import { useTranslation } from "react-i18next";
 
+const Success = lazy(() => import("./pages/Payment/Success"));
+const Fail = lazy(() => import("./pages/Payment/Fail"));
+
 const NotFound = lazy(() => import("./pages/NotFound"));
 const RefundPolicy = lazy(() => import("./pages/RefundPolicy/RefundPolicy"));
 const SuspendedAccount = lazy(() => import("./pages/SuspendedAccount"));
@@ -188,6 +191,8 @@ function App() {
                 <Route path="Search" element={<Search />} />
                 <Route path="Product" element={<Product />} />
                 <Route path="Contact" element={<Contact />} />
+                <Route path="Payment/Success" element={<Success />} />
+                <Route path="Payment/Fail" element={<Fail />} />
                 <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
                 <Route path="RefundPolicy" element={<RefundPolicy />} />
                 <Route path="Product/:id" element={<Product />} />

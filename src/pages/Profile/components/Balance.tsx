@@ -1,16 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import masterCard from "../../../assets/images/logos/masterCard.jpg";
 import visa from "../../../assets/images/logos/visa.png";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { t } from "i18next";
+import axiosCall from "../../../hooks/axiosCall";
+import { useDispatch } from "react-redux";
+import { setWebLoader } from "../../../store/data/webUISlice";
 export default function Balance() {
   const [amount, setAmount] = useState<number | null>(null);
   const [error, setError] = useState<string>("");
+  const dispatch = useDispatch();
   const getPay = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     if (amount && amount >= 5) {
+      dispatch(setWebLoader({ active: true, opacity: true }));
+      const formData = new FormData();
+      formData.append("quantity", JSON.stringify(amount));
+      axiosCall
+        .post("payment/get", formData, { withCredentials: true })
+        .then((res) => {
+          dispatch(setWebLoader({ active: false, opacity: false }));
+          if (res.data.id) {
+            window.location.href = res.data._links.redirect.href;
+          }
+        });
     } else {
       setError(t("balance.minimum_amount"));
     }

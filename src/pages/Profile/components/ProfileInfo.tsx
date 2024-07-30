@@ -15,6 +15,7 @@ import {
 import CryptoJS from "crypto-js";
 import ContentLoader from "../../../components/global/ContentLoader";
 import { t } from "i18next";
+import { FormatTime } from "../../../components/global/Addons";
 type TuserInfo = {
   title: string;
   value: string;
@@ -40,9 +41,11 @@ export default function ProfileInfo() {
   const navigate = useNavigate();
   const [data, setData] = useState<null | TuserCardInfo>(null);
   const [editInfo, setEditInfo] = useState<boolean>(false);
-  if (user.isLogged == false) {
-    navigate("/Login");
-  }
+  useEffect(() => {
+    if (user.isLogged == false) {
+      navigate("/Login");
+    }
+  }, [user.isLogged, navigate]);
 
   useEffect(() => {
     axiosCall
@@ -141,9 +144,10 @@ export default function ProfileInfo() {
 
         <div className="flex flex-col">
           <div className="flex [&>div]:text-textDesc [&>div]:text-[14px] mb-3">
-            <div className=" w-1/12">ID</div>
-            <div className=" w-4/12">{t("profileInfo.spend_money")}</div>
-            <div className=" w-4/12">{t("profileInfo.actived")}</div>
+            <div className=" w-2/12">ID</div>
+            <div className=" w-3/12">{t("profileInfo.spend_money")}</div>
+            <div className=" w-2/12">{t("profileInfo.actived")}</div>
+            <div className=" w-3/12">{t("status")}</div>
             <div className=" w-3/12">{t("profileInfo.date")}</div>
           </div>
           <div
@@ -467,23 +471,34 @@ function SubmitMailCode(props: {
 }
 
 function PaymentCard({ paymentData }: { paymentData: TuserCardInfoPayments }) {
-  const color = ActiveOffers().filter(
-    (item) => item.name == paymentData.payment_for
-  )[0].mainColor;
+  let color = "var(--main)";
+  if (paymentData.status !== 2) {
+    color = ActiveOffers().filter(
+      (item) => item.name == paymentData.payment_for
+    )[0].mainColor;
+  }
+
   return (
     <div className="flex [&>div]:text-textDesc [&>div]:text-[14px] my-1">
-      <div className=" w-1/12">{paymentData.id}</div>
-      <div className=" w-4/12">
+      <div className=" w-2/12">{paymentData.id}</div>
+      <div className=" w-3/12">
         <p className="text-main">
           {(paymentData.price / 100)
             .toFixed(2)
             .replace(/\B(?=(\d{3})+(?!\d))/g, " ") + "₾"}
         </p>
       </div>
-      <div className=" w-4/12" style={{ color: color ? color : "" }}>
+      <div className=" w-2/12" style={{ color: color ? color : "" }}>
         {paymentData.payment_for}
       </div>
-      <div className=" w-3/12">{paymentData.payment_date}</div>
+      <div className=" w-3/12">
+        {paymentData.success ? (
+          <p className="text-greenI">{t("success")}</p>
+        ) : (
+          <p className="text-redI">{t("failed")}</p>
+        )}
+      </div>
+      <div className=" w-3/12">{FormatTime(paymentData.payment_date)}</div>
     </div>
   );
 }

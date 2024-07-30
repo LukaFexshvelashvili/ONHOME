@@ -13,7 +13,7 @@ import {
 import SideSection from "./components/SideSection";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axiosCall from "../../hooks/axiosCall";
 import { Tuser } from "../../store/data/userSlice";
 import { makeUserSession, mergeFavorites } from "../../hooks/serverFunctions";
@@ -33,62 +33,76 @@ export default function Login() {
     (store: RootState) => store.webUI.darkMode
   );
 
-  const mailRef = useRef<null | HTMLInputElement>(null);
-  const passwordRef = useRef<null | HTMLInputElement>(null);
+  const mailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  if (user.isLogged === true) {
-    navigate("/");
-  }
+  const validateInputs = (mail: string, password: string): boolean => {
+    return mail.length > 2 && password.length > 7;
+  };
 
-  const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setError("");
 
-    e.preventDefault();
-    if (mailRef.current?.value && passwordRef.current?.value) {
-      dispatch(setWebLoader({ active: true, opacity: true }));
-      var mail: string = mailRef.current.value;
-      var password: string = passwordRef.current.value;
-      const formData = new FormData();
+    const mail = mailRef.current?.value ?? "";
+    const password = passwordRef.current?.value ?? "";
 
+    if (!validateInputs(mail, password)) {
+      setError(t("login.fill_all_inputs"));
+      return;
+    }
+
+    dispatch(setWebLoader({ active: true, opacity: true }));
+
+    try {
+      const formData = new FormData();
       formData.append("mail", mail);
       formData.append("password", password);
       formData.append("remember", JSON.stringify(remember));
-      if (mail.length > 2 && password.length > 7) {
-        axiosCall
-          .post("authentication/user_login", formData, {
-            withCredentials: true,
-          })
-          .then((res) => {
-            dispatch(setWebLoader({ active: false }));
 
-            if (res.data.status === 3) {
-              makeUserSession(dispatch, res.data.user_data);
-              if (localStorage.getItem("favorites")) {
-                const currentFavorites: any = localStorage.getItem("favorites");
-                mergeFavorites(
-                  dispatch,
-                  JSON.parse(res.data.user_data.favorites),
-                  JSON.parse(currentFavorites)
-                );
-              }
-              navigate("/");
-            }
-            if (res.data.status === 0) {
-              setError(t("login.password_or_mail_is_incorrect"));
-            }
-            if (res.data.status === -1) {
-              setError(t("login.an_error_occurred_try_again_later"));
-            }
-          })
-          .catch((err) => console.log(err));
-      } else {
-        setError(t("login.fill_all_inputs"));
+      const response = await axiosCall.post(
+        "authentication/user_login",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
+
+      dispatch(setWebLoader({ active: false }));
+
+      switch (response.data.status) {
+        case 3:
+          makeUserSession(dispatch, response.data.user_data);
+          const currentFavorites = localStorage.getItem("favorites");
+          if (currentFavorites) {
+            mergeFavorites(
+              dispatch,
+              JSON.parse(response.data.user_data.favorites),
+              JSON.parse(currentFavorites)
+            );
+          }
+          navigate("/");
+          break;
+        case 0:
+          setError(t("login.password_or_mail_is_incorrect"));
+          break;
+        case -1:
+          setError(t("login.an_error_occurred_try_again_later"));
+          break;
+        default:
+          setError(t("login.an_error_occurred_try_again_later"));
       }
-    } else {
-      setError(t("login.fill_all_inputs"));
+    } catch (err) {
+      dispatch(setWebLoader({ active: false }));
+      setError(t("login.an_error_occurred_try_again_later"));
     }
   };
 
+  useEffect(() => {
+    if (user.isLogged) {
+      navigate("/");
+    }
+  }, [user.isLogged, navigate]);
   return (
     <>
       <Helmet>
