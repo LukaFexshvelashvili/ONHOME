@@ -1,6 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  --rsnf: "rsnf";
+  --mainSemiBold: "mainSemiBold";
+  --mainBold: "mainBold";
+  --mainBoldLg: "mainBold";
+  --mainMedium: "mainMedium";
+  --mainRegular: "mainRegular";
+  --logoBold: "logoBold";
+}
+.rsnf {
+  --mainSemiBold: "rsnf";
+  --mainBold: "rsnf";
+  --mainMedium: "rsnf";
+  --mainRegular: "rsnf";
+  --logoBold: "logoBold";
+}
 
 @font-face {
   font-family: mainSemiBold;
@@ -27,7 +43,11 @@
   src: url("/fonts/junegull.woff2") format("woff2");
   font-display: swap;
 }
-
+@font-face {
+  font-family: rsnf;
+  src: url("/fonts/rsnf.woff2") format("woff2");
+  font-display: swap;
+}
 img {
   -webkit-transform: translateZ(0);
 }
@@ -68,7 +88,7 @@ input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
 }
 body {
-  font-family: mainSemiBold;
+  font-family: var(--mainSemiBold);
   letter-spacing: 0.5px;
 }
 body.no-scroll {

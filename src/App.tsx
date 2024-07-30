@@ -24,10 +24,11 @@ import Home from "./pages/Home/Home";
 import Product from "./pages/Product/Product";
 import { Helmet } from "react-helmet";
 import CookieAgreement from "./pages/Profile/components/CookieAgreement";
-import NotFound from "./pages/NotFound";
 import AddProduct from "./pages/AddProduct/AddProduct";
 import { useTranslation } from "react-i18next";
 
+const NotFound = lazy(() => import("./pages/NotFound"));
+const RefundPolicy = lazy(() => import("./pages/RefundPolicy/RefundPolicy"));
 const SuspendedAccount = lazy(() => import("./pages/SuspendedAccount"));
 const Notifications = lazy(
   () => import("./pages/Profile/components/Notifications")
@@ -54,7 +55,7 @@ const ForgotPassword = lazy(
 );
 
 function App() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const UISettings = useSelector((store: RootState) => store.webUI);
   const user: Tuser = useSelector((store: RootState) => store.user);
   const popups: TPopups = useSelector((store: RootState) => store.popups);
@@ -113,6 +114,13 @@ function App() {
     loggedUser(navigate, user.isLogged);
   }, [navigate, user.isLogged, location.pathname]);
 
+  useEffect(() => {
+    if (i18n.language == "ru") {
+      document.body.classList.add("rsnf");
+    } else {
+      document.body.classList.remove("rsnf");
+    }
+  }, [i18n.language]);
   return (
     <>
       <Helmet>
@@ -165,6 +173,7 @@ function App() {
               <Route path="/">
                 <Route index element={<Home />} />
                 <Route path="/NotFound" element={<NotFound />} />
+                <Route path="*" element={<NotFound />} />
 
                 <Route path="Login" element={<Login />} />
                 <Route path="Register" element={<Register />} />
@@ -180,6 +189,7 @@ function App() {
                 <Route path="Product" element={<Product />} />
                 <Route path="Contact" element={<Contact />} />
                 <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
+                <Route path="RefundPolicy" element={<RefundPolicy />} />
                 <Route path="Product/:id" element={<Product />} />
                 <Route path="AddProduct" element={<AddProduct />} />
                 <Route path="SuspendedAccount" element={<SuspendedAccount />} />

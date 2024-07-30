@@ -23,7 +23,7 @@ import {
   setProductCache,
 } from "../../components/cache/cacheFunctions";
 import { Helmet } from "react-helmet";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 export type TproductPage = {
   productData: TProductData;
@@ -32,6 +32,7 @@ export type TproductPage = {
 };
 
 export default function Product() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -97,7 +98,7 @@ export default function Product() {
   return (
     <>
       <Helmet>
-        <title>{pageData?.productData.estate_title}</title>
+        <title>{pageData?.productData.estate_title} - OnHome.Ge</title>
         <meta
           name="description"
           lang="ka"
@@ -124,6 +125,24 @@ export default function Product() {
         <meta
           property="og:site_name"
           content="OnHome.ge - უძრავი ქონების ყიდვა გაყიდვა გაქირავება"
+        />
+        <meta
+          name="image"
+          lang="ka"
+          content={
+            pageData?.productData.estate_active_image
+              ? pageData?.productData.estate_active_image
+              : "https://onhome.ge/onhome-thumbnail.jpg"
+          }
+        />
+        <meta
+          property="og:image"
+          lang="ka"
+          content={
+            pageData?.productData.estate_active_image
+              ? pageData?.productData.estate_active_image
+              : "https://onhome.ge/onhome-thumbnail.jpg"
+          }
         />
       </Helmet>
       <main className="min-h-screen">

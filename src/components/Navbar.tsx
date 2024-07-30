@@ -85,7 +85,7 @@ export default function Navbar() {
             className="flex items-center gap-[6px]"
           >
             <WebIcon className="h-[30px] aspect-square" />
-            <div className=" rounded-[3px] cursor-pointer text-textHead font-mainBold text-[16px] tracking-[2px]">
+            <div className=" rounded-[3px] cursor-pointer text-textHead font-mainBoldLg text-[16px] tracking-[2px]">
               <span className="text-main ">ON</span>HOME
             </div>
           </Link>
@@ -121,7 +121,7 @@ export default function Navbar() {
                   onClick={() => {
                     handleLanguageChange("ka");
                   }}
-                  className="px-4 text-start py-3 transition-colors hover:bg-whiteHover text-[12px] flex items-center text-textHead"
+                  className="px-4 text-start py-3 font-mainBoldLg transition-colors hover:bg-whiteHover text-[12px] flex items-center text-textHead"
                 >
                   <img
                     className="max-h-[18px] aspect-square mr-3"
@@ -134,7 +134,7 @@ export default function Navbar() {
                   onClick={() => {
                     handleLanguageChange("en");
                   }}
-                  className="px-4 text-start py-3 transition-colors hover:bg-whiteHover text-[12px] flex items-center text-textHead"
+                  className="px-4 text-start py-3 font-mainBoldLg transition-colors hover:bg-whiteHover text-[12px] flex items-center text-textHead"
                 >
                   <img
                     className="max-h-[18px] aspect-square mr-3"
@@ -147,7 +147,7 @@ export default function Navbar() {
                   onClick={() => {
                     handleLanguageChange("ru");
                   }}
-                  className="px-4 text-start py-3 transition-colors hover:bg-whiteHover text-[12px] flex items-center text-textHead"
+                  className="px-4 text-start py-3 font-rsnf transition-colors hover:bg-whiteHover text-[12px] flex items-center text-textHead"
                 >
                   <img
                     className="max-h-[18px] rounded-circle aspect-square mr-3"

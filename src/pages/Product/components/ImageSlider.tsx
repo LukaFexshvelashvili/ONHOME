@@ -157,9 +157,9 @@ function FullSliderBlock({
         <div className="flex flex-col gap-5 justify-center items-center relative">
           <div
             onClick={() => setFullSlider(false)}
-            className="h-[40px] aspect-square top-0 right-0 absolute cursor-pointer"
+            className="h-[40px] aspect-square top-0 right-0 absolute cursor-pointer rounded-lg flex justify-center items-center bg-mainClear transition-colors hover:bg-mainClearHover"
           >
-            <PopupCloseIcon className="h-5 [&>path]:fill-blackMain" />
+            <PopupCloseIcon className="h-5 [&>path]:fill-buttonText" />
           </div>
           <div className="relative flex items-center justify-center gap-3  h-auto w-[90%] max-w-[1200px] mobile:w-full  aspect-video rounded-xl overflow-hidden">
             {!loaded ? (

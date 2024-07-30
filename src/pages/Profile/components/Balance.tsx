@@ -76,6 +76,12 @@ export default function Balance() {
             >
               {t("balance.payment_history")}
             </Link>
+            <Link
+              to={"/RefundPolicy"}
+              className="text-[14px] text-main mt-8 underline text-center"
+            >
+              {t("footer.refund_policy")}
+            </Link>
           </div>
         </div>
       </div>

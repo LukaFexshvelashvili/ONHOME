@@ -148,11 +148,13 @@ export default {
         block: "14px",
       },
       fontFamily: {
-        mainSemiBold: "mainSemiBold",
-        mainBold: "mainBold",
-        mainMedium: "mainMedium",
-        mainRegular: "mainRegular",
-        logoBold: "logoBold",
+        mainSemiBold: "var(--mainSemiBold)",
+        mainBold: "var(--mainBold)",
+        mainBoldLg: "var(--mainBoldLg)",
+        mainMedium: "var(--mainMedium)",
+        mainRegular: "var(--mainRegular)",
+        logoBold: "var(--logoBold)",
+        rsnf: "var(--rsnf)",
       },
       fontSize: {
         Asmallest: "11px",

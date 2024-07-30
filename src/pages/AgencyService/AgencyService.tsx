@@ -10,7 +10,7 @@ import {
   MaclerHouse3,
 } from "../../assets/images/decorations/svg/Decorations";
 import { Helmet } from "react-helmet";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 type Tservice = {
   icon: JSX.Element;
@@ -18,6 +18,7 @@ type Tservice = {
   color: string;
 };
 export default function AgencyService() {
+  const { t } = useTranslation();
   const services: Tservice[] = [
     {
       icon: <ClientContact className="h-[30px] mobileTab:h-[22px]" />,

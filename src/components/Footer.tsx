@@ -152,7 +152,7 @@ export default function Footer() {
       <div className="content_container flex justify-between  [&>p]:text-Asmall medium:[&>p]:text-[11px] text-Asmall [&>p]:text-textInfo [&>p]:cursor-pointer py-3">
         <div className="flex gap-4  text-Asmall [&>a]:text-Asmall [&>a]:text-textInfo medium:[&>a]:text-[11px]  [&>a]:cursor-pointer flex-wrap">
           <Link to={"PrivacyPolicy"}> {t("footer.terms_and_conditions")}</Link>
-          <Link to={"PrivacyPolicy"}> {t("footer.privacy")} </Link>
+          <Link to={"RefundPolicy"}> {t("footer.refund_policy")} </Link>
         </div>
         <p>{t("footer.all_rights_served")} </p>
       </div>
