@@ -42,7 +42,7 @@ export default function ProfileInfo() {
   const [data, setData] = useState<null | TuserCardInfo>(null);
   const [editInfo, setEditInfo] = useState<boolean>(false);
   useEffect(() => {
-    if (user.isLogged == false) {
+    if (user.isLogged !== null && user.isLogged == false) {
       navigate("/Login");
     }
   }, [user.isLogged, navigate]);

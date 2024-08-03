@@ -146,9 +146,10 @@ function SearchPlace(props: {
                 clearInfo();
                 setCity({ ka: "", display: "" });
               }}
-              className={`small:w-full h-min text-center justify-center select-none hidden mobile:flex items-center rounded-lg px-2 py-2 min-h-[30px]  small:min-h-[24px] small:text-[12px] font-mainRegular text-[14px] cursor-pointer transition-colors bg-main text-buttonText hover:bg-mainHover duration-150 `}
+              className={`relative small:w-full h-min text-center justify-center select-none hidden mobile:flex items-center rounded-lg px-2 py-2 min-h-[30px]  small:min-h-[24px] small:text-[12px] font-mainRegular text-[14px] cursor-pointer transition-colors bg-main text-buttonText hover:bg-mainHover duration-150 `}
             >
               {city.display}
+              <PopupCloseIcon className="h-[12px] aspect-square absolute right-3  [&>path]:fill-white" />
             </div>
           ) : null}
           <div
@@ -175,7 +176,7 @@ function SearchPlace(props: {
               ) : null}{" "}
             </div>
             {city.ka !== "" ? (
-              <div className="smScroll  small:justify-center flex flex-wrap  gap-2.5 h-auto max-h-[400px] small:min-h-[150px] small:max-h-[250px] overflow-auto pr-2">
+              <div className="smScroll  small:justify-center flex flex-wrap  gap-2.5 h-auto max-h-[400px] small:min-h-[150px] small:max-h-[250px] overflow-auto pr-2 mobileSmall:justify-start mobileSmall:pl-5">
                 <GetDistricts
                   search={districtSearch}
                   district={district}

@@ -21,6 +21,7 @@ import Settings from "./components/Settings";
 import ProfileInfo from "./components/ProfileInfo";
 import { Helmet } from "react-helmet";
 import { t } from "i18next";
+import NotFound from "../NotFound";
 
 export default function Profile() {
   const userData = useSelector((store: RootState) => store.user);
@@ -150,30 +151,22 @@ export default function Profile() {
         </section>
         <section className="flex flex-col flex-[5] gap-4 ">
           <Routes>
-            <Route path="/">
-              {userData.isLogged ? (
+            {userData.isLogged ? (
+              <>
                 <Route index element={<MyProducts />} />
-              ) : null}
-              {userData.isLogged ? (
                 <Route path="MyProducts" element={<MyProducts />} />
-              ) : null}
-              {userData.isLogged ? (
                 <Route path="Balance" element={<Balance />} />
-              ) : null}
-              <Route path="SavedProducts" element={<SavedProducts />} />
-              {userData.isLogged ? (
-                <Route path="Notifications/" element={<Notifications />}>
+                <Route path="Notifications">
+                  <Route index element={<Notifications />} />
                   <Route path=":id" element={<Notifications />} />
                 </Route>
-              ) : null}
-              {userData.isLogged ? (
                 <Route path="LastSeenProducts" element={<LastSeenProducts />} />
-              ) : null}
-              <Route path="Settings" element={<Settings />} />
-              {userData.isLogged ? (
                 <Route path="ProfileInfo" element={<ProfileInfo />} />
-              ) : null}
-            </Route>
+              </>
+            ) : null}
+            <Route path="SavedProducts" element={<SavedProducts />} />
+            <Route path="Settings" element={<Settings />} />
+            <Route path="*" element={<NotFound start />} />
           </Routes>
         </section>
       </main>

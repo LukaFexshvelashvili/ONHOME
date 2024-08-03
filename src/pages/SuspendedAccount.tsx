@@ -6,7 +6,7 @@ import { PhoneFIlledIcon } from "../assets/icons/Icons";
 import HoverTitle from "../components/global/HoverTitle";
 import { FacebookIcon, InstagramIcon } from "../components/popups/SharePopup";
 
-export default function NotFound() {
+export default function SuspendedAccount() {
   const navigate = useNavigate();
   const userData = useSelector((store: RootState) => store.user);
   useEffect(() => {

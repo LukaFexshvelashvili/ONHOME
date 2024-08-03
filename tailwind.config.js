@@ -174,7 +174,7 @@ export default {
       mobile: { max: "800px" },
       mobileTab: { max: "600px" },
       searchCardLow: { max: "500px" },
-      mobileSmall: { max: "440px" },
+      mobileSmall: { max: "450px" },
       mobileSmallest: { max: "370px" },
     },
   },

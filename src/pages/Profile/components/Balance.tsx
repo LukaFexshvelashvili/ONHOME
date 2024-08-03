@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import masterCard from "../../../assets/images/logos/masterCard.jpg";
 import visa from "../../../assets/images/logos/visa.png";
 import { useState } from "react";
@@ -14,16 +14,24 @@ export default function Balance() {
   const getPay = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
-    if (amount && amount >= 5) {
+    if (amount && amount >= 2) {
       dispatch(setWebLoader({ active: true, opacity: true }));
       const formData = new FormData();
       formData.append("quantity", JSON.stringify(amount));
       axiosCall
         .post("payment/get", formData, { withCredentials: true })
         .then((res) => {
-          dispatch(setWebLoader({ active: false, opacity: false }));
-          if (res.data.id) {
-            window.location.href = res.data._links.redirect.href;
+          if (res.data.status == 100) {
+            if (res.data.data._links.redirect.href) {
+              window.location.href = res.data.data._links.redirect.href;
+            } else {
+              dispatch(setWebLoader({ active: false, opacity: false }));
+
+              setError(t("alert.error_on_server_description"));
+            }
+          } else {
+            setError(t("alert.error_on_server_description"));
+            dispatch(setWebLoader({ active: false, opacity: false }));
           }
         });
     } else {

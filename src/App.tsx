@@ -33,9 +33,7 @@ const Fail = lazy(() => import("./pages/Payment/Fail"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const RefundPolicy = lazy(() => import("./pages/RefundPolicy/RefundPolicy"));
 const SuspendedAccount = lazy(() => import("./pages/SuspendedAccount"));
-const Notifications = lazy(
-  () => import("./pages/Profile/components/Notifications")
-);
+
 const PasswordRecover = lazy(
   () => import("./pages/Authentication/PasswordRecover")
 );
@@ -198,13 +196,7 @@ function App() {
                 <Route path="Product/:id" element={<Product />} />
                 <Route path="AddProduct" element={<AddProduct />} />
                 <Route path="SuspendedAccount" element={<SuspendedAccount />} />
-                <Route path="Profile/*" element={<Profile />}>
-                  {user.isLogged ? (
-                    <Route path="Notifications/" element={<Notifications />}>
-                      <Route path=":id" element={<Notifications />} />
-                    </Route>
-                  ) : null}
-                </Route>
+                <Route path="Profile/*" element={<Profile />} />
                 <Route path="AgencyService" element={<AgencyService />} />
                 <Route path="AgencyChoose" element={<AgencyChoose />} />
                 <Route path="AdsMake" element={<AdsMake />} />
