@@ -23,13 +23,12 @@ function Success() {
         <title>{t("fail_title")}</title>
       </Helmet>
 
-      <div className=" h-[calc(100vh-60px)] min-h-[300px] flex justify-center flex-col items-center font-mainBold text-greenI">
+      <div className=" h-[calc(100vh-60px)] min-h-[300px] flex justify-center flex-col items-center font-mainBold text-redI">
         <div className="w-full h-[300px] rounded-lg bg-sectionBg shadow-cardShadow p-5 flex flex-col justify-center items-center text-start ">
           <p className="text-[28px] tracking-[1px] ">{t("fail_title")}</p>
           <p className="text-[16px] text-textDescCard mt-5 ">{t("fail_p")}</p>
           <p className="text-[16px] text-textDescCard mt-2 ">
-            ავტომატური მთავარ გვერდზე გადამისამართება{t("auto_redirect")}{" "}
-            {counter} წამში{t("seconds")}
+            {t("auto_redirect")} {counter} {t("seconds")}
           </p>
           <div className="flex gap-2 mt-5">
             <Link to={"/"} className="  mt-5">

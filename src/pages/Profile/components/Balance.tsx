@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import masterCard from "../../../assets/images/logos/masterCard.jpg";
 import visa from "../../../assets/images/logos/visa.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { t } from "i18next";
 import axiosCall from "../../../hooks/axiosCall";
@@ -11,6 +11,9 @@ export default function Balance() {
   const [amount, setAmount] = useState<number | null>(null);
   const [error, setError] = useState<string>("");
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setWebLoader({ active: false, opacity: false }));
+  }, []);
   const getPay = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
@@ -18,20 +21,24 @@ export default function Balance() {
       dispatch(setWebLoader({ active: true, opacity: true }));
       const formData = new FormData();
       formData.append("quantity", JSON.stringify(amount));
+
       axiosCall
         .post("payment/get", formData, { withCredentials: true })
         .then((res) => {
+          dispatch(setWebLoader({ active: false, opacity: false }));
+
           if (res.data.status == 100) {
+            setAmount(null);
+
             if (res.data.data._links.redirect.href) {
               window.location.href = res.data.data._links.redirect.href;
             } else {
-              dispatch(setWebLoader({ active: false, opacity: false }));
-
               setError(t("alert.error_on_server_description"));
             }
+          } else if (res.data.status == 3) {
+            setError(t("balance.minimum_amount"));
           } else {
             setError(t("alert.error_on_server_description"));
-            dispatch(setWebLoader({ active: false, opacity: false }));
           }
         });
     } else {
@@ -62,10 +69,11 @@ export default function Balance() {
               <div className="flex justify-center items-center h-[35px] w-[250px] relative overflow-hidden rounded-lg my-5">
                 <input
                   type="number"
+                  step="0.01"
                   placeholder={t("balance.enter_the_amount")}
                   className="h-full w-full absolute rounded-lg bg-bodyBg text-[14px] font-mainMedium px-2 text-blackMain outline-none text-center tracking-wider placeholder-textCardDesc"
                   onChange={(e) => setAmount(e.target.valueAsNumber)}
-                  value={amount ? amount : ""}
+                  value={amount !== null ? amount : ""}
                 />
                 <div className="absolute right-2 h-[20px] aspect-square text-main translate-y-[-2px]">
                   ₾
